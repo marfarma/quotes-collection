@@ -12,7 +12,7 @@ Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect, manage and display your favourite quotations on your WordPress blog. All quotes or a set of quotes can also be displayed on a page using a `[quote]` tag.
 
-Main features:
+Main features and notes:
 
 * Random Quote sidebar widget with Ajax refresh feature -- you will be able to get another random quote on the same space without refreshing the web page. This refresh feature can be optionally turned off . The widget also comes with few other options in the widget control panel.
 * A nice admin interface to add, edit and manage quotes.
@@ -23,6 +23,7 @@ Main features:
 	* `[quote|source=Something]` displays quotes with source as ‘Something’
 	* `[quote|id=3]` displays quote with ID 3
 	* `[quote|random]` displays a random quote
+* The code `<?php quotescollection_display_randomquote() ?>` can be used to display a random quote in places other than sidebar.
 
 == Installation ==
 

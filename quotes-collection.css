@@ -1,3 +1,15 @@
+/* Random quote */
+
+#quotescollection_randomquote q {
+
+}
+
+#quotescollection_randomquote cite {
+
+}
+
+
+/* Quotes page */
 blockquote.quotescollection {
 	border:0;
 	background:none;

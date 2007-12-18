@@ -5,24 +5,15 @@ if(isset($_REQUEST['refresh'])) {
 	include_once($blogdir.'/wp-config.php');
 	include_once($blogdir.'/wp-includes/wp-db.php');
 	include_once(str_replace("-ajax", "", __FILE__));
-	if($random_quote = quotescollection_randomquote()) {
-		$display .= "<p>";
-		$display .= "<q>".wptexturize($random_quote['quote'])."</q>";
+	if($random_quote = quotescollection_get_randomquote()) {
 		$options = get_option('quotescollection');
 		$show_author = isset($options['show_author'])?$options['show_author']:0;
 		$show_source = isset($options['show_source'])?$options['show_source']:1;
-		if( ($show_author && $random_quote['author']) || ($show_source && $random_quote['source']) )
-			$display .= " &mdash;&nbsp;";
-		if($show_author && $random_quote['author'])
-			$display .= "<cite>".$random_quote['author']."</cite> ";
-		if($show_source && $random_quote['source'])
-			$display .= "from <cite>".$random_quote['source']."</cite>";
-		$display .= "</p>";
-		$display .= "<p id=\"quotescollection_nextquote\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh();\">Next quote »</a></p>";
+		$display = quotescollection_display_randomquote($show_author, $show_source, 2, $random_quote);
 		die( "document.getElementById('quotescollection_randomquote').innerHTML = '".$display."'" ); 
 	}
 	else
-		 die( "alert('$error')" );
+		die( "alert('$error')" );
 }
 
 if(isset($_REQUEST['js'])) {

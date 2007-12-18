@@ -4,14 +4,14 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 0.9.1
+Version: 0.9.2
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
 	http://www.opensource.org/licenses/gpl-license.php
 */
 
-function quotescollection_randomquote()
+function quotescollection_get_randomquote()
 {
 	global $wpdb;
 	$sql = "SELECT quote_id, quote, author, source
@@ -27,34 +27,48 @@ function quotescollection_randomquote()
 		return 0;
 }
 
+function quotescollection_display_randomquote($show_author = 1, $show_source = 0, $ajax_refresh = 1, $random_quote = array()) 
+{
+	$random_quote = $random_quote?$random_quote:quotescollection_get_randomquote();
+	if(!$random_quote)
+		return;
+	$display = "<p><q>". wptexturize($random_quote['quote']) ."</q>";
+	if( ($show_author && $random_quote['author']) || ($show_source && $random_quote['source']) )
+		$display .= " &mdash;&nbsp;";
+	if($show_author && $random_quote['author'])
+		$display .= "<cite>".$random_quote['author']."</cite> ";
+	if($show_source && $random_quote['source'])
+		$display .= "from <cite>".$random_quote['source']."</cite>";
+	$display .= "</p>";
+	if($ajax_refresh == 1) {
+		$display .= "<script type=\"text/javascript\">\n<!--\ndocument.write(\"";
+		$display .= '<p id=\"quotescollection_nextquote\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh();\">Next quote »</a></p>';
+		$display .= "\")\n//-->\n</script>\n";
+	}
+	if ($ajax_refresh == 2) {
+		$display .= "<p id=\"quotescollection_nextquote\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh();\">Next quote »</a></p>";
+		return $display;
+	}
+	$display = "<div id=\"quotescollection_randomquote\">{$display}</div>";
+	echo $display;
+	return;
+}
+
 function quotescollection_init()
 {
 	if ( !function_exists('register_sidebar_widget') || !function_exists('register_widget_control') )
 		return;
 	
 	function quotescollection_widget($args) {
-		if($random_quote = quotescollection_randomquote()) {
+		if($random_quote = quotescollection_get_randomquote()) {
 			$options = get_option('quotescollection');
 			$title = isset($options['title'])?$options['title']:__('Random Quote');
 			$show_author = isset($options['show_author'])?$options['show_author']:1;
 			$show_source = isset($options['show_source'])?$options['show_source']:1;
 			$ajax_refresh = isset($options['ajax_refresh'])?$options['ajax_refresh']:1;
 			extract($args);
-			echo $before_widget . $before_title . $title . $after_title . "\n<div id=\"quotescollection_randomquote\">";
-			echo "\n<p><q>". wptexturize($random_quote['quote']) ."</q>";
-			if( ($show_author && $random_quote['author']) || ($show_source && $random_quote['source']) )
-				echo " &mdash;&nbsp;";
-			if($show_author && $random_quote['author'])
-				echo "<cite>".$random_quote['author']."</cite> ";
-			if($show_source && $random_quote['source'])
-				echo "from <cite>".$random_quote['source']."</cite>";
-			echo "</p>\n";
-			if($options['ajax_refresh']) {
-				echo "<script type=\"text/javascript\">\n<!--\ndocument.write(\"";
-				echo '<p id=\"quotescollection_nextquote\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh();\">Next quote »</a></p>';
-				echo "\")\n//-->\n</script>\n";
-			}
-			echo "</div>";
+			echo $before_widget . $before_title . $title . $after_title . "\n";
+			quotescollection_display_randomquote($show_author, $show_source, $ajax_refresh, $random_quote);
 			echo $after_widget;
 		}
 	}
@@ -531,5 +545,4 @@ add_filter('the_excerpt', 'quotescollection_inpost', 7);
 add_action('activate_quotes-collection/quotes-collection.php', 'quotescollection_install'); 
 add_action('admin_menu', 'quotescollection_admin_menu');
 add_action('plugins_loaded', 'quotescollection_init');
-
 ?>
