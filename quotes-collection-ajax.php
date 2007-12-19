@@ -26,8 +26,8 @@ function quotescollection_refresh()
 	mysack.execute = 1;
 	mysack.onError = function() { document.getElementById('quotescollection_randomquote').innerHTML = 'Error getting quote'; };
 	mysack.onLoading = function() { document.getElementById('quotescollection_nextquote').innerHTML = 'Loading...'; };
-	mysack.onLoaded = function() { document.getElementById('quotescollection_nextquote').innerHTML += '...'; };
-	mysack.onInteractive = function() { document.getElementById('quotescollection_nextquote').innerHTML += '...'; };
+	mysack.onLoaded = function() { document.getElementById('quotescollection_nextquote').innerHTML = '<a style="cursor:pointer" onclick="quotescollection_refresh();">Next quote »</a>'; };
+//	mysack.onInteractive = function() { document.getElementById('quotescollection_nextquote').innerHTML += '...'; };
 //	mysack.onCompletion = function() { document.getElementById('quotescollection_randomquote').innerHTML = mysack.response; };
 	mysack.runAJAX();
 	return true;

@@ -14,7 +14,7 @@ Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you
 
 Main features and notes:
 
-* Random Quote sidebar widget with Ajax refresh feature -- you will be able to get another random quote on the same space without refreshing the web page. This refresh feature can be optionally turned off . The widget also comes with few other options in the widget control panel.
+* Random Quote sidebar widget with Ajax refresh feature -- you will be able to get another random quote on the same space without refreshing the web page. This refresh feature can be optionally turned off. The widget also comes with few other options in the widget control panel.
 * A nice admin interface to add, edit and manage quotes.
 * Additional information that can be provided along with the quote: quote author, source (e.g., a book, or a website URL) and visibility.
 * Quotes can be displayed in a page using one of the tags below.
