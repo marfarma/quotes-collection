@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 0.9.3
+Version: 0.9.4
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -32,7 +32,7 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 0
 	$random_quote = $random_quote?$random_quote:quotescollection_get_randomquote();
 	if(!$random_quote)
 		return;
-	$display = "<p><q>". wptexturize($random_quote['quote']) ."</q>";
+	$display = "<p><q>". wptexturize(str_replace(array("\r\n", "\r", "\n"), '', nl2br($random_quote['quote']))) ."</q>";
 	if( ($show_author && $random_quote['author']) || ($show_source && $random_quote['source']) )
 		$display .= " &mdash;&nbsp;";
 	if($show_author && $random_quote['author'])
@@ -209,7 +209,7 @@ function quotescollection_editquote($quote_id, $quote, $author = "", $source = "
 		if(FALSE === $results)
 			return "There was an error in the MySQL query";
 		else
-			return "Quote updated successfully with author = {$author}, source = {$source}";
+			return "Quote updated successfully";
    }
 }
 
@@ -370,7 +370,7 @@ function quotescollection_quotes_management()
 		$quotes_list .= "<tr{$alternate}>";
 		$quotes_list .= "<td><input type=\"checkbox\" name=\"bulkcheck[]\" value=\"".$quote_data->quote_id."\" /></td>";
 		$quotes_list .= "<td>" . $quote_data->quote_id . "</td>";
-		$quotes_list .= "<td>" . wptexturize($quote_data->quote) ."</td>";
+		$quotes_list .= "<td>" . wptexturize(nl2br($quote_data->quote)) ."</td>";
 		$quotes_list .= "<td>" . $quote_data->author;
 		if($quote_data->author && $quote_data->source)
 			$quotes_list .= " / ";
@@ -436,7 +436,13 @@ function quotescollection_install()
 			PRIMARY KEY  (quote_id)
 		);";
 		$results = $wpdb->query( $sql );
-   }	
+   }
+	$query = "ALTER TABLE `{$table_name}` charset=utf8";
+	$wpdb->query($query);
+	$query = "ALTER TABLE `{$table_name}` MODIFY `quote` TEXT CHARACTER SET utf8, MODIFY `author` TEXT CHARACTER SET utf8, MODIFY `source` TEXT CHARACTER SET utf8";
+	$wpdb->query($query);
+
+
 }
 
 
@@ -455,7 +461,7 @@ function quotescollection_displayquote($quote_id = 0)
 	}
 	$quote_data = $wpdb->get_row($sql, ARRAY_A);
 	if ( !empty($quote_data) ) {
-		$display = "<blockquote class=\"quotescollection\" cite=\"{$quote_data['author']}\"><q>{$quote_data['quote']}</q>";
+		$display = "<blockquote class=\"quotescollection\" cite=\"{$quote_data['author']}\"><q>".wptexturize(nl2br($quote_data['quote']))."</q>";
 		if($quote_data['author'] || $quote_data['source'])
 			$display .= " &mdash;&nbsp;";
 		if($quote_data['author'])
@@ -488,7 +494,7 @@ function quotescollection_displayquotes($source = "")
 	$quotes = $wpdb->get_results($sql, ARRAY_A);
 	if ( !empty($quotes) ) {
 		foreach($quotes as $quote_data) {
-			$display .= "<blockquote class=\"quotescollection\" cite=\"{$quote_data['source']}\"><q>{$quote_data['quote']}</q>";
+			$display .= "<blockquote class=\"quotescollection\" cite=\"{$quote_data['source']}\"><q>".wptexturize(nl2br($quote_data['quote']))."</q>";
 			if($quote_data['author'] || $quote_data['source'])
 				$display .= " &mdash;&nbsp;";
 			if($quote_data['author'])
