@@ -4,12 +4,20 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.0
+Version: 1.1
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
 	http://www.opensource.org/licenses/gpl-license.php
 */
+
+
+
+$quotescollection_admin_userlevel = 2; 
+// Refer http://codex.wordpress.org/Roles_and_Capabilities
+
+
+$quotescollection_db_version = '1.1'; 
 
 
 function quotescollection_get_randomquote($exclude = 0)
@@ -46,17 +54,21 @@ function quotescollection_js_head() // this is a PHP function
 	
 	// Define custom JavaScript function
 	?>
-<!-- Random Quote script -->
+<!-- Quotes Collection -->
 <script type="text/javascript" src="<?php bloginfo( 'wpurl' ); ?>/wp-content/plugins/quotes-collection/quotes-collection-ajax.php?js"></script>
-	<?php
-} // end of PHP function myplugin_js_header
-
+<script type="text/javascript" language="JavaScript">
+  quotcoll_nextquote = '<?php _e('Next quote', 'quotes-collection'); ?>';
+  quotcoll_loading = '<?php _e('Loading...', 'quotes-collection'); ?>';
+  quotcoll_error = '<?php _e('Error getting quote', 'quotes-collection'); ?>';
+</script>
+<?php
+} // end of PHP function quotescollection_js_head
 add_action('wp_head', 'quotescollection_js_head' );
 
 
 
 
-function quotescollection_display_randomquote($show_author = 1, $show_source = 0, $ajax_refresh = 1, $random_quote = array()) 
+function quotescollection_display_randomquote($show_author = 1, $show_source = 1, $ajax_refresh = 1, $random_quote = array()) 
 {
 	global $quotescollection_instances;
 	if(!($instance = $quotescollection_instances))
@@ -68,10 +80,12 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 0
 	$display = "<p><q>". wptexturize(str_replace(array("\r\n", "\r", "\n"), '', nl2br($random_quote['quote']))) ."</q>";
 	if( ($show_author && $random_quote['author']) || ($show_source && $random_quote['source']) )
 		$display .= " &mdash;&nbsp;";
+	if( ($show_author && $random_quote['author']) && ($show_source && $random_quote['source']) )
+		$comma = ", ";
 	if($show_author && $random_quote['author'])
-		$display .= "<cite>".$random_quote['author']."</cite> ";
+		$display .= "<cite>".$random_quote['author']."</cite>";
 	if($show_source && $random_quote['source'])
-		$display .= "from <cite>".$random_quote['source']."</cite>";
+		$display .= $comma."<cite>".$random_quote['source']."</cite>";
 	$display .= "</p>";
 	
 	// We don't want to display the 'next quote' link if there is no more than 1 quote
@@ -79,11 +93,11 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 0
 	
 	if($ajax_refresh == 1 && $quotes_count > 1) {
 		$display .= "<script type=\"text/javascript\">\n<!--\ndocument.write(\"";
-		$display .= '<p id=\"quotescollection_nextquote-'.$instance.'\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh('.$instance.', '.$random_quote["quote_id"].');\">Next quote &raquo;</a></p>';
+		$display .= '<p id=\"quotescollection_nextquote-'.$instance.'\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh('.$instance.', '.$random_quote["quote_id"].', '. $show_author .', '.$show_source.');\">'.__('Next quote', 'quotes-collection').' &raquo;</a></p>';
 		$display .= "\")\n//-->\n</script>\n";
 	}
 	if ($ajax_refresh == 2 && $quotes_count > 1) {
-		$display .= "<p id=\"quotescollection_nextquote-".$_REQUEST['refresh']."\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh(".$_REQUEST['refresh'].", ".$random_quote['quote_id'].");\">Next quote &raquo;</a></p>";
+		$display .= "<p id=\"quotescollection_nextquote-".$_REQUEST['refresh']."\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh(".$_REQUEST['refresh'].", ".$random_quote['quote_id'].', '. $show_author .', '.$show_source.");\">".__('Next quote', 'quotes-collection')." &raquo;</a></p>";
 		return $display;
 	}
 	$display = "<div id=\"quotescollection_randomquote-".$instance."\" class=\"quotescollection_randomquote\">{$display}</div>";
@@ -94,13 +108,16 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 0
 
 function quotescollection_init()
 {
+	if(function_exists('load_plugin_textdomain'))
+		load_plugin_textdomain('quotes-collection', 'wp-content/plugins/quotes-collection/languages/');
+	
 	if ( !function_exists('register_sidebar_widget') || !function_exists('register_widget_control') )
 		return;
 	
 	function quotescollection_widget($args) {
 		if($random_quote = quotescollection_get_randomquote()) {
 			$options = get_option('quotescollection');
-			$title = isset($options['title'])?$options['title']:__('Random Quote');
+			$title = isset($options['title'])?$options['title']:__('Random Quote', 'quotes-collection');
 			$show_author = isset($options['show_author'])?$options['show_author']:1;
 			$show_source = isset($options['show_source'])?$options['show_source']:1;
 			$ajax_refresh = isset($options['ajax_refresh'])?$options['ajax_refresh']:1;
@@ -117,7 +134,7 @@ function quotescollection_init()
 		
 		// default values for options
 		$options = array(
-			'title' => 'Random Quote', 
+			'title' => __('Random Quote', 'quotes-collection'), 
 			'show_author' => 1,
 			'show_source' => 0, 
 			'ajax_refresh' => 1, 
@@ -144,12 +161,12 @@ function quotescollection_init()
         	$show_source_checked = ' checked="checked"';
         if($options['ajax_refresh'])
         	$ajax_refresh_checked = ' checked="checked"';
-		echo "<p style=\"text-align:left;\"><label for=\"quotescollection-title\">Title: </label><input class=\"widefat\" type=\"text\" id=\"quotescollection-title\" name=\"quotescollection-title\" value=\"".htmlspecialchars($options['title'], ENT_QUOTES)."\" /></p>";
-		echo "<p style=\"text-align:left;\"><input type=\"checkbox\" id=\"quotescollection-show_author\" name=\"quotescollection-show_author\" value=\"1\"{$show_author_checked} /> <label for=\"quotescollection-show_author\">Show author?</label></p>";
-		echo "<p style=\"text-align:left;\"><input type=\"checkbox\" id=\"quotescollection-show_source\" name=\"quotescollection-show_source\" value=\"1\"{$show_source_checked} /> <label for=\"quotescollection-show_source\">Show source?</label></p>";
-		echo "<p style=\"text-align:left;\"><input type=\"checkbox\" id=\"quotescollection-ajax_refresh\" name=\"quotescollection-ajax_refresh\" value=\"1\"{$ajax_refresh_checked} /> <label for=\"quotescollection-ajax_refresh\">Ajax refresh feature</label></p>";
+		echo "<p style=\"text-align:left;\"><label for=\"quotescollection-title\">".__('Title', 'quotes-collection').": </label><input class=\"widefat\" type=\"text\" id=\"quotescollection-title\" name=\"quotescollection-title\" value=\"".htmlspecialchars($options['title'], ENT_QUOTES)."\" /></p>";
+		echo "<p style=\"text-align:left;\"><input type=\"checkbox\" id=\"quotescollection-show_author\" name=\"quotescollection-show_author\" value=\"1\"{$show_author_checked} /> <label for=\"quotescollection-show_author\">".__('Show author?', 'quotes-collection')."</label></p>";
+		echo "<p style=\"text-align:left;\"><input type=\"checkbox\" id=\"quotescollection-show_source\" name=\"quotescollection-show_source\" value=\"1\"{$show_source_checked} /> <label for=\"quotescollection-show_source\">".__('Show source?', 'quotes-collection')."</label></p>";
+		echo "<p style=\"text-align:left;\"><input type=\"checkbox\" id=\"quotescollection-ajax_refresh\" name=\"quotescollection-ajax_refresh\" value=\"1\"{$ajax_refresh_checked} /> <label for=\"quotescollection-ajax_refresh\">".__('Ajax refresh feature', 'quotes-collection')."</label></p>";
 		echo "<input type=\"hidden\" id=\"quotescollection-submit\" name=\"quotescollection-submit\" value=\"1\" />";
-		echo "<p style=\"text-align:left;\">Manage your collection of quotes at<br /><a href=\"edit.php?page=quotes-collection/quotes-collection.php\">Manage->Quotes Collection</a></p>";
+		echo "<p style=\"text-align:left;\">".__('Manage your collection of quotes at', 'quotes-collection')."<br /><a href=\"edit.php?page=quotes-collection/quotes-collection.php\">".__('Manage')."->Quotes Collection</a></p>";
 	}
 
 
@@ -160,16 +177,17 @@ function quotescollection_init()
 
 function quotescollection_admin_menu() 
 {
-	add_management_page('Quotes Collection', 'Quotes Collection', 8, __FILE__, 'quotescollection_quotes_management');
+	global $quotescollection_admin_userlevel;
+	add_management_page('Quotes Collection', 'Quotes Collection', $quotescollection_admin_userlevel, __FILE__, 'quotescollection_quotes_management');
 }
 
-function quotescollection_addquote($quote, $author = "", $source = "", $visible = 'yes')
+function quotescollection_addquote($quote, $author = "", $source = "", $tags = "", $visible = 'yes')
 {
-	if(!$quote) return "Nothing added to the database.";
+	if(!$quote) return __('Nothing added to the database.', 'quotes-collection');
 	global $wpdb;
 	$table_name = $wpdb->prefix . "quotescollection";
 	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) 
-		return "Database not found";
+		return __('Database table not found', 'quotes-collection');
 	else //Add the quote data to the database
 	{
 		
@@ -177,31 +195,37 @@ function quotescollection_addquote($quote, $author = "", $source = "", $visible 
 		  $quote = stripslashes($quote);
 		  $author = stripslashes($author);	
 		  $source = stripslashes($source);	
+		  $tags = stripslashes($tags);
 	  	}
 		$quote = "'".$wpdb->escape($quote)."'";
 		$author = $author?"'".$wpdb->escape($author)."'":"NULL";
 		$source = $source?"'".$wpdb->escape($source)."'":"NULL";
+		$tags = explode(',', $tags);
+		foreach ($tags as $key => $tag)
+			$tags[$key] = trim($tag);
+		$tags = implode(',', $tags);
+		$tags = $tags?"'".$wpdb->escape($tags)."'":"NULL";
 		if(!$visible) $visible = "'no'";
 		else $visible = "'yes'";
 		$insert = "INSERT INTO " . $table_name .
-			"(quote, author, source, visible, time_added)" .
-			"VALUES ({$quote}, {$author}, {$source}, {$visible}, NOW())";
+			"(quote, author, source, tags, visible, time_added)" .
+			"VALUES ({$quote}, {$author}, {$source}, {$tags}, {$visible}, NOW())";
 		$results = $wpdb->query( $insert );
 		if(FALSE === $results)
-			return "There was an error in the MySQL query";
+			return __('There was an error in the MySQL query', 'quotes-collection');
 		else
-			return "Quote added";
+			return __('Quote added', 'quotes-collection');
    }
 }
 
-function quotescollection_editquote($quote_id, $quote, $author = "", $source = "", $visible = 'yes')
+function quotescollection_editquote($quote_id, $quote, $author = "", $source = "", $tags = "", $visible = 'yes')
 {
-	if(!$quote) return "Quote not updated.";
+	if(!$quote) return __('Quote not updated.', 'quotes-collection');
 	if(!$quote_id) return srgq_addquote($quote, $author, $source, $visible);
 	global $wpdb;
 	$table_name = $wpdb->prefix . "quotescollection";
 	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) 
-		return "Database not found";
+		return __('Database table not found', 'quotes-collection');
 	else //Update database
 	{
 		
@@ -209,24 +233,31 @@ function quotescollection_editquote($quote_id, $quote, $author = "", $source = "
 		  $quote = stripslashes($quote);
 		  $author = stripslashes($author);	
 		  $source = stripslashes($source);	
+		  $tags = stripslashes($tags);
 	  	}
 	  	$quote = "'".$wpdb->escape($quote)."'";
 		$author = $author?"'".$wpdb->escape($author)."'":"NULL";
 		$source = $source?"'".$wpdb->escape($source)."'":"NULL";
+		$tags = explode(',', $tags);
+		foreach ($tags as $key => $tag)
+			$tags[$key] = trim($tag);
+		$tags = implode(',', $tags);
+		$tags = $tags?"'".$wpdb->escape($tags)."'":"NULL";
 		if(!$visible) $visible = "'no'";
 		else $visible = "'yes'";
 		$update = "UPDATE " . $table_name . "
 			SET quote = {$quote},
 				author = {$author},
 				source = {$source}, 
+				tags = {$tags},
 				visible = {$visible}, 
 				time_updated = NOW()
 			WHERE quote_id = $quote_id";
 		$results = $wpdb->query( $update );
 		if(FALSE === $results)
-			return "There was an error in the MySQL query";
+			return __('There was an error in the MySQL query', 'quotes-collection');		
 		else
-			return "Changes saved";
+			return __('Changes saved', 'quotes-collection');
    }
 }
 
@@ -238,17 +269,17 @@ function quotescollection_deletequote($quote_id)
 		$sql = "DELETE from " . $wpdb->prefix ."quotescollection" .
 			" WHERE quote_id = " . $quote_id;
 		if(FALSE === $wpdb->query($sql))
-			return "There was an error in the MySQL query";
+			return __('There was an error in the MySQL query', 'quotes-collection');		
 		else
-			return "Quote deleted";
+			return __('Quote deleted', 'quotes-collection');
 	}
-	else return "The quote cannot be deleted";
+	else return __('The quote cannot be deleted', 'quotes-collection');
 }
 
 function quotescollection_getquotedata($quote_id)
 {
 	global $wpdb;
-	$sql = "SELECT quote_id, quote, author, source, visible
+	$sql = "SELECT quote_id, quote, author, source, tags, visible
 		FROM " . $wpdb->prefix . "quotescollection 
 		WHERE quote_id = {$quote_id}";
 	$quote_data = $wpdb->get_row($sql, ARRAY_A);	
@@ -258,8 +289,9 @@ function quotescollection_getquotedata($quote_id)
 function quotescollection_editform($quote_id = 0)
 {
 	$visible_selected = " checked=\"checked\"";
-	$submit_value = "Add Quote";
+	$submit_value = __('Add Quote', 'quotes-collection');
 	$form_name = "addquote";
+	$action_url = $_SERVER['PHP_SELF']."?page=quotes-collection/quotes-collection.php#addnew";
 
 	if($quote_id) {
 		$form_name = "editquote";
@@ -267,34 +299,47 @@ function quotescollection_editform($quote_id = 0)
 		foreach($quote_data as $key => $value)
 			$quote_data[$key] = $quote_data[$key];
 		extract($quote_data);
-		$quote = htmlentities($quote);
-		$author = htmlentities($author);
-		$source = htmlentities($source);
+		$quote = htmlspecialchars($quote);
+		$author = htmlspecialchars($author);
+		$source = htmlspecialchars($source);
+		$tags = implode(', ', explode(',', $tags));
 		$hidden_input = "<input type=\"hidden\" name=\"quote_id\" value=\"{$quote_id}\" />";
 		if($visible == 'no') $visible_selected = "";
-		$submit_value = "Save changes";
-		$back = "<input type=\"submit\" name=\"submit\" value=\"Back\" />&nbsp;";
+		$submit_value = __('Save changes', 'quotes-collection');
+		$back = "<input type=\"submit\" name=\"submit\" value=\"".__('Back', 'quotes-collection')."\" />&nbsp;";
+		$action_url = $_SERVER['PHP_SELF']."?page=quotes-collection/quotes-collection.php";
 	}
 
+	$quote_label = __('The quote', 'quotes-collection');
+	$author_label = __('Author', 'quotes-collection');
+	$source_label = __('Source', 'quotes-collection');
+	$tags_label = __('Tags', 'quotes-collection');
+	$visible_label = __('Visible?', 'quotes-collection');
+	$optional_text = __('optional', 'quotes-collection');
+	$comma_separated_text = __('comma separated', 'quotes-collection');
 
 	$display .=<<< EDITFORM
-<form name="{$form_name}" method="post" action="{$_SERVER['PHP_SELF']}?page=quotes-collection/quotes-collection.php">
+<form name="{$form_name}" method="post" action="{$action_url}">
 	{$hidden_input}
 	<table class="form-table" cellpadding="5" cellspacing="2" width="100%">
 		<tbody><tr class="form-field form-required">
-			<th style="text-align:left;" scope="row" valign="top"><label for="quotescollection_quote">The quote:</label></th>
+			<th style="text-align:left;" scope="row" valign="top"><label for="quotescollection_quote">{$quote_label}:</label></th>
 			<td><textarea id="quotescollection_quote" name="quote" rows="5" cols="50" style="width: 97%;">{$quote}</textarea></td>
 		</tr>
 		<tr class="form-field">
-			<th style="text-align:left;" scope="row" valign="top"><label for="quotescollection_author">Author: <small>(optional)</small></label></th>
-			<td><input type="text" id="quotescollection_author" name="author" size="40" value="{$author}" /></td>
+			<th style="text-align:left;" scope="row" valign="top"><label for="quotescollection_author">{$author_label}:</label></th>
+			<td><input type="text" id="quotescollection_author" name="author" size="40" value="{$author}" /> <small>({$optional_text})</small></td>
 		</tr>
 		<tr class="form-field">
-			<th style="text-align:left;" scope="row" valign="top"><label for="quotescollection_source">Source: <small>(optional)</small></label></th>
-			<td><input type="text" id="quotescollection_source" name="source" size="40" value="{$source}" /></td>
+			<th style="text-align:left;" scope="row" valign="top"><label for="quotescollection_source">{$source_label}:</label></th>
+			<td><input type="text" id="quotescollection_source" name="source" size="40" value="{$source}" /> <small>({$optional_text})</small></td>
+		</tr>
+		<tr class="form-field">
+			<th style="text-align:left;" scope="row" valign="top"><label for="quotescollection_tags">{$tags_label}:</label></th>
+			<td><input type="text" id="quotescollection_tags" name="tags" size="40" value="{$tags}" /> <small>({$optional_text}, {$comma_separated_text})</small></td>
 		</tr>
 		<tr>
-			<th style="text-align:left;" scope="row" valign="top"><label for="quotescollection_visible">Visible?</label></th>
+			<th style="text-align:left;" scope="row" valign="top"><label for="quotescollection_visible">{$visible_label}</label></th>
 			<td><input type="checkbox" id="quotescollection_visible" name="visible"{$visible_selected} />
 		</tr></tbody>
 	</table>
@@ -307,41 +352,46 @@ EDITFORM;
 function quotescollection_changevisibility($quote_ids, $visibility = 'yes')
 {
 	if(!$quote_ids)
-		return "Nothing done!";
+		return __('Nothing done!', 'quotes-collection');
 	global $wpdb;
 	$sql = "UPDATE ".$wpdb->prefix."quotescollection 
 		SET visible = '".$visibility."',
 			time_updated = NOW()
 		WHERE quote_id IN (".implode(', ', $quote_ids).")";
 	$wpdb->query($sql);
-	return "Visibility status of selected quotes set to '{$visibility}'.";
+	return sprintf(__("Visibility status of selected quotes set to '%s'", 'quotes-collection'), $visibility);
 }
 
 function quotescollection_bulkdelete($quote_ids)
 {
 	if(!$quote_ids)
-		return "Nothing done!";
+		return __('Nothing done!', 'quotes-collection');
 	global $wpdb;
 	$sql = "DELETE FROM ".$wpdb->prefix."quotescollection 
 		WHERE quote_id IN (".implode(', ', $quote_ids).")";
 	$wpdb->query($sql);
-	return "Quote(s) deleted";
+	return __('Quote(s) deleted', 'quotes-collection');
 }
 
 
 
 function quotescollection_quotes_management()
-{
-	if($_REQUEST['submit'] == 'Add Quote') {
+{	
+	global $quotescollection_db_version;
+	$options = get_option('quotescollection');
+	if($options['db_version'] != $quotescollection_db_version )
+		quotescollection_install();
+		
+	if($_REQUEST['submit'] == __('Add Quote', 'quotes-collection')) {
 		extract($_REQUEST);
-		$msg = quotescollection_addquote($quote, $author, $source, $visible);
+		$msg = quotescollection_addquote($quote, $author, $source, $tags, $visible);
 	}
-	else if($_REQUEST['submit'] == 'Save changes') {
+	else if($_REQUEST['submit'] == __('Save changes', 'quotes-collection')) {
 		extract($_REQUEST);
-		$msg = quotescollection_editquote($quote_id, $quote, $author, $source, $visible);
+		$msg = quotescollection_editquote($quote_id, $quote, $author, $source, $tags, $visible);
 	}
 	else if($_REQUEST['action'] == 'editquote') {
-		$display .= "<div class=\"wrap\">\n<h2>Edit quote</h2>";
+		$display .= "<div class=\"wrap\">\n<h2>".__('Edit quote', 'quotes-collection')."</h2>";
 		$display .=  quotescollection_editform($_REQUEST['id']);
 		$display .= "</div>";
 		echo $display;
@@ -351,15 +401,16 @@ function quotescollection_quotes_management()
 		$msg = quotescollection_deletequote($_REQUEST['id']);
 	}
 	else if(isset($_REQUEST['bulkaction']))  {
-		if($_REQUEST['bulkaction'] == "Delete") 
+		if($_REQUEST['bulkaction'] == __('Delete', 'quotes-collection')) 
 			$msg = quotescollection_bulkdelete($_REQUEST['bulkcheck']);
-		if($_REQUEST['bulkaction'] == "Make visible") {
+		if($_REQUEST['bulkaction'] == __('Make visible', 'quotes-collection')) {
 			$msg = quotescollection_changevisibility($_REQUEST['bulkcheck'], 'yes');
 		}
-		if($_REQUEST['bulkaction'] == "Make invisible") {
+		if($_REQUEST['bulkaction'] == __('Make invisible', 'quotes-collection')) {
 			$msg = quotescollection_changevisibility($_REQUEST['bulkcheck'], 'no');
 		}
 	}
+	
 	$display .= "<div class=\"wrap\">";
 	
 	if($msg)
@@ -367,13 +418,11 @@ function quotescollection_quotes_management()
 
 	$display .= "<h2>Quotes Collection</h2>";
 
-	// anchor to add new quote
-	$display .= "<p><a href=\"#addnew\"><strong>Add new quote</strong></a></p>";
 
 	// Get all the quotes from the database
 	global $wpdb;
 
-	$sql = "SELECT quote_id, quote, author, source, visible
+	$sql = "SELECT quote_id, quote, author, source, tags, visible
 		FROM " . $wpdb->prefix . "quotescollection";
 	
 	if(isset($_REQUEST['orderby'])) {
@@ -400,57 +449,79 @@ function quotescollection_quotes_management()
 		if($quote_data->author && $quote_data->source)
 			$quotes_list .= " / ";
 		$quotes_list .= $quote_data->source ."</td>";
+		$quotes_list .= "<td>" . implode(', ', explode(',', $quote_data->tags)) . "</td>";
 		$quotes_list .= "<td>" . $quote_data->visible ."</td>";
-		$quotes_list .= "<td><a href=\"" . $_SERVER['PHP_SELF'] . "?page=quotes-collection/quotes-collection.php&action=editquote&amp;id=".$quote_data->quote_id."\" class=\"edit\">Edit</a></td>
-    <td><a href=\"" . $_SERVER['PHP_SELF'] . "?page=quotes-collection/quotes-collection.php&action=delquote&amp;id=".$quote_data->quote_id."\" onclick=\"return confirm( 'Are you sure you want to delete this quote?');\" class=\"delete\">Delete</a> </td>";
+		$quotes_list .= "<td><a href=\"" . $_SERVER['PHP_SELF'] . "?page=quotes-collection/quotes-collection.php&action=editquote&amp;id=".$quote_data->quote_id."\" class=\"edit\">".__('Edit', 'quotes-collection')."</a></td>
+    <td><a href=\"" . $_SERVER['PHP_SELF'] . "?page=quotes-collection/quotes-collection.php&action=delquote&amp;id=".$quote_data->quote_id."\" onclick=\"return confirm( '".__('Are you sure you want to delete this quote?', 'quotes-collection')."');\" class=\"delete\">".__('Delete', 'quotes-collection')."</a> </td>";
 		$quotes_list .= "</tr>";
 	}
 	
 	if($quotes_list) {
+		$display .= "<p>";
+	$quotes_count = quotescollection_count();
+	$display .= sprintf(__ngettext('Currently, you have %d quote.', 'Currently, you have %d quotes.', $quotes_count, 'quotes-collection'), $quotes_count);
+	// anchor to add new quote
+	$display .= " (<a href=\"#addnew\"><strong>".__('Add new quote', 'quotes-collection')."</strong></a>)";
+	$display .= "</p>";
+
 		$display .= "<form id=\"quotescollection\" method=\"post\" action=\"{$_SERVER['PHP_SELF']}?page=quotes-collection/quotes-collection.php\">";
 		$display .= "<div class=\"tablenav\">";
-		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"Delete\" class=\"button-secondary\" />";
-		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"Make visible\" class=\"button-secondary\" />";
-		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"Make invisible\" class=\"button-secondary\" />";
+		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Delete', 'quotes-collection')."\" class=\"button-secondary\" />";
+		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Make visible', 'quotes-collection')."\" class=\"button-secondary\" />";
+		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Make invisible', 'quotes-collection')."\" class=\"button-secondary\" />";
 		$display .= "&nbsp;&nbsp;&nbsp;";
-		$display .= "Sort by: ";
+		$display .= __('Sort by: ', 'quotes-collection');
 		$display .= "<select name=\"criteria\">";
-		$display .= "<option value=\"quote_id\"{$option_selected['quote_id']}>Quote ID</option>";
-		$display .= "<option value=\"quote\"{$option_selected['quote']}>Quote</option>";
-		$display .= "<option value=\"author\"{$option_selected['author']}>Author</option>";
-		$display .= "<option value=\"source\"{$option_selected['source']}>Source</option>";
-		$display .= "<option value=\"time_added\"{$option_selected['time_added']}>Date added</option>";
-		$display .= "<option value=\"time_updated\"{$option_selected['time_updated']}>Date updated</option>";
-		$display .= "<option value=\"visible\"{$option_selected['visible']}>Visibility</option>";
+		$display .= "<option value=\"quote_id\"{$option_selected['quote_id']}>".__('Quote', 'quotes-collection')." ID</option>";
+		$display .= "<option value=\"quote\"{$option_selected['quote']}>".__('Quote', 'quotes-collection')."</option>";
+		$display .= "<option value=\"author\"{$option_selected['author']}>".__('Author', 'quotes-collection')."</option>";
+		$display .= "<option value=\"source\"{$option_selected['source']}>".__('Source', 'quotes-collection')."</option>";
+		$display .= "<option value=\"time_added\"{$option_selected['time_added']}>".__('Date added', 'quotes-collection')."</option>";
+		$display .= "<option value=\"time_updated\"{$option_selected['time_updated']}>".__('Date updated', 'quotes-collection')."</option>";
+		$display .= "<option value=\"visible\"{$option_selected['visible']}>".__('Visibility', 'quotes-collection')."</option>";
 		$display .= "</select>";
 		$display .= "<select name=\"order\"><option{$option_selected['ASC']}>ASC</option><option{$option_selected['DESC']}>DESC</option></select>";
-		$display .= "<input type=\"submit\" name=\"orderby\" value=\"Go\" class=\"button-secondary\" />";
+		$display .= "<input type=\"submit\" name=\"orderby\" value=\"".__('Go', 'quotes-collection')."\" class=\"button-secondary\" />";
 		$display .= "</div>";
 		$display .= "<br style=\"clear:both;\" />";
 		
 		$display .= "<table class=\"widefat\">";
-		$display .= "<thead><tr><th class=\"check-column\"><input type=\"checkbox\" onclick=\"quotescollection_checkAll(document.getElementById('quotescollection'));\" /></th><th>ID</th><th>The quote</th><th>Author / Source</th><th>Visible?</th><th colspan=\"2\" style=\"text-align:center\">Action</th></tr></thead>";
+		$display .= "<thead><tr>
+			<th class=\"check-column\"><input type=\"checkbox\" onclick=\"quotescollection_checkAll(document.getElementById('quotescollection'));\" /></th>
+			<th>ID</th><th>".__('The quote', 'quotes-collection')."</th>
+			<th>
+				".__('Author', 'quotes-collection')." / ".__('Source', 'quotes-collection')."
+			</th>
+			<th>".__('Tags', 'quotes-collection')."</th>
+			<th>".__('Visible?', 'quotes-collection')."</th>
+			<th colspan=\"2\" style=\"text-align:center\">".__('Action', 'quotes-collection')."</th>
+		</tr></thead>";
 		$display .= "<tbody id=\"the-list\">{$quotes_list}</tbody>";
 		$display .= "</table>";
 
+
 		$display .= "<div class=\"tablenav\">";
-		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"Delete\" class=\"button-secondary\" />";
-		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"Make visible\" class=\"button-secondary\" />";
-		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"Make invisible\" class=\"button-secondary\" />";
+
+		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Delete', 'quotes-collection')."\" class=\"button-secondary\" />";
+		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Make visible', 'quotes-collection')."\" class=\"button-secondary\" />";
+		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Make invisible', 'quotes-collection')."\" class=\"button-secondary\" />";
+
 		$display .= "</div>";
 		$display .= "</form>";
 		$display .= "<br style=\"clear:both;\" />";
 
 	}
 	else
-		$display .= "<p>No quotes in the database</p>";
+		$display .= "<p>".__('No quotes in the database', 'quotes-collection')."</p>";
+
+
 
 	$display .= "</div>";
 	
-	$display .= "<div id=\"addnew\" class=\"wrap\">\n<h2>Add new quote</h2>";
+	$display .= "<div id=\"addnew\" class=\"wrap\">\n<h2>".__('Add new quote', 'quotes-collection')."</h2>";
 	$display .= quotescollection_editform();
 	$display .= "</div>";
-	
+
 	
 	echo $display;
 
@@ -480,27 +551,59 @@ function quotescollection_install()
 {
    global $wpdb;
    $table_name = $wpdb->prefix . "quotescollection";
-   if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) 
-   {
-   		//Creating the table
-		$sql = "CREATE TABLE " . $table_name . " (
-			quote_id mediumint(9) NOT NULL AUTO_INCREMENT,
-			quote text NOT NULL,
-			author varchar(255),
-			source varchar(255),
-			visible enum('yes', 'no') DEFAULT 'yes' NOT NULL,
-			time_added datetime NOT NULL,
-			time_updated datetime,
-			PRIMARY KEY  (quote_id)
-		);";
-		$results = $wpdb->query( $sql );
-   }
-	$query = "ALTER TABLE `{$table_name}` charset=utf8";
-	$wpdb->query($query);
-	$query = "ALTER TABLE `{$table_name}` MODIFY `quote` TEXT CHARACTER SET utf8, MODIFY `author` TEXT CHARACTER SET utf8, MODIFY `source` TEXT CHARACTER SET utf8";
-	$wpdb->query($query);
 
+   // if table name already exists
+   if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name) {
+		// Get all available data from the table and store it in an array
+		$sql = "SELECT * FROM " . $table_name . " ORDER BY quote_id";
+		$data = $wpdb->get_results($sql, ARRAY_A);
+		// Delete the table
+		$sql = "DROP TABLE ". $table_name;
+		$wpdb->query($sql);
+	}
 
+	//Creating the table ... fresh!
+	if(!defined('DB_CHARSET') || !($db_charset = DB_CHARSET)) $db_charset = 'utf8';
+	$db_charset = "DEFAULT CHARACTER SET ".$db_charset;
+	if(defined('DB_COLLATE') && $db_collate = DB_COLLATE) $db_collate = "DEFAULT COLLATE ".$db_collate;
+	$sql = "CREATE TABLE " . $table_name . " (
+		quote_id mediumint(9) NOT NULL AUTO_INCREMENT,
+		quote TEXT NOT NULL,
+		author VARCHAR(256),
+		source VARCHAR(256),
+		tags VARCHAR(256),
+		visible enum('yes', 'no') DEFAULT 'yes' NOT NULL,
+		time_added datetime NOT NULL,
+		time_updated datetime,
+		PRIMARY KEY  (quote_id)
+	) {$db_charset} {$db_collate};";
+	$results = $wpdb->query( $sql );
+	
+	global $quotescollection_db_version;
+	$options = get_option('quotescollection');
+	$options['db_version'] = $quotescollection_db_version;
+	update_option('quotescollection', $options);
+
+	// if data retrieved from previous table,
+	if($data) {
+		foreach($data as $record) {
+			$quote_id = $quote = $author = $source = $tags = $visible = $time_added = $time_updated = '';
+			extract($record);
+			$quote = "'".$quote."'";
+			$author = $author?"'".$author."'":"NULL";
+			$source = $source?"'".$source."'":"NULL";
+			$tags = $tags?"'".$tags."'":"NULL";
+			$visible = "'".$visible."'";
+			$time_added = "'".$time_added."'";
+			$time_updated = $time_updated?"'".$time_updated."'":"NULL";
+			// input the data
+			if(!$sql_insert)
+				$sql_insert = "INSERT INTO `" . $table_name . "` (`quote_id`, `quote`, `author`, `source`, `tags`, `visible`, `time_added`, `time_updated`) VALUES ";
+			else $sql_insert .= ", ";
+			$sql_insert .= "({$quote_id}, {$quote}, {$author}, {$source}, {$tags}, {$visible}, {$time_added}, {$time_updated})";
+		}
+		if($sql_insert)	$wpdb->query($sql_insert);
+	}
 }
 
 
@@ -522,11 +625,12 @@ function quotescollection_displayquote($quote_id = 0)
 		$display = "<blockquote class=\"quotescollection\"><q>".wptexturize(nl2br($quote_data['quote']))."</q>";
 		if($quote_data['author'] || $quote_data['source'])
 			$display .= " &mdash;&nbsp;";
+		if($quote_data['author'] && $quote_data['source'])
+			$comma = ", ";
 		if($quote_data['author'])
-			$display .= "<cite>{$quote_data['author']}</cite> ";
-		if($quote_data['source']) {
-			$display .="<cite>from {$quote_data['source']}</cite>";
-		}
+			$display .= "<cite>{$quote_data['author']}</cite>";
+		if($quote_data['source'])
+				$display .= $comma."<cite>{$quote_data['source']}</cite>";
 		$display .= "</blockquote>";
 		return $display;
 	}
@@ -544,8 +648,8 @@ function quotescollection_displayquotes($source = "")
 	if(!$source) {
 		$sql .= "ORDER BY quote";
 	}
-	else if($source == "Anonymous") {
-		$sql .= "AND (author = '' OR author ='Anonymous')";
+	else if($source == "Anonymous" || $source == "anonymous") {
+		$sql .= "AND (author IS NULL OR author = '' OR author ='Anonymous')";
 	}
 	else {
 		$sql .= "AND (source = '{$source}' OR author = '{$source}')";
@@ -556,11 +660,12 @@ function quotescollection_displayquotes($source = "")
 			$display .= "<blockquote class=\"quotescollection\"><q>".wptexturize(nl2br($quote_data['quote']))."</q>";
 			if($quote_data['author'] || $quote_data['source'])
 				$display .= " &mdash;&nbsp;";
+			if($quote_data['author'] && $quote_data['source'])
+				$comma = ", ";
 			if($quote_data['author'])
-				$display .= "<cite>{$quote_data['author']}</cite> ";
-			if($quote_data['source']) {
-				$display .="<cite>from {$quote_data['source']}</cite>";
-			}
+				$display .= "<cite>{$quote_data['author']}</cite>";
+			if($quote_data['source'])
+				$display .= $comma."<cite>{$quote_data['source']}</cite>";
 			$display .= "</blockquote>";
 		}
 		return $display;
@@ -569,7 +674,40 @@ function quotescollection_displayquotes($source = "")
 		return "";
 }
 
-
+function quotescollection_displayquotes_tags($tags = "")
+{
+	global $wpdb;
+	$tags = html_entity_decode($tags);
+	if(!$tags)
+		return "";
+	$taglist = explode(',', $tags);
+	foreach($taglist as $tag) {
+		$tag = trim($tag);
+		if($sql_condition) $sql_condition .= " OR ";
+		$sql_condition .= "tags = '{$tag}' OR tags LIKE '{$tag},%' OR tags LIKE '%,{$tag},%' OR tags LIKE '%,{$tag}'";
+	}
+	$sql = "SELECT quote_id, quote, author, source
+		FROM " . $wpdb->prefix . "quotescollection 
+		WHERE visible = 'yes' AND ({$sql_condition})";
+	$quotes = $wpdb->get_results($sql, ARRAY_A);
+	if ( !empty($quotes) ) {
+		foreach($quotes as $quote_data) {
+			$display .= "<blockquote class=\"quotescollection\"><q>".wptexturize(nl2br($quote_data['quote']))."</q>";
+			if($quote_data['author'] || $quote_data['source'])
+				$display .= " &mdash;&nbsp;";
+			if($quote_data['author'] && $quote_data['source'])
+				$comma = ", ";
+			if($quote_data['author'])
+				$display .= "<cite>{$quote_data['author']}</cite>";
+			if($quote_data['source'])
+				$display .= $comma."<cite>{$quote_data['source']}</cite>";
+			$display .= "</blockquote>";
+		}
+		return $display;
+	}
+	else
+		return "";
+}
 
 function quotescollection_inpost( $text ) {
   $start = strpos($text,"[quote|id=");
@@ -592,7 +730,10 @@ function quotescollection_inpost( $text ) {
 	if($start !== FALSE) {
 		$text = preg_replace("/\[quote\|source=(.{1,})?\]/ie", "quotescollection_displayquotes('\\1')", $text);
 	}
-	return $text;
+	$start = strpos($text,"[quote|tags=");
+	if($start !== FALSE) {
+		$text = preg_replace("/\[quote\|tags=(.{1,})?\]/ie", "quotescollection_displayquotes_tags('\\1')", $text);
+	}	return $text;
 }
 
 function quotescollection_css_head() 
@@ -607,8 +748,7 @@ add_action('wp_head', 'quotescollection_css_head' );
 
 add_filter('the_content', 'quotescollection_inpost', 7);
 add_filter('the_excerpt', 'quotescollection_inpost', 7);
-
-add_action('activate_quotes-collection/quotes-collection.php', 'quotescollection_install'); 
+register_activation_hook( __FILE__, 'quotescollection_install' );
 add_action('admin_menu', 'quotescollection_admin_menu');
 add_action('plugins_loaded', 'quotescollection_init');
 ?>

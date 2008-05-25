@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: http://srinig.com/wordpress/plugins/quotes-collection/#donate
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax
 Requires at least: 2.1
-Tested up to: 2.5
+Tested up to: 2.5.1
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
@@ -16,14 +16,17 @@ Main features and notes:
 
 * Random Quote sidebar widget with Ajax refresh feature -- you will be able to get another random quote on the same space without refreshing the web page. This refresh feature can be optionally turned off. The widget also comes with few other options in the widget control panel.
 * A nice admin interface to add, edit and manage quotes.
-* Additional information that can be provided along with the quote: quote author, source (e.g., a book, or a website URL) and visibility.
-* Quotes can be displayed in a page using one of the tags below.
-	* The tag `[quote|all]` displays all quotes.
+* Additional information that can be provided along with the quote: quote author, source (e.g., a book, or a website URL), tags (keywords) and visibility.
+* Quotes can be displayed in a page by placing a piece of code (quick tags) such as the ones below.
+	* Placing `[quote|all]` in the page displays all quotes.
 	* `[quote|author=Somebody]` displays quotes authored by Somebody.
 	* `[quote|source=Something]` displays quotes with source as ‘Something’
+	* `[quote|tags=sometag]` displays quotes tagged sometag *(new with 1.1)*
+	* `[quote|tags=tag1,tag2,tag3]` displays quotes tagged tag1 or tag2 or tag3, one or more or all of these *(new with 1.1)*
 	* `[quote|id=3]` displays quote with ID 3
 	* `[quote|random]` displays a random quote
-* The code `<?php quotescollection_display_randomquote() ?>` can be used to display a random quote in places other than sidebar.
+* The template function `quotescollection_display_randomquote()` can be used to display a random quote in places other than sidebar.
+* Support for Localization. *(new with 1.1)*
 
 == Installation ==
 
@@ -34,7 +37,7 @@ Main features and notes:
 
 == Screenshots ==
 
-1. Admin interface (with WP 2.5)
+1. Admin interface
 2. ‘Random Quote’ widget options
 3. Random quote as can be seen in the sidebar of [srinig.com](http://srinig.com/)
 
