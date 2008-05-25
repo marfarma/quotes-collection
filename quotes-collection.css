@@ -1,10 +1,10 @@
 /* Random quote */
 
-#quotescollection_randomquote q {
+.quotescollection_randomquote q {
 
 }
 
-#quotescollection_randomquote cite {
+.quotescollection_randomquote cite {
 
 }
 
@@ -23,6 +23,7 @@ blockquote.quotescollection q {
 }
 
 blockquote.quotescollection cite {
+	display:inline;
 	font-size:0.83em;
 	color:#888;
 }

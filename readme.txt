@@ -1,9 +1,9 @@
 === Quotes Collection ===
 Contributors: SriniG
-Donate link: http://srinig.com/wordpress/plugins/quotes-collection/#donation
+Donate link: http://srinig.com/wordpress/plugins/quotes-collection/#donate
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax
 Requires at least: 2.1
-Tested up to: 2.3.1
+Tested up to: 2.5
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
@@ -34,7 +34,7 @@ Main features and notes:
 
 == Screenshots ==
 
-1. Admin interface
+1. Admin interface (with WP 2.5)
 2. ‘Random Quote’ widget options
 3. Random quote as can be seen in the sidebar of [srinig.com](http://srinig.com/)
 
