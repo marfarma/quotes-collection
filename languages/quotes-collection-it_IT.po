@@ -1,0 +1,165 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quotes Collection 1.1 in Italiano\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-04-22 22:08+0100\n"
+"PO-Revision-Date: 2008-05-26 14:13+0100\n"
+"Last-Translator: Gianni Diurno (aka gidibao) <gidibao@gmail.com>\n"
+"Language-Team: gidibao.net <gidibao@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_c;__ngettext_noop:1,2\n"
+
+msgid "Next quote"
+msgstr "La prossima citazione"
+
+msgid "Loading..."
+msgstr "Un attimo..."
+
+msgid "Error getting quote"
+msgstr "Si é verificato un errore"
+
+msgid "from"
+msgstr "da"
+
+msgid "Random Quote"
+msgstr "Citazioni a caso"
+
+msgid "Title"
+msgstr "Titolo"
+
+msgid "Show author?"
+msgstr "Desideri mostrare l'autore?"
+
+msgid "Show source?"
+msgstr "Desideri mostrare la fonte?"
+
+msgid "Ajax refresh feature"
+msgstr "Funzione di ricarica Ajax"
+
+msgid "Manage your collection of quotes at"
+msgstr "Gestisci la tua collezione di citazioni"
+
+msgid "Manage"
+msgstr "Gestione"
+
+msgid "Nothing added to the database."
+msgstr "Non é stato aggiunto nulla al database."
+
+msgid "Database table not found!"
+msgstr "La tabella del database non é stata trovata!"
+
+msgid "There was an error in the MySQL query"
+msgstr "Si é verificato un errore nella richiesta MySQL"
+
+msgid "Quote added"
+msgstr "La citazione é stata aggiunta"
+
+msgid "Quote not updated."
+msgstr "La citazione non é stata aggiornata."
+
+msgid "Changes saved"
+msgstr "Le modifiche sono state salvate"
+
+msgid "Quote deleted"
+msgstr "La citazione é stata cancellata"
+
+msgid "The quote cannot be deleted"
+msgstr "La citazione non può essere cancellata"
+
+msgid "Add Quote"
+msgstr "Aggiungi la citazione"
+
+msgid "Save changes"
+msgstr "Salva le modifiche"
+
+msgid "Back"
+msgstr "Ritorna indietro"
+
+msgid "The quote"
+msgstr "Citazione"
+
+msgid "Author"
+msgstr "Autore"
+
+msgid "Source"
+msgstr "Fonte"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Visible?"
+msgstr "Desideri che sia visibile?"
+
+msgid "optional"
+msgstr "facoltativo"
+
+msgid "comma separated"
+msgstr "separa con una virgola"
+
+msgid "Nothing done!"
+msgstr "Non ho fatto nulla!"
+
+msgid "Visibility status of selected quotes set to '%s'"
+msgstr "Lo stato di visibilità delle citazioni selezionate é impostato come '%s'"
+
+msgid "Quote(s) deleted"
+msgstr "Citazione(i) cancellata(e)"
+
+msgid "Edit quote"
+msgstr "Modifica la citazione"
+
+msgid "Delete"
+msgstr "Cancella"
+
+msgid "Make visible"
+msgstr "Rendi visibile"
+
+msgid "Make invisible"
+msgstr "Nascondi"
+
+msgid "Add new quote"
+msgstr "Aggiungi una nuova citazione"
+
+msgid "Edit"
+msgstr "Modifica"
+
+msgid "Are you sure you want to delete this quote?"
+msgstr "Sei certo di volere cancellare questa citazione?"
+
+msgid "Sort by: "
+msgstr "Disponi per: "
+
+msgid "Quote"
+msgstr "Citazione"
+
+msgid "Date added"
+msgstr "Data di inserimento"
+
+msgid "Date updated"
+msgstr "Data di aggiornamento"
+
+msgid "Visibility"
+msgstr "Visibilità"
+
+msgid "Go"
+msgstr "Vai"
+
+msgid "Action"
+msgstr "Azione"
+
+msgid "No quotes in the database"
+msgstr "Non é presente alcuna citazione nel database"
+
+#: quotes-collection.php:462
+#, php-format
+msgid "Currently, you have %d quote."
+msgid_plural "Currently, you have %d quotes."
+msgstr[0] "Al momento, hai %d citazione disponibile."
+msgstr[1] "Al momento, hai %d citazioni disponibili."
+

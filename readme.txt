@@ -21,12 +21,12 @@ Main features and notes:
 	* Placing `[quote|all]` in the page displays all quotes.
 	* `[quote|author=Somebody]` displays quotes authored by Somebody.
 	* `[quote|source=Something]` displays quotes with source as ‘Something’
-	* `[quote|tags=sometag]` displays quotes tagged sometag *(new with 1.1)*
-	* `[quote|tags=tag1,tag2,tag3]` displays quotes tagged tag1 or tag2 or tag3, one or more or all of these *(new with 1.1)*
+	* `[quote|tags=sometag]` displays quotes tagged sometag 
+	* `[quote|tags=tag1,tag2,tag3]` displays quotes tagged tag1 or tag2 or tag3, one or more or all of these
 	* `[quote|id=3]` displays quote with ID 3
 	* `[quote|random]` displays a random quote
 * The template function `quotescollection_display_randomquote()` can be used to display a random quote in places other than sidebar.
-* Support for Localization. *(new with 1.1)*
+* Support for Localization.
 
 == Installation ==
 

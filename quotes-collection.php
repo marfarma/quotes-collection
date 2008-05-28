@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.1.1
+Version: 1.1.2
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -549,61 +549,51 @@ add_action('admin_head', 'quotescollection_admin_head');
 
 function quotescollection_install()
 {
-   global $wpdb;
-   $table_name = $wpdb->prefix . "quotescollection";
+	global $wpdb;
+	$table_name = $wpdb->prefix . "quotescollection";
 
-   // if table name already exists
-   if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name) {
-		// Get all available data from the table and store it in an array
-		$sql = "SELECT * FROM " . $table_name . " ORDER BY quote_id";
-		$data = $wpdb->get_results($sql, ARRAY_A);
-		// Delete the table
-		$sql = "DROP TABLE ". $table_name;
-		$wpdb->query($sql);
+	if(!defined('DB_CHARSET') || !($db_charset = DB_CHARSET))
+		$db_charset = 'utf8';
+	$db_charset = "CHARACTER SET ".$db_charset;
+	if(defined('DB_COLLATE') && $db_collate = DB_COLLATE) 
+		$db_collate = "COLLATE ".$db_collate;
+
+
+	// if table name already exists
+	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name) {
+   		$wpdb->query("ALTER TABLE `{$table_name}` {$db_charset} {$db_collate}");
+
+   		$wpdb->query("ALTER TABLE `{$table_name}` MODIFY quote TEXT {$db_charset} {$db_collate}");
+
+   		$wpdb->query("ALTER TABLE `{$table_name}` MODIFY author VARCHAR(256) {$db_charset} {$db_collate}");
+
+   		$wpdb->query("ALTER TABLE `{$table_name}` MODIFY source VARCHAR(256) {$db_charset} {$db_collate}");
+
+   		if(!($wpdb->get_results("SHOW COLUMNS FROM {$table_name} LIKE 'tags'"))) {
+   			$wpdb->query("ALTER TABLE `{$table_name}` ADD `tags` VARCHAR(256) {$db_charset} {$db_collate} AFTER `source`");
+		}
 	}
-
-	//Creating the table ... fresh!
-	if(!defined('DB_CHARSET') || !($db_charset = DB_CHARSET)) $db_charset = 'utf8';
-	$db_charset = "DEFAULT CHARACTER SET ".$db_charset;
-	if(defined('DB_COLLATE') && $db_collate = DB_COLLATE) $db_collate = "DEFAULT COLLATE ".$db_collate;
-	$sql = "CREATE TABLE " . $table_name . " (
-		quote_id mediumint(9) NOT NULL AUTO_INCREMENT,
-		quote TEXT NOT NULL,
-		author VARCHAR(256),
-		source VARCHAR(256),
-		tags VARCHAR(256),
-		visible enum('yes', 'no') DEFAULT 'yes' NOT NULL,
-		time_added datetime NOT NULL,
-		time_updated datetime,
-		PRIMARY KEY  (quote_id)
-	) {$db_charset} {$db_collate};";
-	$results = $wpdb->query( $sql );
+	else {
+		//Creating the table ... fresh!
+		$sql = "CREATE TABLE " . $table_name . " (
+			quote_id mediumint(9) NOT NULL AUTO_INCREMENT,
+			quote TEXT NOT NULL,
+			author VARCHAR(256),
+			source VARCHAR(256),
+			tags VARCHAR(256),
+			visible enum('yes', 'no') DEFAULT 'yes' NOT NULL,
+			time_added datetime NOT NULL,
+			time_updated datetime,
+			PRIMARY KEY  (quote_id)
+		) {$db_charset} {$db_collate};";
+		$results = $wpdb->query( $sql );
+	}
 	
 	global $quotescollection_db_version;
 	$options = get_option('quotescollection');
 	$options['db_version'] = $quotescollection_db_version;
 	update_option('quotescollection', $options);
 
-	// if data retrieved from previous table,
-	if($data) {
-		foreach($data as $record) {
-			$quote_id = $quote = $author = $source = $tags = $visible = $time_added = $time_updated = '';
-			extract($record);
-			$quote = "'".addslashes($quote)."'";
-			$author = $author?"'".addslashes($author)."'":"NULL";
-			$source = $source?"'".addslashes($source)."'":"NULL";
-			$tags = $tags?"'".addslashes($tags)."'":"NULL";
-			$visible = "'".$visible."'";
-			$time_added = "'".$time_added."'";
-			$time_updated = $time_updated?"'".$time_updated."'":"NULL";
-			// input the data
-			if(!$sql_insert)
-				$sql_insert = "INSERT INTO `" . $table_name . "` (`quote_id`, `quote`, `author`, `source`, `tags`, `visible`, `time_added`, `time_updated`) VALUES ";
-			else $sql_insert .= ", ";
-			$sql_insert .= "({$quote_id}, {$quote}, {$author}, {$source}, {$tags}, {$visible}, {$time_added}, {$time_updated})";
-		}
-		if($sql_insert)	$wpdb->query($sql_insert);
-	}
 }
 
 

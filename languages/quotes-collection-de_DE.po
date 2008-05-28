@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Quotes Collection 1.1\n"
+"Project-Id-Version: Quotes Collection 1.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-22 22:08+0100\n"
 "PO-Revision-Date: 2008-04-22 22:16+0100\n"
@@ -14,11 +14,9 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_c;__ngettext_noop:1,2\n"
-"X-Poedit-Basepath: C:\\Dokumente und Einstellungen\\Overkill\\Eigene Dateien\\Eigene Webs\\kochs-online\\blog\\wp-content\\plugins\\quotes-collection\n"
-"X-Poedit-SearchPath-0: .\n"
 
 msgid "Next quote"
-msgstr "N&auml;chstes Zitat"
+msgstr "Nächstes Zitat"
 
 msgid "Loading..."
 msgstr "Laden..."
@@ -30,7 +28,7 @@ msgid "from"
 msgstr "aus"
 
 msgid "Random Quote"
-msgstr "Zuf&auml;lliges Zitat"
+msgstr "Zufälliges Zitat"
 
 msgid "Title"
 msgstr "Titel"
@@ -51,7 +49,7 @@ msgid "Manage"
 msgstr "Verwalten"
 
 msgid "Nothing added to the database."
-msgstr "Nichts zur Datenbank hinzugef&uuml;gt."
+msgstr "Nichts zur Datenbank hinzugefügt."
 
 msgid "Database table not found!"
 msgstr "Datenbank nicht gefunden!"
@@ -60,28 +58,28 @@ msgid "There was an error in the MySQL query"
 msgstr "Es trat ein Fehler in der MySQL-Abfrage auf"
 
 msgid "Quote added"
-msgstr "Zitat hinzugef&uuml;gt"
+msgstr "Zitat hinzugefügt"
 
 msgid "Quote not updated."
-msgstr "Zitat nicht ge&auml;ndert."
+msgstr "Zitat nicht geändert."
 
 msgid "Changes saved"
-msgstr "&Auml;nderungen gespeichert"
+msgstr "Änderungen gespeichert"
 
 msgid "Quote deleted"
-msgstr "Zitat gel&ouml;scht"
+msgstr "Zitat gelöscht"
 
 msgid "The quote cannot be deleted"
-msgstr "Das Zitat kann nicht gel&ouml;scht werden"
+msgstr "Das Zitat kann nicht gelöscht werden"
 
 msgid "Add Quote"
-msgstr "Zitat hinzuf&uuml;gen"
+msgstr "Zitat hinzufügen"
 
 msgid "Save changes"
-msgstr "&Auml;nderungen speichern"
+msgstr "Änderungen speichern"
 
 msgid "Back"
-msgstr "Zur&uuml;ck"
+msgstr "Zurück"
 
 msgid "The quote"
 msgstr "Das Zitat"
@@ -105,19 +103,19 @@ msgid "comma separated"
 msgstr ""
 
 msgid "Nothing done!"
-msgstr "Nichts ver&auml;ndert!"
+msgstr "Nichts verändert!"
 
 msgid "Visibility status of selected quotes set to '%s'"
-msgstr "Sichtbarkeit der gew&auml;ten Zitate gesetzt auf '%s'"
+msgstr "Sichtbarkeit der gewäten Zitate gesetzt auf '%s'"
 
 msgid "Quote(s) deleted"
-msgstr "Zitat(e) gel&ouml;scht"
+msgstr "Zitat(e) gelöscht"
 
 msgid "Edit quote"
 msgstr "Zitat editieren"
 
 msgid "Delete"
-msgstr "L&ouml;schen"
+msgstr "Löschen"
 
 msgid "Make visible"
 msgstr "Sichtbar machen"
@@ -126,13 +124,13 @@ msgid "Make invisible"
 msgstr "Unsichtbar machen"
 
 msgid "Add new quote"
-msgstr "Neues Zitat hinzuf&uuml;gen"
+msgstr "Neues Zitat hinzufügen"
 
 msgid "Edit"
 msgstr "Editieren"
 
 msgid "Are you sure you want to delete this quote?"
-msgstr "Bist du sicher, dass du das gew&auml;hlte Zitat l&ouml;schen m&ouml;chtest?"
+msgstr "Bist du sicher, dass du das gewählte Zitat löschen möchtest?"
 
 msgid "Sort by: "
 msgstr "Sortieren nach: "
@@ -144,7 +142,7 @@ msgid "Date added"
 msgstr "Erstellungsdatum"
 
 msgid "Date updated"
-msgstr "&Auml;nderungsdatum"
+msgstr "Änderungsdatum"
 
 msgid "Visibility"
 msgstr "Sichtbarkeit"
@@ -165,4 +163,3 @@ msgid "Currently, you have %d quote."
 msgid_plural "Currently, you have %d quotes."
 msgstr[0] ""
 msgstr[1] ""
-
