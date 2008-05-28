@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.1.2
+Version: 1.1.2.1
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -565,12 +565,12 @@ function quotescollection_install()
 
    		$wpdb->query("ALTER TABLE `{$table_name}` MODIFY quote TEXT {$db_charset} {$db_collate}");
 
-   		$wpdb->query("ALTER TABLE `{$table_name}` MODIFY author VARCHAR(256) {$db_charset} {$db_collate}");
+   		$wpdb->query("ALTER TABLE `{$table_name}` MODIFY author VARCHAR(255) {$db_charset} {$db_collate}");
 
-   		$wpdb->query("ALTER TABLE `{$table_name}` MODIFY source VARCHAR(256) {$db_charset} {$db_collate}");
+   		$wpdb->query("ALTER TABLE `{$table_name}` MODIFY source VARCHAR(255) {$db_charset} {$db_collate}");
 
    		if(!($wpdb->get_results("SHOW COLUMNS FROM {$table_name} LIKE 'tags'"))) {
-   			$wpdb->query("ALTER TABLE `{$table_name}` ADD `tags` VARCHAR(256) {$db_charset} {$db_collate} AFTER `source`");
+   			$wpdb->query("ALTER TABLE `{$table_name}` ADD `tags` VARCHAR(255) {$db_charset} {$db_collate} AFTER `source`");
 		}
 	}
 	else {
@@ -578,9 +578,9 @@ function quotescollection_install()
 		$sql = "CREATE TABLE " . $table_name . " (
 			quote_id mediumint(9) NOT NULL AUTO_INCREMENT,
 			quote TEXT NOT NULL,
-			author VARCHAR(256),
-			source VARCHAR(256),
-			tags VARCHAR(256),
+			author VARCHAR(255),
+			source VARCHAR(255),
+			tags VARCHAR(255),
 			visible enum('yes', 'no') DEFAULT 'yes' NOT NULL,
 			time_added datetime NOT NULL,
 			time_updated datetime,
