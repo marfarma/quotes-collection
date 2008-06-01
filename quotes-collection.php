@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.1.2.1
+Version: 1.1.3
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -78,15 +78,14 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 1
 		return;
 	}
 	$display = "<p><q>". wptexturize(str_replace(array("\r\n", "\r", "\n"), '', nl2br($random_quote['quote']))) ."</q>";
-	if( ($show_author && $random_quote['author']) || ($show_source && $random_quote['source']) )
-		$display .= " &mdash;&nbsp;";
-	if( ($show_author && $random_quote['author']) && ($show_source && $random_quote['source']) )
-		$comma = ", ";
 	if($show_author && $random_quote['author'])
-		$display .= "<cite>".$random_quote['author']."</cite>";
-	if($show_source && $random_quote['source'])
-		$display .= $comma."<cite>".$random_quote['source']."</cite>";
-	$display .= "</p>";
+		$cite = $random_quote['author'];
+	if($show_source && $random_quote['source']) {
+		if($cite) $cite .= ", ";
+		$cite .= $random_quote['source'];
+	}
+	if($cite) $cite = " <cite>&mdash;&nbsp;{$cite}</cite>";
+	$display .= $cite."</p>";
 	
 	// We don't want to display the 'next quote' link if there is no more than 1 quote
 	$quotes_count = quotescollection_count("WHERE visible='yes'"); 
@@ -117,7 +116,7 @@ function quotescollection_init()
 	function quotescollection_widget($args) {
 		if($random_quote = quotescollection_get_randomquote()) {
 			$options = get_option('quotescollection');
-			$title = isset($options['title'])?$options['title']:__('Random Quote', 'quotes-collection');
+			$title = isset($options['title'])?apply_filters('randomquote_title', $options['title']):__('Random Quote', 'quotes-collection');
 			$show_author = isset($options['show_author'])?$options['show_author']:1;
 			$show_source = isset($options['show_source'])?$options['show_source']:1;
 			$ajax_refresh = isset($options['ajax_refresh'])?$options['ajax_refresh']:1;
@@ -613,15 +612,14 @@ function quotescollection_displayquote($quote_id = 0)
 	$quote_data = $wpdb->get_row($sql, ARRAY_A);
 	if ( !empty($quote_data) ) {
 		$display = "<blockquote class=\"quotescollection\"><q>".wptexturize(nl2br($quote_data['quote']))."</q>";
-		if($quote_data['author'] || $quote_data['source'])
-			$display .= " &mdash;&nbsp;";
-		if($quote_data['author'] && $quote_data['source'])
-			$comma = ", ";
 		if($quote_data['author'])
-			$display .= "<cite>{$quote_data['author']}</cite>";
-		if($quote_data['source'])
-				$display .= $comma."<cite>{$quote_data['source']}</cite>";
-		$display .= "</blockquote>";
+			$cite = $quote_data['author'];
+		if($quote_data['source']) {
+			if($cite) $cite .= ", ";
+			$cite .= $quote_data['source'];
+		}
+		if($cite) $cite = " <cite>&mdash;&nbsp;{$cite}</cite>"; 
+		$display .= $cite."</blockquote>";
 		return $display;
 	}
 	else
@@ -648,15 +646,15 @@ function quotescollection_displayquotes($source = "")
 	if ( !empty($quotes) ) {
 		foreach($quotes as $quote_data) {
 			$display .= "<blockquote class=\"quotescollection\"><q>".wptexturize(nl2br($quote_data['quote']))."</q>";
-			if($quote_data['author'] || $quote_data['source'])
-				$display .= " &mdash;&nbsp;";
-			if($quote_data['author'] && $quote_data['source'])
-				$comma = ", ";
+			$cite = "";
 			if($quote_data['author'])
-				$display .= "<cite>{$quote_data['author']}</cite>";
-			if($quote_data['source'])
-				$display .= $comma."<cite>{$quote_data['source']}</cite>";
-			$display .= "</blockquote>";
+				$cite = $quote_data['author'];
+			if($quote_data['source']) {
+				if($cite) $cite .= ", ";
+				$cite .= $quote_data['source'];
+			}
+			if($cite) $cite = " <cite>&mdash;&nbsp;{$cite}</cite>"; 
+			$display .= $cite."</blockquote>";
 		}
 		return $display;
 	}
@@ -683,15 +681,15 @@ function quotescollection_displayquotes_tags($tags = "")
 	if ( !empty($quotes) ) {
 		foreach($quotes as $quote_data) {
 			$display .= "<blockquote class=\"quotescollection\"><q>".wptexturize(nl2br($quote_data['quote']))."</q>";
-			if($quote_data['author'] || $quote_data['source'])
-				$display .= " &mdash;&nbsp;";
-			if($quote_data['author'] && $quote_data['source'])
-				$comma = ", ";
+			$cite = "";
 			if($quote_data['author'])
-				$display .= "<cite>{$quote_data['author']}</cite>";
-			if($quote_data['source'])
-				$display .= $comma."<cite>{$quote_data['source']}</cite>";
-			$display .= "</blockquote>";
+				$cite = $quote_data['author'];
+			if($quote_data['source']) {
+				if($cite) $cite .= ", ";
+				$cite .= $quote_data['source'];
+			}
+			if($cite) $cite = " <cite>&mdash;&nbsp;{$cite}</cite>"; 
+			$display .= $cite."</blockquote>";
 		}
 		return $display;
 	}
@@ -732,6 +730,7 @@ function quotescollection_css_head()
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo( 'wpurl' ); ?>/wp-content/plugins/quotes-collection/quotes-collection.css"/>
 	<?php
 }
+
 
 add_action('wp_head', 'quotescollection_css_head' );
 

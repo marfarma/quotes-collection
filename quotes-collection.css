@@ -1,11 +1,11 @@
 /* Random quote */
-
 .quotescollection_randomquote q {
-
 }
 
-.quotescollection_randomquote cite {
 
+.quotescollection_randomquote cite {
+	display:block; /* To display author and source in a new line */
+	text-align:right; 
 }
 
 
@@ -19,11 +19,17 @@ blockquote.quotescollection {
 }
 
 blockquote.quotescollection q {
-	color:#555;
 }
 
 blockquote.quotescollection cite {
-	display:inline;
+	display:inline;	
 	font-size:0.83em;
-	color:#888;
 }
+
+/* Uncomment the block below if you want to get rid of the quotation marks before and after the quote */
+
+/*
+q:before, q:after {
+	content:"";
+}
+*/
