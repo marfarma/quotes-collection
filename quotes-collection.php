@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.1.3
+Version: 1.1.4
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -96,6 +96,7 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 1
 		$display .= "\")\n//-->\n</script>\n";
 	}
 	if ($ajax_refresh == 2 && $quotes_count > 1) {
+		$display = addslashes($display);
 		$display .= "<p id=\"quotescollection_nextquote-".$_REQUEST['refresh']."\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh(".$_REQUEST['refresh'].", ".$random_quote['quote_id'].', '. $show_author .', '.$show_source.");\">".__('Next quote', 'quotes-collection')." &raquo;</a></p>";
 		return $display;
 	}
@@ -116,7 +117,7 @@ function quotescollection_init()
 	function quotescollection_widget($args) {
 		if($random_quote = quotescollection_get_randomquote()) {
 			$options = get_option('quotescollection');
-			$title = isset($options['title'])?apply_filters('randomquote_title', $options['title']):__('Random Quote', 'quotes-collection');
+			$title = isset($options['title'])?apply_filters('the_title', $options['title']):__('Random Quote', 'quotes-collection');
 			$show_author = isset($options['show_author'])?$options['show_author']:1;
 			$show_source = isset($options['show_source'])?$options['show_source']:1;
 			$ajax_refresh = isset($options['ajax_refresh'])?$options['ajax_refresh']:1;
@@ -712,15 +713,15 @@ function quotescollection_inpost( $text ) {
   }
 	$start = strpos($text,"[quote|author=");
 	if($start !== FALSE) {
-		$text = preg_replace("/\[quote\|author=(.{1,})?\]/ie", "quotescollection_displayquotes('\\1')", $text);
+		$text = preg_replace("/\[quote\|author=(.{1,})?\]/ie", "quotescollection_displayquotes(\"\\1\")", $text);
 	}
 	$start = strpos($text,"[quote|source=");
 	if($start !== FALSE) {
-		$text = preg_replace("/\[quote\|source=(.{1,})?\]/ie", "quotescollection_displayquotes('\\1')", $text);
+		$text = preg_replace("/\[quote\|source=(.{1,})?\]/ie", "quotescollection_displayquotes(\"\\1\")", $text);
 	}
 	$start = strpos($text,"[quote|tags=");
 	if($start !== FALSE) {
-		$text = preg_replace("/\[quote\|tags=(.{1,})?\]/ie", "quotescollection_displayquotes_tags('\\1')", $text);
+		$text = preg_replace("/\[quote\|tags=(.{1,})?\]/ie", "quotescollection_displayquotes_tags(\"\\1\")", $text);
 	}	return $text;
 }
 
