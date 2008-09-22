@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.1.4
+Version: 1.2
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -49,17 +49,20 @@ function quotescollection_count($condition = "")
 
 function quotescollection_js_head() // this is a PHP function
 {
+	$requrl = get_bloginfo( 'wpurl' )."/wp-content/plugins/quotes-collection/quotes-collection-ajax.php";
+	$nextquote =  __('Next quote', 'quotes-collection');
+	$loading = __('Loading...', 'quotes-collection');
+	$error = __('Error getting quote', 'quotes-collection');
+
 	// use JavaScript SACK library for AJAX
 	wp_print_scripts( array( 'sack' ));
 	
 	// Define custom JavaScript function
 	?>
 <!-- Quotes Collection -->
-<script type="text/javascript" src="<?php bloginfo( 'wpurl' ); ?>/wp-content/plugins/quotes-collection/quotes-collection-ajax.php?js"></script>
+<script type="text/javascript" src="<?php bloginfo( 'wpurl' ); ?>/wp-content/plugins/quotes-collection/quotes-collection.js"></script>
 <script type="text/javascript" language="JavaScript">
-  quotcoll_nextquote = '<?php _e('Next quote', 'quotes-collection'); ?>';
-  quotcoll_loading = '<?php _e('Loading...', 'quotes-collection'); ?>';
-  quotcoll_error = '<?php _e('Error getting quote', 'quotes-collection'); ?>';
+  quotescollection_init(<?php echo "'{$requrl}', '{$nextquote}', '{$loading}', '{$error}'"; ?>);
 </script>
 <?php
 } // end of PHP function quotescollection_js_head
@@ -79,10 +82,10 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 1
 	}
 	$display = "<p><q>". wptexturize(str_replace(array("\r\n", "\r", "\n"), '', nl2br($random_quote['quote']))) ."</q>";
 	if($show_author && $random_quote['author'])
-		$cite = $random_quote['author'];
+		$cite = "<span class=\"quotescollection_author\">".$random_quote['author']."</span>";
 	if($show_source && $random_quote['source']) {
 		if($cite) $cite .= ", ";
-		$cite .= $random_quote['source'];
+		$cite .= "<span class=\"quotescollection_source\">".$random_quote['source']."</span>";
 	}
 	if($cite) $cite = " <cite>&mdash;&nbsp;{$cite}</cite>";
 	$display .= $cite."</p>";
@@ -92,12 +95,12 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 1
 	
 	if($ajax_refresh == 1 && $quotes_count > 1) {
 		$display .= "<script type=\"text/javascript\">\n<!--\ndocument.write(\"";
-		$display .= '<p id=\"quotescollection_nextquote-'.$instance.'\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh('.$instance.', '.$random_quote["quote_id"].', '. $show_author .', '.$show_source.');\">'.__('Next quote', 'quotes-collection').' &raquo;</a></p>';
+		$display .= '<p class=\"quotescollection_nextquote\" id=\"quotescollection_nextquote-'.$instance.'\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh('.$instance.', '.$random_quote["quote_id"].', '. $show_author .', '.$show_source.');\">'.__('Next quote', 'quotes-collection').' &raquo;</a></p>';
 		$display .= "\")\n//-->\n</script>\n";
 	}
 	if ($ajax_refresh == 2 && $quotes_count > 1) {
 		$display = addslashes($display);
-		$display .= "<p id=\"quotescollection_nextquote-".$_REQUEST['refresh']."\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh(".$_REQUEST['refresh'].", ".$random_quote['quote_id'].', '. $show_author .', '.$show_source.");\">".__('Next quote', 'quotes-collection')." &raquo;</a></p>";
+		$display .= "<p class=\"quotescollection_nextquote\" id=\"quotescollection_nextquote-".$_REQUEST['refresh']."\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh(".$_REQUEST['refresh'].", ".$random_quote['quote_id'].', '. $show_author .', '.$show_source.");\">".__('Next quote', 'quotes-collection')." &raquo;</a></p>";
 		return $display;
 	}
 	$display = "<div id=\"quotescollection_randomquote-".$instance."\" class=\"quotescollection_randomquote\">{$display}</div>";

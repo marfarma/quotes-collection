@@ -2,10 +2,25 @@
 .quotescollection_randomquote q {
 }
 
-
 .quotescollection_randomquote cite {
 	display:block; /* To display author and source in a new line */
 	text-align:right; 
+}
+
+.quotescollection_author { /* author */
+
+}
+
+.quotescollection_source { /* source */
+
+}
+
+.quotescollection_nextquote { /* 'Next Quote »' link */
+
+}
+
+.quotescollection_nextquote a { /* use this if you want to change, for example, the color of the 'Next Quote »' link */
+
 }
 
 
@@ -19,6 +34,7 @@ blockquote.quotescollection {
 }
 
 blockquote.quotescollection q {
+
 }
 
 blockquote.quotescollection cite {

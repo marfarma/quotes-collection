@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Quotes Collection 1.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-28 16:38+0300\n"
-"PO-Revision-Date: 2008-05-28 20:56+0300\n"
+"PO-Revision-Date: 2008-07-07 17:59+0300\n"
 "Last-Translator: Andrew <eng@go-by.com>\n"
 "Language-Team:  <admin@go-by.com>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "Следующая цитата"
 
 #: ../quotes-collection.php:61
 msgid "Loading..."
-msgstr "Загружаюсь..."
+msgstr "секундочку..."
 
 #: ../quotes-collection.php:62
 msgid "Error getting quote"
@@ -50,11 +50,11 @@ msgstr "Показывать источник?"
 
 #: ../quotes-collection.php:167
 msgid "Ajax refresh feature"
-msgstr "Особенности обновления Ajax "
+msgstr "Включить обновление Ajax "
 
 #: ../quotes-collection.php:169
 msgid "Manage your collection of quotes at"
-msgstr "Управлять коллекцией цитат"
+msgstr "Перейти к управлению цитатами"
 
 #: ../quotes-collection.php:169
 msgid "Manage"
