@@ -5,7 +5,7 @@ function quotescollection_init(requrl, nextquote, loading, errortext)
 	quotcoll_requrl = requrl;
 	quotcoll_nextquote = nextquote;
 	quotcoll_loading = loading;
-	quotcoll_errortext = errotext;
+	quotcoll_errortext = errortext;
 }
 
 function quotescollection_refresh(instance, exclude, show_author, show_source)

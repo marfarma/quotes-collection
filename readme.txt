@@ -26,7 +26,8 @@ Main features and notes:
 	* `[quote|id=3]` displays quote with ID 3
 	* `[quote|random]` displays a random quote
 * The template function `quotescollection_display_randomquote()` can be used to display a random quote in places other than sidebar.
-* Support for Localization. As of version 1.2, translation is available in the following languages.
+* Support for Localization. As of version 1.2.1, translation is available in the following languages.
+	* Arabic
 	* German
 	* Spanish
 	* French
