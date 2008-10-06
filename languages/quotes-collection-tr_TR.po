@@ -9,6 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1\n"
 
 #: quotes-collection.php:60
 #: quotes-collection.php:96
@@ -135,7 +136,7 @@ msgstr "seçime bağlı"
 
 #: quotes-collection.php:319
 msgid "comma separated"
-msgstr "boşluklarla ayrılmış"
+msgstr "virgüllerle ayrılmış"
 
 #: quotes-collection.php:355
 #: quotes-collection.php:368
@@ -185,7 +186,9 @@ msgstr "Bu alıntıyı silmek istediğinize emin misiniz?"
 #: quotes-collection.php:462
 #, php-format
 msgid "Currently, you have %d quote."
-msgstr "Şu anda %d alıntınız var."
+msgid_plural "Currently, you have %d quotes."
+msgstr[0] "Şu anda %d alıntınız var."
+msgstr[1] "Şu anda %d alıntınız var."
 
 #: quotes-collection.php:464
 #: quotes-collection.php:521

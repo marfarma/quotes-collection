@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.2.1
+Version: 1.2.2
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -23,7 +23,7 @@ $quotescollection_db_version = '1.1';
 function quotescollection_get_randomquote($exclude = 0)
 {
 	global $wpdb;
-	if($exclude)
+	if($exclude && is_numeric($exclude))
 		$exclude_condition = 'AND quote_id <> '.$exclude;
 	$sql = "SELECT quote_id, quote, author, source
 		FROM " . $wpdb->prefix . "quotescollection 
@@ -82,10 +82,11 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 1
 	}
 	$display = "<p><q>". wptexturize(str_replace(array("\r\n", "\r", "\n"), '', nl2br($random_quote['quote']))) ."</q>";
 	if($show_author && $random_quote['author'])
-		$cite = "<span class=\"quotescollection_author\">".$random_quote['author']."</span>";
+		$cite = "<span class=\"quotescollection_author\">".wptexturize(str_replace(array("\r\n", "\r", "\n"), '', $random_quote['author']))."</span>";
+
 	if($show_source && $random_quote['source']) {
 		if($cite) $cite .= ", ";
-		$cite .= "<span class=\"quotescollection_source\">".$random_quote['source']."</span>";
+			$cite .= "<span class=\"quotescollection_source\">".wptexturize(str_replace(array("\r\n", "\r", "\n"), '', $random_quote['source']))."</span>";
 	}
 	if($cite) $cite = " <cite>&mdash;&nbsp;{$cite}</cite>";
 	$display .= $cite."</p>";
@@ -95,12 +96,13 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 1
 	
 	if($ajax_refresh == 1 && $quotes_count > 1) {
 		$display .= "<script type=\"text/javascript\">\n<!--\ndocument.write(\"";
-		$display .= '<p class=\"quotescollection_nextquote\" id=\"quotescollection_nextquote-'.$instance.'\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh('.$instance.', '.$random_quote["quote_id"].', '. $show_author .', '.$show_source.');\">'.__('Next quote', 'quotes-collection').' &raquo;</a></p>';
+		$display .= '<p class=\"quotescollection_nextquote\" id=\"quotescollection_nextquote-'.$instance.'\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh('.$instance.', '.$random_quote["quote_id"].', '. $show_author .', '.$show_source.');\">'.__('Next quote', 'quotes-collection').' &raquo;<\/a><\/p>';
 		$display .= "\")\n//-->\n</script>\n";
 	}
 	if ($ajax_refresh == 2 && $quotes_count > 1) {
 		$display = addslashes($display);
-		$display .= "<p class=\"quotescollection_nextquote\" id=\"quotescollection_nextquote-".$_REQUEST['refresh']."\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh(".$_REQUEST['refresh'].", ".$random_quote['quote_id'].', '. $show_author .', '.$show_source.");\">".__('Next quote', 'quotes-collection')." &raquo;</a></p>";
+		$display = str_replace("</", "<\/", $display);
+		$display .= "<p class=\"quotescollection_nextquote\" id=\"quotescollection_nextquote-".$_REQUEST['refresh']."\"><a style=\"cursor:pointer\" onclick=\"quotescollection_refresh(".$_REQUEST['refresh'].", ".$random_quote['quote_id'].', '. $show_author .', '.$show_source.");\">".__('Next quote', 'quotes-collection')." &raquo;<\/a><\/p>";
 		return $display;
 	}
 	$display = "<div id=\"quotescollection_randomquote-".$instance."\" class=\"quotescollection_randomquote\">{$display}</div>";
