@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.2.2
+Version: 1.2.3
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -396,7 +396,7 @@ function quotescollection_quotes_management()
 		$msg = quotescollection_editquote($quote_id, $quote, $author, $source, $tags, $visible);
 	}
 	else if($_REQUEST['action'] == 'editquote') {
-		$display .= "<div class=\"wrap\">\n<h2>".__('Edit quote', 'quotes-collection')."</h2>";
+		$display .= "<div class=\"wrap\">\n<h2>Quotes Collection &raquo; ".__('Edit quote', 'quotes-collection')."</h2>";
 		$display .=  quotescollection_editform($_REQUEST['id']);
 		$display .= "</div>";
 		echo $display;
@@ -471,6 +471,7 @@ function quotescollection_quotes_management()
 
 		$display .= "<form id=\"quotescollection\" method=\"post\" action=\"{$_SERVER['PHP_SELF']}?page=quotes-collection/quotes-collection.php\">";
 		$display .= "<div class=\"tablenav\">";
+		$display .= "<div class=\"alignleft actions\">";
 		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Delete', 'quotes-collection')."\" class=\"button-secondary\" />";
 		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Make visible', 'quotes-collection')."\" class=\"button-secondary\" />";
 		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Make invisible', 'quotes-collection')."\" class=\"button-secondary\" />";
@@ -488,7 +489,10 @@ function quotescollection_quotes_management()
 		$display .= "<select name=\"order\"><option{$option_selected['ASC']}>ASC</option><option{$option_selected['DESC']}>DESC</option></select>";
 		$display .= "<input type=\"submit\" name=\"orderby\" value=\"".__('Go', 'quotes-collection')."\" class=\"button-secondary\" />";
 		$display .= "</div>";
-		$display .= "<br style=\"clear:both;\" />";
+		$display .= "<div class=\"clear\"></div>";	
+		$display .= "</div>";
+		
+
 		
 		$display .= "<table class=\"widefat\">";
 		$display .= "<thead><tr>
@@ -506,10 +510,11 @@ function quotescollection_quotes_management()
 
 
 		$display .= "<div class=\"tablenav\">";
-
+		$display .= "<div class=\"alignleft actions\">";
 		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Delete', 'quotes-collection')."\" class=\"button-secondary\" />";
 		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Make visible', 'quotes-collection')."\" class=\"button-secondary\" />";
 		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Make invisible', 'quotes-collection')."\" class=\"button-secondary\" />";
+		$display .= "</div>";
 
 		$display .= "</div>";
 		$display .= "</form>";
