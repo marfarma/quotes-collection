@@ -26,12 +26,15 @@ Main features and notes:
 	* `[quote|id=3]` displays quote with ID 3
 	* `[quote|random]` displays a random quote
 * The template function `quotescollection_display_randomquote()` can be used to display a random quote in places other than sidebar.
-* Support for Localization. As of version 1.2.1, translation is available in the following languages.
+* Support for Localization. As of version 1.2.4, translation is available in the following languages.
 	* Arabic
+	* Danish
 	* German
 	* Spanish
 	* French
+	* Croatian
 	* Italian
+	* Japanese
 	* Polish
 	* Russian
 	* Tamil
@@ -44,6 +47,50 @@ Main features and notes:
 1. Go to `WP Admin » Plugins` and activate the ‘Quotes Collection’ plugin
 1. To add and manage the quotes go to `WP Admin » Manage » Quotes Collection`
 1. To display a random quote in the sidebar, go to `WP Admin » Presentation » Widgets`, drag ‘Random Quote’ widget into the sidebar
+
+== Frequently Asked Questions ==
+
+= How to get rid of the quotation marks that surround the random quote? =
+
+Open the quotes-collection.css file that comes along with the plugin, scroll down and look towards the bottom.
+
+= The 'Next quote »' link is not working. Why? =
+
+You have to check a couple of things,
+
+1. Make sure your theme’s header.php file has the code `<?php wp_head(); ?>` just before `</head>`.
+
+2. Make sure the plugin files are uploaded in the correct location. The files should be uploaded in a location as follows
+<pre>	wp-content/
+	|-- plugins/
+		|-- quotes-collection/
+    		|-- quotes-collection.php
+    		|-- quotes-collection.js
+    		|-- quotes-collection.css
+    		|-- quotes-collection-ajax.php</pre>
+        
+If you still experience the problem even after the above conditions are met, [contact](http://srinig.com/contact/) the plugin author.
+
+
+= How to hide the 'Next quote »' link? = 
+
+You can do this by turning off the 'Ajax Refresh feature' in widget options.
+
+= What are the parameters that can be passed on to  `quotescollection_display_randomquote()` template function? =
+
+Three parameters can be passed into the `quotescollection_display_randomquote()` template function.
+
+`quotescollection_display_randomquote(1, 1, 1)` will show author, show source and switch on the ajax refresh feature.
+
+`quotescollection_display_randomquote(0, 0, 0)` will hide author, hide source and switch off the ajax refresh.
+
+You can mix those parameters as you like it. Feel free to experiment. :)
+
+= How about a feature to backup/export/import the bulk of quotes in CSV/text format? =
+
+Such a feature will be available in a future version of the plugin, though no promises can be made as to when it will be available!
+
+
 
 == Screenshots ==
 

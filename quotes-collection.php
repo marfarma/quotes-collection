@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.2.3
+Version: 1.2.4
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -49,7 +49,7 @@ function quotescollection_count($condition = "")
 
 function quotescollection_js_head() // this is a PHP function
 {
-	$requrl = get_bloginfo( 'wpurl' )."/wp-content/plugins/quotes-collection/quotes-collection-ajax.php";
+	$requrl = get_bloginfo( 'url' )."/wp-content/plugins/quotes-collection/quotes-collection-ajax.php";
 	$nextquote =  __('Next quote', 'quotes-collection');
 	$loading = __('Loading...', 'quotes-collection');
 	$error = __('Error getting quote', 'quotes-collection');
@@ -60,7 +60,7 @@ function quotescollection_js_head() // this is a PHP function
 	// Define custom JavaScript function
 	?>
 <!-- Quotes Collection -->
-<script type="text/javascript" src="<?php bloginfo( 'wpurl' ); ?>/wp-content/plugins/quotes-collection/quotes-collection.js"></script>
+<script type="text/javascript" src="<?php bloginfo( 'url' ); ?>/wp-content/plugins/quotes-collection/quotes-collection.js"></script>
 <script type="text/javascript" language="JavaScript">
   quotescollection_init(<?php echo "'{$requrl}', '{$nextquote}', '{$loading}', '{$error}'"; ?>);
 </script>
@@ -738,7 +738,7 @@ function quotescollection_inpost( $text ) {
 function quotescollection_css_head() 
 {
 	?>
-	<link rel="stylesheet" type="text/css" href="<?php bloginfo( 'wpurl' ); ?>/wp-content/plugins/quotes-collection/quotes-collection.css"/>
+	<link rel="stylesheet" type="text/css" href="<?php bloginfo( 'url' ); ?>/wp-content/plugins/quotes-collection/quotes-collection.css"/>
 	<?php
 }
 
