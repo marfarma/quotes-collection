@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: http://srinig.com/wordpress/plugins/quotes-collection/#donate
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax
 Requires at least: 2.1
-Tested up to: 2.7
+Tested up to: 2.7.1
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
@@ -37,6 +37,7 @@ Main features and notes:
 	* Japanese
 	* Polish
 	* Russian
+	* Swedish
 	* Tamil
 	* Turkish
 	* Ukrainian
@@ -80,9 +81,8 @@ You can do this by turning off the 'Ajax Refresh feature' in widget options.
 
 Three parameters can be passed into the `quotescollection_display_randomquote()` template function.
 
-`quotescollection_display_randomquote(1, 1, 1)` will show author, show source and switch on the ajax refresh feature.
-
-`quotescollection_display_randomquote(0, 0, 0)` will hide author, hide source and switch off the ajax refresh.
+* `quotescollection_display_randomquote(1, 1, 1)` will show author, show source and switch on the ajax refresh feature.
+* `quotescollection_display_randomquote(0, 0, 0)` will hide author, hide source and switch off the ajax refresh.
 
 You can mix those parameters as you like it. Feel free to experiment. :)
 
