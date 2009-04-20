@@ -21,10 +21,10 @@ if(isset($_REQUEST['refresh'])) {
 	$show_source = isset($_REQUEST['show_source'])?$_REQUEST['show_source']:1;
 	if($display = quotescollection_display_randomquote($show_author, $show_source, 2)) {
 		@header("Content-type: text/javascript; charset=utf-8");
-		die( $display ); 
+		die( "document.getElementById('quotescollection_randomquote-".$_REQUEST['refresh']."').innerHTML = '".$display."'" ); 
 	}
 	else
-		die( $error );
+		die( "alert('$error')" );
 }
 
 ?>
