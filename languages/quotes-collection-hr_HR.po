@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Quotes Collection 1.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/quotes-collection\n"
 "POT-Creation-Date: 2009-01-16 14:49+0530\n"
-"PO-Revision-Date: 2009-01-16 12:30+0530\n"
+"PO-Revision-Date: 2009-05-27 09:52+0530\n"
 "Last-Translator: 1984da <1984da@gmail.com>\n"
 "Language-Team: CROATIAN <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -208,3 +208,27 @@ msgstr "Radnja"
 #: quotes-collection.php:515
 msgid "No quotes in the database"
 msgstr "Nema citata u bazi"
+
+#: quotes-collection.php:257
+msgid "Tags filter"
+msgstr "Filter oznaka"
+
+
+#: quotes-collection.php:257
+msgid "Comma separated"
+msgstr "Odvojeno zarezom"
+
+
+#: quotes-collection.php:258
+msgid "Character limit"
+msgstr "Ogranicenje znakova"
+
+
+#: quotes-collection.php:260
+msgid "Click here"
+msgstr "Kliknite ovdje"
+
+
+#: quotes-collection.php:260
+msgid "to manage your collection of quotes"
+msgstr "kako bi upravljali svojom kolekcijom citata"

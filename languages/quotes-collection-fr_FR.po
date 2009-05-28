@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Quotes Collection 1.0 en Français\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-22 22:08+0100\n"
-"PO-Revision-Date: 2008-09-02 03:42+0100\n"
+"PO-Revision-Date: 2009-05-27 10:02+0530\n"
 "Last-Translator: psykotik <psykotik@ikiru.ch>\n"
 "Language-Team: www.ikiru.ch/blog <psykotik@ikiru.ch>\n"
 "MIME-Version: 1.0\n"
@@ -162,4 +162,24 @@ msgid "Currently, you have %d quote."
 msgid_plural "Currently, you have %d quotes."
 msgstr[0] "Actuellement, vous avez %d citation."
 msgstr[1] "Actuellement, vous avez %d citations."
+
+#: quotes-collection.php:257
+msgid "Tags filter"
+msgstr "Filtre de tags"
+
+#: quotes-collection.php:257
+msgid "Comma separated"
+msgstr "Séparé par virgule"
+
+#: quotes-collection.php:258
+msgid "Character limit"
+msgstr "Limite des charactères"
+
+#: quotes-collection.php:260
+msgid "Click here"
+msgstr "Cliquez ici"
+
+#: quotes-collection.php:260
+msgid "to manage your collection of quotes"
+msgstr "pour gérer votre collection de citations"
 

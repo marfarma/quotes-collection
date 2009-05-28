@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kelle\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/quotes-collection\n"
 "POT-Creation-Date: 2008-05-24 14:49+0530\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2009-05-27 09:57+0530\n"
 "Last-Translator: Gürkan Gür <seqizz@gmail.com>\n"
 "Language-Team: seqizz\n"
 "MIME-Version: 1.0\n"
@@ -227,4 +227,27 @@ msgstr "Eylem"
 #: quotes-collection.php:515
 msgid "No quotes in the database"
 msgstr "Veritabanında alıntı yok"
+
+#: quotes-collection.php:257
+msgid "Tags filter"
+msgstr "Etiket süzgeci"
+
+#: quotes-collection.php:257
+msgid "Comma separated"
+msgstr "Virgülle ayrılmış"
+
+
+#: quotes-collection.php:258
+msgid "Character limit"
+msgstr "Karakter sınırı"
+
+
+#: quotes-collection.php:260
+msgid "Click here"
+msgstr "Buraya tıklayın"
+
+
+#: quotes-collection.php:260
+msgid "to manage your collection of quotes"
+msgstr "alıntı koleksiyonunuzu yönetmek"
 
