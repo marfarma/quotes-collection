@@ -4,10 +4,18 @@
 $blogdir = ""; 
 
 if(isset($_REQUEST['refresh'])) {
-	if (!$blogdir)
+	if (!$blogdir) {
 		$blogdir = preg_replace('|/wp-content.*$|','', __FILE__);
-	include_once($blogdir.'/wp-config.php');
-	include_once($blogdir.'/wp-includes/wp-db.php');
+	}
+	if($blogdir == __FILE__) {
+		$blogdir = preg_replace('|\wp-content.*$|','', __FILE__);
+		include_once($blogdir.'\wp-config.php');
+		include_once($blogdir.'\wp-includes\wp-db.php');
+	}
+	else {
+		include_once($blogdir.'/wp-config.php');
+		include_once($blogdir.'/wp-includes/wp-db.php');
+	}
 	include_once(str_replace("-ajax", "", __FILE__));
 	$show_author = isset($_REQUEST['show_author'])?$_REQUEST['show_author']:1;
 	$show_source = isset($_REQUEST['show_source'])?$_REQUEST['show_source']:1;

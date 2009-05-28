@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: http://srinig.com/wordpress/plugins/quotes-collection/#donate
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax
 Requires at least: 2.1
-Tested up to: 2.7
+Tested up to: 2.7.1
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
@@ -26,17 +26,23 @@ Main features and notes:
 	* `[quote|id=3]` displays quote with ID 3
 	* `[quote|random]` displays a random quote
 * The template function `quotescollection_display_randomquote()` can be used to display a random quote in places other than sidebar.
-* Support for Localization. As of version 1.2.4, translation is available in the following languages.
+* Support for Localization. As of version 1.2.8, translation is available in the following languages.
 	* Arabic
+	* Bosnian
 	* Danish
 	* German
 	* Spanish
+	* Persian
 	* French
 	* Croatian
 	* Italian
 	* Japanese
+	* Dutch
 	* Polish
+	* Portugese
 	* Russian
+	* Serbian
+	* Swedish
 	* Tamil
 	* Turkish
 	* Ukrainian
@@ -80,9 +86,8 @@ You can do this by turning off the 'Ajax Refresh feature' in widget options.
 
 Three parameters can be passed into the `quotescollection_display_randomquote()` template function.
 
-`quotescollection_display_randomquote(1, 1, 1)` will show author, show source and switch on the ajax refresh feature.
-
-`quotescollection_display_randomquote(0, 0, 0)` will hide author, hide source and switch off the ajax refresh.
+* `quotescollection_display_randomquote(1, 1, 1)` will show author, show source and switch on the ajax refresh feature.
+* `quotescollection_display_randomquote(0, 0, 0)` will hide author, hide source and switch off the ajax refresh.
 
 You can mix those parameters as you like it. Feel free to experiment. :)
 
@@ -90,7 +95,9 @@ You can mix those parameters as you like it. Feel free to experiment. :)
 
 Such a feature will be available in a future version of the plugin, though no promises can be made as to when it will be available!
 
+= How to change the admin access level setting for the quotes collection admin page? =
 
+Change the value of the variable `$quotescollection_admin_userlevel` on line 16 of the quotes-collection.php file. Refer [WordPress documentation](http://codex.wordpress.org/Roles_and_Capabilities) for more information about user roles and capabilities.
 
 == Screenshots ==
 

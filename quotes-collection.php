@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.2.4
+Version: 1.2.8
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -49,7 +49,11 @@ function quotescollection_count($condition = "")
 
 function quotescollection_js_head() // this is a PHP function
 {
-	$requrl = get_bloginfo( 'url' )."/wp-content/plugins/quotes-collection/quotes-collection-ajax.php";
+	if ( !defined('WP_PLUGIN_URL') )
+		$wp_plugin_url = get_bloginfo( 'url' )."/wp-content/plugins";
+	else
+		$wp_plugin_url = WP_PLUGIN_URL;
+	$requrl = $wp_plugin_url . "/quotes-collection/quotes-collection-ajax.php";
 	$nextquote =  __('Next quote', 'quotes-collection');
 	$loading = __('Loading...', 'quotes-collection');
 	$error = __('Error getting quote', 'quotes-collection');
@@ -60,8 +64,8 @@ function quotescollection_js_head() // this is a PHP function
 	// Define custom JavaScript function
 	?>
 <!-- Quotes Collection -->
-<script type="text/javascript" src="<?php bloginfo( 'url' ); ?>/wp-content/plugins/quotes-collection/quotes-collection.js"></script>
-<script type="text/javascript" language="JavaScript">
+<script type="text/javascript" src="<?php echo $wp_plugin_url; ?>/quotes-collection/quotes-collection.js"></script>
+<script type="text/javascript">
   quotescollection_init(<?php echo "'{$requrl}', '{$nextquote}', '{$loading}', '{$error}'"; ?>);
 </script>
 <?php
@@ -80,7 +84,7 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 1
 	if(!$random_quote) {
 		return;
 	}
-	$display = "<p><q>". wptexturize(str_replace(array("\r\n", "\r", "\n"), '', nl2br($random_quote['quote']))) ."</q>";
+	$display = "<p><q>". wptexturize(str_replace(array("\r\n", "\r", "\n"), '', nl2br(trim($random_quote['quote'])))) ."</q>";
 	if($show_author && $random_quote['author'])
 		$cite = "<span class=\"quotescollection_author\">".wptexturize(str_replace(array("\r\n", "\r", "\n"), '', $random_quote['author']))."</span>";
 
@@ -737,8 +741,13 @@ function quotescollection_inpost( $text ) {
 
 function quotescollection_css_head() 
 {
+
+	if ( !defined('WP_PLUGIN_URL') )
+		$wp_plugin_url = get_bloginfo( 'url' )."/wp-content/plugins";
+	else
+		$wp_plugin_url = WP_PLUGIN_URL;
 	?>
-	<link rel="stylesheet" type="text/css" href="<?php bloginfo( 'url' ); ?>/wp-content/plugins/quotes-collection/quotes-collection.css"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo $wp_plugin_url; ?>/quotes-collection/quotes-collection.css"/>
 	<?php
 }
 
