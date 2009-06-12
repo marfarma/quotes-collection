@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Quotes Collection 1.0 magyarul: Idézetgyűjtemény\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-22 22:08+0100\n"
-"PO-Revision-Date: 2009-05-12 05:19+0100\n"
+"PO-Revision-Date: 2009-06-12 10:51+0530\n"
 "Last-Translator: KOOS, Tamas <tamas@pumpkingood.com>\n"
 "Language-Team: KOOS, Tamas <tamas@koosfoto.hu>\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgid "Visible?"
 msgstr "Mutassuk?"
 
 msgid "optional"
-msgstr "választható"
+msgstr "nem kötelező"
 
 msgid "comma separated"
 msgstr "vesszővel elválasztva"
@@ -163,3 +163,23 @@ msgid_plural "Currently, you have %d quotes."
 msgstr[0] "Jelenleg ennyi idézeted van: %d"
 msgstr[1] "Jelenleg ennyi idézeted van: %d"
 
+
+#: quotes-collection.php:257
+msgid "Tags filter"
+msgstr "Cimke szűrő"
+
+#: quotes-collection.php:257
+msgid "Comma separated"
+msgstr "Vesszővel elválasztva"
+
+#: quotes-collection.php:258
+msgid "Character limit"
+msgstr "Karakter korlát"
+
+#: quotes-collection.php:260
+msgid "Click here"
+msgstr "Klikkelj ide"
+
+#: quotes-collection.php:260
+msgid "to manage your collection of quotes"
+msgstr "az idézet gyújteményed kezeléséhez"
