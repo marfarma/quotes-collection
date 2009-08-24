@@ -26,7 +26,7 @@ Main features and notes:
 	* `[quote|id=3]` displays quote with ID 3
 	* `[quote|random]` displays a random quote
 * The template function `quotescollection_quote()` can be used to display a random quote in places other than sidebar. See [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/) for details.
-* Support for Localization. As of version 1.3.3, translation is available in the following languages.
+* Support for Localization. As of version 1.3.4, translation is available in the following languages.
 	* Arabic
 	* Bosnian
 	* Belarusian
@@ -34,6 +34,7 @@ Main features and notes:
 	* German
 	* Spanish
 	* Persian
+	* Finnish
 	* French
 	* Croatian
 	* Hungarian
@@ -101,6 +102,10 @@ Such a feature will be available in a future version of the plugin, though no pr
 
 Change the value of the variable `$quotescollection_admin_userlevel` on line 16 of the quotes-collection.php file. Refer [WordPress documentation](http://codex.wordpress.org/Roles_and_Capabilities) for more information about user roles and capabilities.
 
+= I have a long list of quotes, and `[quote|all]` puts all of the quotes in a single page. Is there a way to introduce pagination and break the long list of quotes into different pages? =
+
+Inbuilt pagination support may be introduced in a future version. As of now, you can separate different set of quotes based on author name `[quote|author=]` or tags `[quote|tags=]` and introduce a [`<!--nextpage-->`](http://codex.wordpress.org/Styling_Page-Links) in between.
+
 == Screenshots ==
 
 1. Admin interface (in WordPress 2.8)
@@ -155,7 +160,11 @@ The list of parameters (arguments) that can be passed on to this function:
 
 	* The 'Next quote' link is not shown, quotes with number of characters greater that 300 are left out.
 	
-==Version History==
+==Changelog==
+* **2009-08-24: Version 1.3.4**
+	* Finnish localization added.
+	* FAQ updated.
+
 * **2009-08-12: Version 1.3.3**
 	* Localization in Simplified Chinese added.
 
