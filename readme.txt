@@ -26,7 +26,7 @@ Main features and notes:
 	* `[quote|id=3]` displays quote with ID 3
 	* `[quote|random]` displays a random quote
 * The template function `quotescollection_quote()` can be used to display a random quote in places other than sidebar. See [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/) for details.
-* Support for Localization. As of version 1.3.4, translation is available in the following languages.
+* Support for Localization. As of version 1.3.5, translation is available in the following languages.
 	* Arabic
 	* Bosnian
 	* Belarusian
@@ -45,6 +45,7 @@ Main features and notes:
 	* Dutch
 	* Polish
 	* Portugese
+	* Portugese (Brazilian)
 	* Russian
 	* Serbian
 	* Swedish
@@ -161,6 +162,10 @@ The list of parameters (arguments) that can be passed on to this function:
 	* The 'Next quote' link is not shown, quotes with number of characters greater that 300 are left out.
 	
 ==Changelog==
+* **2009-09-22: Version 1.3.5**
+	* Brazilian Portugese localization added.
+	* Modifications in quotes-collection.js (for better debugging in case of error)
+	
 * **2009-08-24: Version 1.3.4**
 	* Finnish localization added.
 	* FAQ updated.

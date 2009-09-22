@@ -22,9 +22,10 @@ function quotescollection_refresh(instance, exclude, show_author, show_source, f
 			jQuery("#quotescollection_randomquote-"+instance).html( response );
 			jQuery("#quotescollection_randomquote-"+instance).fadeIn("slow");	
 		},
-		error: function() {
-			alert("There was an error getting quote.");
-			jQuery("#quotescollection_nextquote-"+instance).html(quotcoll_nextquote);
+		error: function(xhr, textStatus, errorThrown) {
+			alert(textStatus+' '+xhr.status+': '+errorThrown);
+			jQuery("#quotescollection_nextquote-"+instance).html('<a class=\"quotescollection_refresh\" style=\"cursor:pointer\" onclick=\"quotescollection_refresh('+instance+', '+exclude+', '+show_author+', '+show_source+', \''+filter_tags+'\', '+char_limit+')\">'+quotcoll_nextquote+' &raquo;</a>');
 		}	
 	});
 }
+
