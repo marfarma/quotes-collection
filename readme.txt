@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: http://srinig.com/wordpress/plugins/quotes-collection/#donate
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax
 Requires at least: 2.2
-Tested up to: 2.8.5
+Tested up to: 2.9.2
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
@@ -26,7 +26,7 @@ Main features and notes:
 	* `[quote|id=3]` displays quote with ID 3
 	* `[quote|random]` displays a random quote
 * The template function `quotescollection_quote()` can be used to display a random quote in places other than sidebar. See [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/) for details.
-* Support for Localization. As of version 1.3.5, translation is available in the following languages.
+* Support for Localization. As of version 1.3.7, translation is available in the following languages.
 	* Arabic
 	* Bulgarian
 	* Bosnian
@@ -38,6 +38,7 @@ Main features and notes:
 	* Persian
 	* Finnish
 	* French
+	* Hindi
 	* Croatian
 	* Hungarian
 	* Italian
@@ -162,6 +163,9 @@ The list of parameters (arguments) that can be passed on to this function:
 	* The 'Next quote' link is not shown, quotes with number of characters greater that 300 are left out.
 	
 ==Changelog==
+* **2010-03-02: Version 1.3.7**
+	* Localization in Hindi added.
+	
 * **2009-11-10: Version 1.3.6**
 	* Localization in Bulgarian and Czech languages added.
 
