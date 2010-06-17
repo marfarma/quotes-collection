@@ -12,7 +12,7 @@
 }
 
 .quotescollection_source { /* source */
-
+	font-style: italic;
 }
 
 .quotescollection_nextquote { /* 'Next Quote »' link */
@@ -42,8 +42,14 @@ blockquote.quotescollection cite {
 	font-size:0.83em;
 }
 
-/* Uncomment the block below if you want to get rid of the quotation marks before and after the quote */
 
+/* See http://www.w3schools.com/css/pr_gen_quotes.asp */
+q:lang(en)
+{
+quotes: "“" "”" "‘" "’";
+}
+
+/* Uncomment the block below if you want to get rid of the quotation marks before and after the quote */
 /*
 q:before, q:after {
 	content:"";

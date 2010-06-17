@@ -19,16 +19,21 @@ if(isset($_POST['refresh'])) {
 	include_once(str_replace("-ajax", "", __FILE__));
 	$show_author = isset($_POST['show_author'])?$_POST['show_author']:1;
 	$show_source = isset($_POST['show_source'])?$_POST['show_source']:1;
+	$auto_refresh = isset($_POST['auto_refresh'])?$_POST['auto_refresh']:0;	
+	$random_refresh = isset($_POST['random_refresh'])?$_POST['random_refresh']:1;	
 	$char_limit = (isset($_POST['char_limit']) && is_numeric($_POST['char_limit']))?$_POST['char_limit']:'';
 	
-	
-	if($_POST['exclude'] && is_numeric($_POST['exclude']))
-		$exclude = $_POST['exclude'];
-	else $exclude = '';
+	if($random_refresh && $_POST['current'] && is_numeric($_POST['current']))
+		$exclude = $_POST['current'];
+	else {
+		if ($_POST['current'] && is_numeric($_POST['current']))
+			$current = $_POST['current'];
+		$exclude = '';
+	}
 		
 	$tags = $_POST['tags'];
 	
-	$args = "echo=0&ajax_refresh=2&show_author={$show_author}&show_source={$show_source}&char_limit={$char_limit}&exclude={$exclude}&tags={$tags}";
+	$args = "echo=0&ajax_refresh=2&auto_refresh={$auto_refresh}&show_author={$show_author}&show_source={$show_source}&char_limit={$char_limit}&exclude={$exclude}&tags={$tags}&random={$random_refresh}&current={$current}";
 		
 
 	if($response = quotescollection_quote($args)) {
