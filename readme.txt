@@ -1,9 +1,8 @@
 === Quotes Collection ===
 Contributors: SriniG
-Donate link: http://srinig.com/wordpress/plugins/quotes-collection/#donate
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax
 Requires at least: 2.2
-Tested up to: 2.9.2
+Tested up to: 3.0-RC1
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
@@ -163,6 +162,9 @@ The list of parameters (arguments) that can be passed on to this function:
 	* The 'Next quote' link is not shown, quotes with number of characters greater that 300 are left out.
 	
 ==Changelog==
+* **2010-06-06: Version 1.3.8**
+	* Fix for the backslashes issue.
+
 * **2010-03-02: Version 1.3.7**
 	* Localization in Hindi added.
 	

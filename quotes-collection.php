@@ -4,8 +4,8 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.3.7
-Author URI: http://srinig.com/wordpress/
+Version: 1.3.8
+Author URI: http://srinig.com/
 */
 /*  Released under GPL:
 	http://www.opensource.org/licenses/gpl-license.php
@@ -281,12 +281,11 @@ function quotescollection_addquote($quote, $author = "", $source = "", $tags = "
 	else //Add the quote data to the database
 	{
 		
-		if ( ini_get('magic_quotes_gpc') ) {
-		  $quote = stripslashes($quote);
-		  $author = stripslashes($author);	
-		  $source = stripslashes($source);	
-		  $tags = stripslashes($tags);
-	  	}
+		$quote = stripslashes($quote);
+		$author = stripslashes($author);	
+		$source = stripslashes($source);	
+		$tags = stripslashes($tags);
+
 		$quote = "'".$wpdb->escape($quote)."'";
 		$author = $author?"'".$wpdb->escape($author)."'":"NULL";
 		$source = $source?"'".$wpdb->escape($source)."'":"NULL";
@@ -319,12 +318,11 @@ function quotescollection_editquote($quote_id, $quote, $author = "", $source = "
 	else //Update database
 	{
 		
-		if ( ini_get('magic_quotes_gpc') ) {
-		  $quote = stripslashes($quote);
-		  $author = stripslashes($author);	
-		  $source = stripslashes($source);	
-		  $tags = stripslashes($tags);
-	  	}
+		$quote = stripslashes($quote);
+		$author = stripslashes($author);	
+		$source = stripslashes($source);	
+		$tags = stripslashes($tags);
+
 	  	$quote = "'".$wpdb->escape($quote)."'";
 		$author = $author?"'".$wpdb->escape($author)."'":"NULL";
 		$source = $source?"'".$wpdb->escape($source)."'":"NULL";
