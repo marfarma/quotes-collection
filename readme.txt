@@ -1,8 +1,9 @@
 === Quotes Collection ===
 Contributors: SriniG
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDWT2K8TXXHUN
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax
 Requires at least: 2.2
-Tested up to: 3.0-RC3
+Tested up to: 3.0
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
@@ -32,6 +33,7 @@ Features and notes:
 	* `[quote|id=3]` displays quote with ID 3
 	* `[quote|random]` displays a random quote
 * The plugin comes with a nice admin interface to add, edit and manage quotes.
+* Compatible with WordPress 3.0 multi-site functionality.
 * The plugin suppports localization. See [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/) for the full list of available languages and the respective translators. 
 
 == Installation ==
@@ -45,6 +47,18 @@ Features and notes:
 = How to get rid of the quotation marks that surround the random quote? =
 
 Open the quotes-collection.css file that comes along with the plugin, scroll down and look towards the bottom.
+
+= How to change the random quote text color? =
+
+Styling such as text color, font size, background color, etc., of the random quote can be customized by editing the quotes-collection.css file.
+
+= How to hide the 'Next quote »' link? = 
+
+You can do this by turning off the 'Ajax Refresh feature' in widget options.
+
+= How to change the link text from 'Next quote »' to something else? =
+
+Change the value of the variable `$quotescollection_next_quote` on line 16 of the quotes-collection.php file.
 
 = The 'Next quote »' link is not working. Why? =
 
@@ -64,21 +78,9 @@ You have to check a couple of things,
 If you still experience the problem even after the above conditions are met, [contact](http://srinig.com/contact/) the plugin author.
 
 
-= How to hide the 'Next quote »' link? = 
-
-You can do this by turning off the 'Ajax Refresh feature' in widget options.
-
-= How to change the link text from 'Next quote »' to something else? =
-
-Change the value of the variable `$quotescollection_next_quote` on line 16 of the quotes-collection.php file.
-
 = What are the parameters that can be passed on to  `quotescollection_quote()` template function? =
 
 Please refer [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/)
-
-= How about a feature to backup/export/import the bulk of quotes in CSV/text format? =
-
-Such a feature will be available in a future version of the plugin, though no promises can be made as to when it will be available!
 
 = How to change the admin access level setting for the quotes collection admin page? =
 
@@ -87,6 +89,10 @@ Change the value of the variable `$quotescollection_admin_userlevel` on line 26 
 = I have a long list of quotes, and `[quote|all]` puts all of the quotes in a single page. Is there a way to introduce pagination and break the long list of quotes into different pages? =
 
 Inbuilt pagination support may be introduced in a future version. As of now, you can separate different set of quotes based on author name `[quote|author=]` or tags `[quote|tags=]` and introduce a [`<!--nextpage-->`](http://codex.wordpress.org/Styling_Page-Links) in between.
+
+= How about a feature to backup/export/import the bulk of quotes in CSV/text format? =
+
+Such a feature will be available in a future version of the plugin, though no promises can be made as to when it will be available!
 
 == Screenshots ==
 
@@ -187,6 +193,10 @@ Versions 1.1 and greater support localization. As of the current version, locali
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the [plugin author](http://srinig.com/contact/).
 
 ==Changelog==
+* **2010-06-19: Version 1.4.1**
+	* Compatibility with WP 3.0 multi-site functionality
+	* Tamil localization updated
+	
 * **2010-06-17: Version 1.4**
 	* Added ability to refresh quotes sequentially in the order added instead of random refresh.
 	* Added ability to refresh quotes automatically in a specified time interval
@@ -320,3 +330,9 @@ You can translate the plugin in your language if it's not done already. The loca
 
 * **2007-12-15: Version 0.9**
     * Initial release
+
+== Upgrade Notice ==
+
+= 1.4.1 = 
+Upgrade if you are using the plugin in a multi-site installation, or if you are using the Tamil localization.
+    

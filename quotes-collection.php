@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.4
+Version: 1.4.1
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -438,7 +438,7 @@ function quotescollection_editform($quote_id = 0)
 	$public_selected = " checked=\"checked\"";
 	$submit_value = __('Add Quote', 'quotes-collection');
 	$form_name = "addquote";
-	$action_url = $_SERVER['PHP_SELF']."?page=quotes-collection#addnew";
+	$action_url = get_bloginfo('wpurl')."/wp-admin/admin.php?page=quotes-collection#addnew";
 
 	if($quote_id) {
 		$form_name = "editquote";
@@ -454,7 +454,7 @@ function quotescollection_editform($quote_id = 0)
 		if($public == 'no') $public_selected = "";
 		$submit_value = __('Save changes', 'quotes-collection');
 		$back = "<input type=\"submit\" name=\"submit\" value=\"".__('Back', 'quotes-collection')."\" />&nbsp;";
-		$action_url = $_SERVER['PHP_SELF']."?page=quotes-collection";
+		$action_url = get_bloginfo('wpurl')."/wp-admin/admin.php?page=quotes-collection";
 	}
 
 	$quote_label = __('The quote', 'quotes-collection');
@@ -602,8 +602,8 @@ function quotescollection_quotes_management()
 		$quotes_list .= $quote_data->source ."</td>";
 		$quotes_list .= "<td>" . implode(', ', explode(',', $quote_data->tags)) . "</td>";
 		$quotes_list .= "<td>" . $quote_data->public ."</td>";
-		$quotes_list .= "<td><a href=\"" . $_SERVER['PHP_SELF'] . "?page=quotes-collection&action=editquote&amp;id=".$quote_data->quote_id."\" class=\"edit\">".__('Edit', 'quotes-collection')."</a></td>
-    <td><a href=\"" . $_SERVER['PHP_SELF'] . "?page=quotes-collection&action=delquote&amp;id=".$quote_data->quote_id."\" onclick=\"return confirm( '".__('Are you sure you want to delete this quote?', 'quotes-collection')."');\" class=\"delete\">".__('Delete', 'quotes-collection')."</a> </td>";
+		$quotes_list .= "<td><a href=\"" . get_bloginfo('wpurl') . "/wp-admin/admin.php?page=quotes-collection&action=editquote&amp;id=".$quote_data->quote_id."\" class=\"edit\">".__('Edit', 'quotes-collection')."</a></td>
+    <td><a href=\"" . get_bloginfo('wpurl'). "/wp-admin/admin.php?page=quotes-collection&action=delquote&amp;id=".$quote_data->quote_id."\" onclick=\"return confirm( '".__('Are you sure you want to delete this quote?', 'quotes-collection')."');\" class=\"delete\">".__('Delete', 'quotes-collection')."</a> </td>";
 		$quotes_list .= "</tr>";
 	}
 	
@@ -615,7 +615,7 @@ function quotescollection_quotes_management()
 	$display .= " (<a href=\"#addnew\"><strong>".__('Add new quote', 'quotes-collection')."</strong></a>)";
 	$display .= "</p>";
 
-		$display .= "<form id=\"quotescollection\" method=\"post\" action=\"{$_SERVER['PHP_SELF']}?page=quotes-collection\">";
+		$display .= "<form id=\"quotescollection\" method=\"post\" action=\"".get_bloginfo('wpurl')."/wp-admin/admin.php?page=quotes-collection\">";
 		$display .= "<div class=\"tablenav\">";
 		$display .= "<div class=\"alignleft actions\">";
 		$display .= "<input type=\"submit\" name=\"bulkaction\" value=\"".__('Delete', 'quotes-collection')."\" class=\"button-secondary\" />";
