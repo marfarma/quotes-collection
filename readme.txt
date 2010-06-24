@@ -193,6 +193,9 @@ Versions 1.1 and greater support localization. As of the current version, locali
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the [plugin author](http://srinig.com/contact/).
 
 ==Changelog==
+* **2010-06-24: Version 1.4.2**
+	* Italian localization updated
+	
 * **2010-06-19: Version 1.4.1**
 	* Compatibility with WP 3.0 multi-site functionality
 	* Tamil localization updated
