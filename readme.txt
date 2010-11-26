@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDWT2K8TXXHUN
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax
 Requires at least: 2.2
-Tested up to: 3.0
+Tested up to: 3.1 beta1
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
@@ -170,7 +170,7 @@ Versions 1.1 and greater support localization. As of the current version, locali
 * `es_ES` / Spanish / [Germán L. Martínez (Gershu)](http://www.gershu.com.ar/)
 * `fa_IR` / Persian / [Ehsan SH](http://mastaneh.ir/)
 * `fi_FI` / Finnish / [Jussi Ruokomäki](http://jussi.ruokomaki.fi/)
-* `fr_FR` / French / [psykotik](http://www.ikiru.ch/blog)
+* `fr_FR` / French / [psykotik](http://www.ikiru.ch/blog), Laurent Naudier
 * `hi_IN` / Hindi / [Ashish J.](http://outshinesolutions.com/)
 * `hr_HR` / Croatian / [1984da](http://faks.us/)
 * `hu_HU` / Hungarian / [KOOS, Tamas](http://www.koosfoto.hu/)
@@ -178,6 +178,7 @@ Versions 1.1 and greater support localization. As of the current version, locali
 * `ja` / Japanese / [Urepko Asaba](http://sourceforge.jp/projects/wppluginsj/downloads/36796/quotes-collection%201.2.3%20Lang-ja.zip)
 * `lt_LT` / Lithuanian / Lulilo
 * `lv_LV` / Latvian / [Maris Svirksts](http://www.moskjis.com/)
+* `nb_NO` / Norwegian (Bokmål) / [Christian K. Nordtømme](http://nextpage.no/)
 * `nl_NL` / Dutch / [Kristof Vercruyssen](http://www.simplit.be/)
 * `pl_PL` / Polish / Marcin Gucia
 * `pt_BR` / Brazilian Portugese / Tzor More
@@ -193,6 +194,10 @@ Versions 1.1 and greater support localization. As of the current version, locali
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the [plugin author](http://srinig.com/contact/).
 
 ==Changelog==
+* **2010-11-26: Version 1.4.3**
+	* Norwegian translation added
+	* French and Simplified Chinese localizations updated
+	
 * **2010-06-24: Version 1.4.2**
 	* Italian localization updated
 	
@@ -336,6 +341,5 @@ You can translate the plugin in your language if it's not done already. The loca
 
 == Upgrade Notice ==
 
-= 1.4.1 = 
-Upgrade if you are using the plugin in a multi-site installation, or if you are using the Tamil localization.
-    
+= 1.4.3 = 
+Upgrade if your blog is Norwegian, French or Simplified Chinese. Or if your blog is in a language other than English, and the 'Next quote' string is not getting translated.

@@ -4,7 +4,7 @@ Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 Author: Srini G
-Version: 1.4.2
+Version: 1.4.3
 Author URI: http://srinig.com/wordpress/
 */
 /*  Released under GPL:
@@ -12,8 +12,10 @@ Author URI: http://srinig.com/wordpress/
 */
 
 
-/* 	The 'Next quote »' link text */
-$quotescollection_next_quote = __('Next quote', 'quotes-collection').'&nbsp;&raquo;';
+/*	The 'Next quote »' link text
+	By default, this is 'Next quote »' (or the corresponding translation).
+	You can change it if you wish */
+$quotescollection_next_quote = "";
 
 
 
@@ -84,7 +86,7 @@ function quotescollection_js_head()
 	global $quotescollection_auto_refresh_max, $quotescollection_next_quote;
 
 	$requrl = $wp_plugin_url . "/quotes-collection/quotes-collection-ajax.php";
-	$nextquote =  $quotescollection_next_quote;
+	$nextquote =  $quotescollection_next_quote?$quotescollection_next_quote:__('Next quote', 'quotes-collection')."&nbsp;&raquo;";
 	$loading = __('Loading...', 'quotes-collection');
 	$error = __('Error getting quote', 'quotes-collection');
 	$auto_refresh_max = $quotescollection_auto_refresh_max;
@@ -134,6 +136,7 @@ function quotescollection_display_randomquote($show_author = 1, $show_source = 1
 function quotescollection_quote($args = '') 
 {
 	global $quotescollection_instances, $quotescollection_next_quote;
+	if(!$quotescollection_next_quote) $quotescollection_next_quote = __('Next quote', 'quotes-collection')."&nbsp;&raquo;";
 	if(!($instance = $quotescollection_instances))
 		$instance = $quotescollection_instances = 0;
 	
