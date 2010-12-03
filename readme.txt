@@ -189,11 +189,14 @@ Versions 1.1 and greater support localization. As of the current version, locali
 * `ta_IN` / Tamil / [Srini](http://srinig.com/)
 * `tr_TR` / Turkish / [Gürkan Gür](http://seqizz.net/)
 * `uk_UA` / Ukrainian / Stas
-* `zh_CN` / Simplified Chinese / [天毅许](http://www.yylz.com/)
+* `zh_CN` / Simplified Chinese / [天毅许](http://www.freewarecn.com/)
 
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the [plugin author](http://srinig.com/contact/).
 
 ==Changelog==
+* **2010-12-03: Version 1.4.4**
+	* Updated Simplified Chinese localization
+	
 * **2010-11-26: Version 1.4.3**
 	* Norwegian translation added
 	* French and Simplified Chinese localizations updated
@@ -341,5 +344,5 @@ You can translate the plugin in your language if it's not done already. The loca
 
 == Upgrade Notice ==
 
-= 1.4.3 = 
-Upgrade if your blog is Norwegian, French or Simplified Chinese. Or if your blog is in a language other than English, and the 'Next quote' string is not getting translated.
+= 1.4.4 = 
+Upgrade if your blog is Simplified Chinese.

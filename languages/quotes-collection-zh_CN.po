@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Quotes Collection\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/quotes-collection\n"
 "POT-Creation-Date: 2009-05-25 10:15+0530\n"
-"PO-Revision-Date: 2010-09-15 09:35+0800\n"
+"PO-Revision-Date: 2010-12-01 09:54+0800\n"
 "Last-Translator: 天毅 <yylzcom@gmail.com>\n"
 "Language-Team: YYLZ <yylzcom@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -56,9 +56,8 @@ msgid "Advanced options"
 msgstr "高级选项"
 
 #: quotes-collection.php:313
-#, fuzzy
 msgid "Random refresh"
-msgstr "随机显示"
+msgstr "随机刷新"
 
 #: quotes-collection.php:313
 msgid "Unchecking this will rotate quotes in the order added, latest first."
@@ -203,9 +202,8 @@ msgstr "删除"
 #: quotes-collection.php:557
 #: quotes-collection.php:622
 #: quotes-collection.php:661
-#, fuzzy
 msgid "Make public"
-msgstr "可见"
+msgstr "公开"
 
 #: quotes-collection.php:560
 #: quotes-collection.php:623
