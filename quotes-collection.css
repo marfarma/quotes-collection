@@ -42,6 +42,9 @@ blockquote.quotescollection cite {
 	font-size:0.83em;
 }
 
+a.disabled {
+	cursor:default;
+}
 
 /* See http://www.w3schools.com/css/pr_gen_quotes.asp */
 q:lang(en)

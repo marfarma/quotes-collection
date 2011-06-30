@@ -2,15 +2,16 @@
 Contributors: SriniG
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDWT2K8TXXHUN
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax
-Requires at least: 2.2
-Tested up to: 3.1 beta1
+Requires at least: 2.8
+Tested up to: 3.2-RC3
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
 
 == Description ==
 
-Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect, manage and display your favourite quotations on your WordPress blog. All quotes or a set of quotes can also be displayed on a page using a `[quote]` shortcode.
+Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect, manage and display your favourite quotations on your WordPress blog. All quotes or a set of quotes can also be displayed on a page using a `[quotcoll]` shortcode.
+
 
 Features and notes:
 
@@ -23,23 +24,22 @@ Features and notes:
 	* Option to refresh the quote automatically
 	* Show only quotes with certain tags
 	* Specify a character limit and filter out bigger quotes
-* The template function `quotescollection_quote()` can be used to display a random quote in places other than sidebar. See [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/) for details.
-* Quotes can be displayed in a page by placing a shortcode such as the ones below.
-	* Placing `[quote|all]` in the page displays all quotes.
-	* `[quote|author=Somebody]` displays quotes authored by Somebody.
-	* `[quote|source=Something]` displays quotes with source as 'Something'
-	* `[quote|tags=sometag]` displays quotes tagged sometag 
-	* `[quote|tags=tag1,tag2,tag3]` displays quotes tagged tag1 or tag2 or tag3, one or more or all of these
-	* `[quote|id=3]` displays quote with ID 3
-	* `[quote|random]` displays a random quote
+* Quotes can be displayed in a WordPress page by placing a shortcode such as the ones below. For more examples and the full list of arguments, please refer [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/). *(Note: as of version 1.5, the new `[quotcoll]` shortcode is introduced which uses the WordPress shortoced API. The older `[quote]` shortcode is deprecated.)* 
+	* Placing `[quotcoll]` in the page displays all quotes.
+	* `[quotcoll author="Somebody"]` displays quotes authored by Somebody.
+	* `[quotcoll tags="tag1,tag2,tag3"]` displays quotes tagged tag1 or tag2 or tag3, one or more or all of these
+	* `[quotcoll orderby="random" limit=1]` displays a random quote
+* To code the random quote functionality directly into a template file, the template function `quotescollection_quote()` can be used. Please refer [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/) for details.
 * The plugin comes with a nice admin interface to add, edit and manage quotes.
 * Compatible with WordPress 3.0 multi-site functionality.
-* The plugin suppports localization. See [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/) for the full list of available languages and the respective translators. 
+* The plugin suppports localization. Refer the plugin page or 'Other Notes' for the full list of available languages and the respective translators. 
+
+For more, visit the [plugin page](http://srinig.com/wordpress/plugins/quotes-collection/). Please provide your feedback at the [WordPress support forums](http://wordpress.org/tags/quotes-collection?forum_id=10).
 
 == Installation ==
 1. Upload `quotes-collection` directory to the `/wp-content/plugins/` directory
 1. Activate the 'Quotes Collection' plugin through the 'Plugins' menu in WordPress
-1. Add and manage the quotes through the 'Quotes Collection' menu in the WordPress admin area
+1. Add and manage the quotes through the 'Quotes' menu in the WordPress admin area
 1. To display a random quote in the sidebar, go to 'Widgets' menu and drag the 'Random Quote' widget into the sidebar
 
 == Frequently Asked Questions ==
@@ -58,7 +58,7 @@ You can do this by turning off the 'Ajax Refresh feature' in widget options.
 
 = How to change the link text from 'Next quote »' to something else? =
 
-Change the value of the variable `$quotescollection_next_quote` on line 16 of the quotes-collection.php file.
+Change the value of the variable `$quotescollection_next_quote` on line 34 of the quotes-collection.php file.
 
 = The 'Next quote »' link is not working. Why? =
 
@@ -75,20 +75,15 @@ You have to check a couple of things,
     		|-- quotes-collection.css
     		|-- quotes-collection-ajax.php</pre>
         
-If you still experience the problem even after the above conditions are met, [contact](http://srinig.com/contact/) the plugin author.
-
-
-= What are the parameters that can be passed on to  `quotescollection_quote()` template function? =
-
-Please refer [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/)
+If you still experience the problem even after the above conditions are met, [contact](http://srinig.com/wordpress/contact/) the plugin author.
 
 = How to change the admin access level setting for the quotes collection admin page? =
 
-Change the value of the variable `$quotescollection_admin_userlevel` on line 26 of the quotes-collection.php file. Refer [WordPress documentation](http://codex.wordpress.org/Roles_and_Capabilities) for more information about user roles and capabilities.
+Change the value of the variable `$quotescollection_admin_userlevel` on line 44 of the quotes-collection.php file. Refer [WordPress documentation](http://codex.wordpress.org/Roles_and_Capabilities) for more information about user roles and capabilities.
 
-= I have a long list of quotes, and `[quote|all]` puts all of the quotes in a single page. Is there a way to introduce pagination and break the long list of quotes into different pages? =
+= I have a long list of quotes, and `[quotcoll]` puts all of the quotes in a single page. Is there a way to introduce pagination and break the long list of quotes into different pages? =
 
-Inbuilt pagination support may be introduced in a future version. As of now, you can separate different set of quotes based on author name `[quote|author=]` or tags `[quote|tags=]` and introduce a [`<!--nextpage-->`](http://codex.wordpress.org/Styling_Page-Links) in between.
+Yes, pagination is supporterd in versions 1.5 and greater. `paging` and `limit_per_page` attributes can be used to achieve this. For example, `[quotcoll paging=true limit_per_page=30]` will introduce pagination with a maximum of 30 quotes per page.
 
 = How about a feature to backup/export/import the bulk of quotes in CSV/text format? =
 
@@ -96,10 +91,57 @@ Such a feature will be available in a future version of the plugin, though no pr
 
 == Screenshots ==
 
-1. Admin interface (in WordPress 3.0)
-2. 'Random Quote' widget options (WordPress 3.0)
-3. An example of the random quote displayed on a sidebar
+1. Admin interface (in WordPress 3.2)
+2. 'Random Quote' widget options (WordPress 3.2)
+3. A random quote in the sidebar
 
+== The [quotcoll] shortcode ==
+Quotes can be displayed in a page by placing the shortcode `[quotcoll]`. This will display all the public quotes ordered by the quote id.
+
+Different attributes can be specified to customize the way the quotes are displayed. Here's the list of attributes:
+
+* **id** *(integer)*
+	* For example, `[quotcoll id=3]` displays a single quote, the id of which is 3. If there is no quote with the id 3, nothing is displayed.
+	* This overrides all other attributes. That is, if id attribute is specified, any other attribute specified is ignored.
+	
+* **author** *(string)*
+	* `[quotcoll author="Somebody"]` displays all quotes authored by 'Somebody'.
+
+* **source** *(string)*	
+	* `[quotcoll source="Something"]` displays all quotes from the source 'Something'.
+
+* **tags** *(string, comma separated)*	
+	* `[quotcoll tags="tag1"]` displays all quotes tagged 'tag1'.
+	* `[quotcoll tags="tag1, tag2, tag3"]` displays quotes tagged 'tag1' or 'tag2' or 'tag3', one or more or all of these.
+	* `[quotcoll author="Somebody" tags="tag1"]` displays quotes authored by 'Somebody' AND tagged 'tag1'.
+
+* **orderby** *(string)*
+	* When multiple quotes are displayed, the quotes or ordered based on this value. The value can be either of these:
+		* 'quote_id' (default)
+		* 'author'
+		* 'source'
+		* 'date_added'
+		* 'random'
+	
+* **order** *(string)* 
+	* The value can be either 'ASC' (default) or 'DESC', for ascending and descending order respectively.
+	* For example, `[quotcoll orderby="date_added" order="DESC"]` will display all the quotes in the order of date added, latest first and the earliest last.
+	
+* **paging** *(boolean)*
+	* The values can be:
+		* false (or 0) (default)
+		* true (or 1) -- introduces paging. This is used in conjunction with `limit_per_page` (see below).
+	* For example, `[quotcoll paging=true limit_per_page=30]` will introduce paging with maximum of 30 quotes per page.
+	* Note: if `orderby="random"` is used, paging is ignored.
+
+* **limit_per_page** *(integer)*
+	* The maximum number of quotes to be displayed in a page when paging is introduced, as described above.
+	* The defualt value is 10. For example, `[quotcoll paging=true]` will introduce paging with maximum of 10 quotes per page.
+
+* **limit** *(integer)*
+	* The maximum number of quotes to be displayed in a single page ie., when paging is 'false'.
+	* This can be used, for example, to display just a random quote. `[quotcoll orderby="random" limit=1]`
+	
 == The quotescollection_quote() template function ==
 
 The quotescollection_quote() template function can be used to display a random quote in places other than sidebar.
@@ -174,6 +216,7 @@ Versions 1.1 and greater support localization. As of the current version, locali
 * `hi_IN` / Hindi / [Ashish J.](http://outshinesolutions.com/)
 * `hr_HR` / Croatian / [1984da](http://faks.us/)
 * `hu_HU` / Hungarian / [KOOS, Tamas](http://www.koosfoto.hu/)
+* `id_ID` / Bahasa Indonesia / [Kelayang](http://kelayang.com/)
 * `it_IT` / Italian / [Gianni Diurno  (aka gidibao)](http://gidibao.net/index.php/2008/05/26/quotes-collection-in-italiano/)
 * `ja` / Japanese / [Urepko Asaba](http://sourceforge.jp/projects/wppluginsj/downloads/36796/quotes-collection%201.2.3%20Lang-ja.zip)
 * `lt_LT` / Lithuanian / Lulilo
@@ -191,9 +234,17 @@ Versions 1.1 and greater support localization. As of the current version, locali
 * `uk_UA` / Ukrainian / Stas
 * `zh_CN` / Simplified Chinese / [天毅许](http://www.freewarecn.com/)
 
-You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the [plugin author](http://srinig.com/contact/).
+You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/wordpress/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the plugin author.
 
 ==Changelog==
+* **2011-06-30: Version 1.5**
+	* Shortcodes revamp. The new shortcode `[quotcoll]` uses the WordPress shortcode API and comes with various options. The old `[quote]` is deprecated, but will still work as a measure of backwards compatibility.
+	* Ajax calls are now made to `wp-admin/admin-ajax.php`. This could potentially fix problems some websites had with the older system.
+	* Pagination in admin page. Other minor improvements in the admin page.
+	* Fixes for deprecated functions and undefined variables. Various other minor fixes and improvements.
+	* Bahasa Indonesia (id_ID) localization added. Tamil localization updated.
+	* The `.po` template file `quotes-collection.pot` is updated. New strings added, few strings have become obsolete.
+
 * **2010-12-03: Version 1.4.4**
 	* Updated Simplified Chinese localization
 	
@@ -323,7 +374,7 @@ You can translate the plugin in your language if it's not done already. The loca
     * Bug fixes and various other improvements
 
 * **2008-02-06: Version 0.9.5**
-    * Fixed problem with non English characters in author names while using the tag [quote|author=]
+    * Fixed problem with non English characters in author names while using the tag [quotcoll author=]
 
 * **2008-01-16: Version 0.9.4**
     * Support for utf-8 characters
@@ -344,5 +395,5 @@ You can translate the plugin in your language if it's not done already. The loca
 
 == Upgrade Notice ==
 
-= 1.4.4 = 
-Upgrade if your blog is Simplified Chinese.
+= 1.5 = 
+Upgrade recommended. This version comes with various fixes and improvements.

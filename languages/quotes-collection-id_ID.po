@@ -1,0 +1,263 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quotes Collection 1.4\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/quotes-collection\n"
+"POT-Creation-Date: 2010-06-15 12:26+0530\n"
+"PO-Revision-Date: 2011-02-08 17:58+0700\n"
+"Last-Translator: Kelayang <k@kelayang.com>\n"
+"Language-Team: Kelayang <k@kelayang.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: quotes-collection.php:16
+msgid "Next quote"
+msgstr "Kutipan selanjutnya"
+
+#: quotes-collection.php:88
+msgid "Loading..."
+msgstr "Sedang memuat..."
+
+#: quotes-collection.php:89
+msgid "Error getting quote"
+msgstr "Galat ketika menarik kutipan"
+
+#: quotes-collection.php:239
+#: quotes-collection.php:264
+msgid "Random Quote"
+msgstr "Kutipan Acak"
+
+#: quotes-collection.php:291
+msgid "none"
+msgstr "tidak ada"
+
+#: quotes-collection.php:307
+msgid "Title"
+msgstr "Judul"
+
+#: quotes-collection.php:308
+msgid "Show author?"
+msgstr "Tampilkan penulis?"
+
+#: quotes-collection.php:309
+msgid "Show source?"
+msgstr "Tampilkan sumber?"
+
+#: quotes-collection.php:310
+msgid "Ajax refresh feature"
+msgstr "Fitur pemuatan kembali Ajax"
+
+#: quotes-collection.php:311
+msgid "Advanced options"
+msgstr "Opsi-Opsi Lanjutan"
+
+#: quotes-collection.php:313
+msgid "Random refresh"
+msgstr "Pemuatan kembali secara acak"
+
+#: quotes-collection.php:313
+msgid "Unchecking this will rotate quotes in the order added, latest first."
+msgstr "Menghilangkan centang di sini akan merotasi kutipan sesuai urutan penambahan, yang terakhir terlebih dahulu."
+
+#: quotes-collection.php:314
+msgid "Auto refresh"
+msgstr "Pemuatan kembali otomatis"
+
+#: quotes-collection.php:314
+msgid "every"
+msgstr "setiap"
+
+#: quotes-collection.php:314
+msgid "sec"
+msgstr "det"
+
+#: quotes-collection.php:315
+msgid "Tags filter"
+msgstr "Saringan tag"
+
+#: quotes-collection.php:315
+msgid "Comma separated"
+msgstr "Terpisahkan koma"
+
+#: quotes-collection.php:316
+msgid "Character limit"
+msgstr "Batas karakter"
+
+#: quotes-collection.php:335
+msgid "Nothing added to the database."
+msgstr "Tidak ada yang ditambahkan ke basis data."
+
+#: quotes-collection.php:339
+#: quotes-collection.php:376
+msgid "Database table not found"
+msgstr "Tabel basis data tidak ditemukan"
+
+#: quotes-collection.php:363
+#: quotes-collection.php:405
+#: quotes-collection.php:419
+msgid "There was an error in the MySQL query"
+msgstr "Ada galat dalam kueri MySQL"
+
+#: quotes-collection.php:365
+msgid "Quote added"
+msgstr "Kutipan ditambahkan"
+
+#: quotes-collection.php:371
+msgid "Quote not updated."
+msgstr "Kutipan tidak diperbarui."
+
+#: quotes-collection.php:407
+msgid "Changes saved"
+msgstr "Perubahan tersimpan"
+
+#: quotes-collection.php:421
+msgid "Quote deleted"
+msgstr "Kutipan terhapus"
+
+#: quotes-collection.php:423
+msgid "The quote cannot be deleted"
+msgstr "Kutipan tidak dapat dihapus"
+
+#: quotes-collection.php:439
+#: quotes-collection.php:536
+msgid "Add Quote"
+msgstr "Tambah Kutipan"
+
+#: quotes-collection.php:455
+#: quotes-collection.php:540
+msgid "Save changes"
+msgstr "Simpan perubahan"
+
+#: quotes-collection.php:456
+msgid "Back"
+msgstr "Kembali"
+
+#: quotes-collection.php:460
+#: quotes-collection.php:646
+msgid "The quote"
+msgstr "Kutipan"
+
+#: quotes-collection.php:461
+#: quotes-collection.php:629
+#: quotes-collection.php:648
+msgid "Author"
+msgstr "Penulis"
+
+#: quotes-collection.php:462
+#: quotes-collection.php:630
+#: quotes-collection.php:648
+msgid "Source"
+msgstr "Sumber"
+
+#: quotes-collection.php:463
+#: quotes-collection.php:650
+msgid "Tags"
+msgstr "Tag"
+
+#: quotes-collection.php:464
+#: quotes-collection.php:651
+msgid "Public?"
+msgstr "Publik?"
+
+#: quotes-collection.php:465
+msgid "optional"
+msgstr "opsional"
+
+#: quotes-collection.php:466
+msgid "comma separated"
+msgstr "terpisah koma"
+
+#: quotes-collection.php:503
+#: quotes-collection.php:519
+msgid "Nothing done!"
+msgstr "Tidak ada yang dilakukan!"
+
+#: quotes-collection.php:511
+msgid "Selected quotes made public"
+msgstr "Kutipan terpilih dibuat publik"
+
+#: quotes-collection.php:513
+msgid "Selected quotes made private"
+msgstr "Kutipan terpilih dibuat pribadi"
+
+#: quotes-collection.php:524
+msgid "Quote(s) deleted"
+msgstr "Kutipan terpilih"
+
+#: quotes-collection.php:545
+msgid "Edit quote"
+msgstr "Sunting kutipan"
+
+#: quotes-collection.php:555
+#: quotes-collection.php:606
+#: quotes-collection.php:621
+#: quotes-collection.php:660
+msgid "Delete"
+msgstr "Hapus"
+
+#: quotes-collection.php:557
+#: quotes-collection.php:622
+#: quotes-collection.php:661
+msgid "Make public"
+msgstr "Buat publik"
+
+#: quotes-collection.php:560
+#: quotes-collection.php:623
+#: quotes-collection.php:662
+msgid "Keep private"
+msgstr "Buat pribadi"
+
+#: quotes-collection.php:605
+msgid "Edit"
+msgstr "Sunting"
+
+#: quotes-collection.php:606
+msgid "Are you sure you want to delete this quote?"
+msgstr "Yakinkah Anda akan menghapus kutipan ini?"
+
+#: quotes-collection.php:613
+#, php-format
+msgid "Currently, you have %d quote."
+msgid_plural "Currently, you have %d quotes."
+msgstr[0] "Saat ini, Anda punya %d kutipan."
+msgstr[1] "Saat ini, Anda punya %d kutipan."
+
+#: quotes-collection.php:615
+#: quotes-collection.php:677
+msgid "Add new quote"
+msgstr "Tambah kutipan baru"
+
+#: quotes-collection.php:625
+msgid "Sort by: "
+msgstr "Urut berdasarkan: "
+
+#: quotes-collection.php:627
+#: quotes-collection.php:628
+msgid "Quote"
+msgstr "Kutipan"
+
+#: quotes-collection.php:631
+msgid "Date added"
+msgstr "Tanggal ditambahkan"
+
+#: quotes-collection.php:632
+msgid "Date updated"
+msgstr "Tanggal diperbarui"
+
+#: quotes-collection.php:633
+msgid "Visibility"
+msgstr "Penglihatan"
+
+#: quotes-collection.php:636
+msgid "Go"
+msgstr "Ayo"
+
+#: quotes-collection.php:652
+msgid "Action"
+msgstr "Tindakan"
+
+#: quotes-collection.php:671
+msgid "No quotes in the database"
+msgstr "Tidak ada kutipan di dalam basis data"
+
