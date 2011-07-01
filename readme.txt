@@ -1,21 +1,22 @@
 === Quotes Collection ===
 Contributors: SriniG
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDWT2K8TXXHUN
-Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax
+Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax, shortcode
 Requires at least: 2.8
 Tested up to: 3.2-RC3
 Stable tag: trunk
 
-Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
+Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes in your WordPress blog.
 
 == Description ==
 
-Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect, manage and display your favourite quotations on your WordPress blog. All quotes or a set of quotes can also be displayed on a page using a `[quotcoll]` shortcode.
+Quotes Collection plugin helps you collect, manage and display your favourite quotations in your WordPress blog.
 
 
-Features and notes:
+**Features and notes**
 
-* Random Quote sidebar widget with Ajax refresh feature -- you will be able to get another random quote on the same space without refreshing the web page. Following is the list of options in the widget control panel:
+* **Admin interface**: A nice admin interface to add, edit and manage quotes. Details such as author and source of the quote, and attributes like tags and visibility, can be specified. The 'Quotes' menu in the WP admin navigation leads to the quotes admin interface.
+* **Sidebar widget**: The Random Quote sidebar widget with Ajax refresh feature -- you will be able to get another random quote on the same space without refreshing the web page. Following is the list of options in the widget control panel:
 	* Widget title
 	* Option to show/hide quote author
 	* Option to show/hide quote source
@@ -24,17 +25,16 @@ Features and notes:
 	* Option to refresh the quote automatically
 	* Show only quotes with certain tags
 	* Specify a character limit and filter out bigger quotes
-* Quotes can be displayed in a WordPress page by placing a shortcode such as the ones below. For more examples and the full list of arguments, please refer [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/). *(Note: as of version 1.5, the new `[quotcoll]` shortcode is introduced which uses the WordPress shortoced API. The older `[quote]` shortcode is deprecated.)* 
+* **Shortcode**: Quotes can be displayed in a WordPress page by placing a `[quotcoll]`shortcode. Few examples are provided below. For more examples and the full list of arguments, please refer the [plugin homepage](http://srinig.com/wordpress/plugins/quotes-collection/) or 'other notes'. *(Note: as of version 1.5, the new `[quotcoll]` shortcode is introduced which uses the WordPress shortoced API. The older `[quote]` shortcode is deprecated, though it will still work as a measure of backwards compatibility.)* 
 	* Placing `[quotcoll]` in the page displays all quotes.
 	* `[quotcoll author="Somebody"]` displays quotes authored by Somebody.
 	* `[quotcoll tags="tag1,tag2,tag3"]` displays quotes tagged tag1 or tag2 or tag3, one or more or all of these
 	* `[quotcoll orderby="random" limit=1]` displays a random quote
-* To code the random quote functionality directly into a template file, the template function `quotescollection_quote()` can be used. Please refer [other notes](http://wordpress.org/extend/plugins/quotes-collection/other_notes/) for details.
-* The plugin comes with a nice admin interface to add, edit and manage quotes.
+* **The template function**: To code the random quote functionality directly into a template file, the template function `quotescollection_quote()` can be used. Please refer the plugin homepage or 'other notes' for details.
 * Compatible with WordPress 3.0 multi-site functionality.
-* The plugin suppports localization. Refer the plugin page or 'Other Notes' for the full list of available languages and the respective translators. 
+* The plugin suppports localization. Refer the plugin page or 'other notes' for the full list of available languages and the respective translators. 
 
-For more, visit the [plugin page](http://srinig.com/wordpress/plugins/quotes-collection/). Please provide your feedback at the [WordPress support forums](http://wordpress.org/tags/quotes-collection?forum_id=10).
+For more information, visit the [plugin homepage](http://srinig.com/wordpress/plugins/quotes-collection/). Please provide your feedback at the [WordPress support forums](http://wordpress.org/tags/quotes-collection?forum_id=10).
 
 == Installation ==
 1. Upload `quotes-collection` directory to the `/wp-content/plugins/` directory
@@ -62,20 +62,7 @@ Change the value of the variable `$quotescollection_next_quote` on line 34 of th
 
 = The 'Next quote »' link is not working. Why? =
 
-You have to check a couple of things,
-
-1. Make sure your theme's header.php file has the code `<?php wp_head(); ?>` just before `</head>`.
-
-2. Make sure the plugin files are uploaded in the correct location. The files should be uploaded in a location as follows
-<pre>	wp-content/
-	|-- plugins/
-		|-- quotes-collection/
-    		|-- quotes-collection.php
-    		|-- quotes-collection.js
-    		|-- quotes-collection.css
-    		|-- quotes-collection-ajax.php</pre>
-        
-If you still experience the problem even after the above conditions are met, [contact](http://srinig.com/wordpress/contact/) the plugin author.
+Make sure your theme's header.php file has the code `<?php wp_head(); ?>` just before `</head>`. If you still experience the problem, [contact](http://srinig.com/wordpress/contact/) the plugin author.
 
 = How to change the admin access level setting for the quotes collection admin page? =
 
@@ -237,6 +224,9 @@ Versions 1.1 and greater support localization. As of the current version, locali
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/wordpress/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the plugin author.
 
 ==Changelog==
+* **2011-07-01: Version 1.5.1**
+	* Bahasa Indonesia localization updated
+	
 * **2011-06-30: Version 1.5**
 	* Shortcodes revamp. The new shortcode `[quotcoll]` uses the WordPress shortcode API and comes with various options. The old `[quote]` is deprecated, but will still work as a measure of backwards compatibility.
 	* Ajax calls are now made to `wp-admin/admin-ajax.php`. This could potentially fix problems some websites had with the older system.
@@ -374,7 +364,7 @@ You can translate the plugin in your language if it's not done already. The loca
     * Bug fixes and various other improvements
 
 * **2008-02-06: Version 0.9.5**
-    * Fixed problem with non English characters in author names while using the tag [quotcoll author=]
+    * Fixed problem with non English characters in author names while using the tag `[quote|author=]`
 
 * **2008-01-16: Version 0.9.4**
     * Support for utf-8 characters
@@ -395,5 +385,5 @@ You can translate the plugin in your language if it's not done already. The loca
 
 == Upgrade Notice ==
 
-= 1.5 = 
-Upgrade recommended. This version comes with various fixes and improvements.
+= 1.5.1 = 
+Version 1.5 comes with improved shortcode, and various other fixes and improvements. Localization in Bahasa Indonesia in 1.5.1.
