@@ -135,7 +135,7 @@ add_shortcode('quotecoll', 'quotescollection_shortcodes'); // just in case, some
 function quotescollection_displayquote($quote_id = 0)
 {
 	if($quote_id == 0)
-		$atts = array( 'order_by' => 'random', 'limit' => 1 );
+		$atts = array( 'orderby' => 'random', 'limit' => 1 );
 	else
 		$atts = array (	'id' => $quote_id );
 	

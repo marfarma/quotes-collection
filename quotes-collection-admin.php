@@ -333,13 +333,13 @@ function quotescollection_quotes_management()
 		$quotes_list .= "<th scope=\"row\" class=\"check-column\"><input type=\"checkbox\" name=\"bulkcheck[]\" value=\"".$quote_data->quote_id."\" /></th>";
 		$quotes_list .= "<td>" . $quote_data->quote_id . "</td>";
 		$quotes_list .= "<td>";
-		$quotes_list .= wptexturize(nl2br($quote_data->quote));
+		$quotes_list .= wptexturize(nl2br(make_clickable($quote_data->quote)));
     	$quotes_list .= "<div class=\"row-actions\"><span class=\"edit\"><a href=\"{$admin_url}&action=editquote&amp;id=".$quote_data->quote_id."\" class=\"edit\">".__('Edit', 'quotes-collection')."</a></span> | <span class=\"trash\"><a href=\"{$admin_url}&action=delquote&amp;id=".$quote_data->quote_id."\" onclick=\"return confirm( '".__('Are you sure you want to delete this quote?', 'quotes-collection')."');\" class=\"delete\">".__('Delete', 'quotes-collection')."</a></span></div>";
 		$quotes_list .= "</td>";
-		$quotes_list .= "<td>" . $quote_data->author;
+		$quotes_list .= "<td>" . make_clickable($quote_data->author);
 		if($quote_data->author && $quote_data->source)
 			$quotes_list .= " / ";
-		$quotes_list .= $quote_data->source ."</td>";
+		$quotes_list .= make_clickable($quote_data->source) ."</td>";
 		$quotes_list .= "<td>" . implode(', ', explode(',', $quote_data->tags)) . "</td>";
 		if($quote_data->public == 'no') $public = __('No', 'quotes-collection');
 		else $public = __('Yes', 'quotes-collection');
