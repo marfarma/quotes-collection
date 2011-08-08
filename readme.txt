@@ -200,6 +200,7 @@ Versions 1.1 and greater support localization. As of the current version, locali
 * `fa_IR` / Persian / [Ehsan SH](http://mastaneh.ir/)
 * `fi_FI` / Finnish / [Jussi Ruokomäki](http://jussi.ruokomaki.fi/)
 * `fr_FR` / French / [psykotik](http://www.ikiru.ch/blog), Laurent Naudier
+* `he_IL` / Hebrew / Tailor Vijay
 * `hi_IN` / Hindi / [Ashish J.](http://outshinesolutions.com/)
 * `hr_HR` / Croatian / [1984da](http://faks.us/)
 * `hu_HU` / Hungarian / [KOOS, Tamas](http://www.koosfoto.hu/)
@@ -225,6 +226,10 @@ Versions 1.1 and greater support localization. As of the current version, locali
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/wordpress/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the plugin author.
 
 ==Changelog==
+* **2011-08-08: Version 1.5.3**
+	* Hebrew localization added
+	* id attribute added for blockquote tags for shortcode quotes.
+
 * **2011-07-18: Version 1.5.2**
 	* Slovak localization added
 	* Fixes

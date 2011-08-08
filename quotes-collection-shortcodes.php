@@ -6,7 +6,7 @@ function quotescollection_output_format($quotes)
 
 	foreach($quotes as $quote_data) {
 		$quote_data = quotescollection_txtfmt($quote_data);
-		$display .= "<blockquote class=\"quotescollection\"><p><q>".$quote_data['quote']."</q>";
+		$display .= "<blockquote class=\"quotescollection\" id=\"quote-".$quote_data['quote_id']."\"><p><q>".$quote_data['quote']."</q>";
 		$cite = "";
 		if($quote_data['author'])
 			$cite = $quote_data['author'];
