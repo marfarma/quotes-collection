@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Quotes Collection in Italiano\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/quotes-collection\n"
-"POT-Creation-Date: 2010-06-15 12:26+0530\n"
-"PO-Revision-Date: 2010-06-17 13:58+0100\n"
+"POT-Creation-Date: 2011-06-30 13:32+0530\n"
+"PO-Revision-Date: 2011-08-08 13:28+0100\n"
 "Last-Translator: Gianni Diurno (aka gidibao) <gidibao[at]gmail[dot]com>\n"
-"Language-Team: Gianni Diurno | gidibao.net <gidibao[at]gmail[dot]com>\n"
+"Language-Team: Gianni Diurno | gidibao.net & charmingpress.com\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,256 +14,294 @@ msgstr ""
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_c;__ngettext_noop:1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: quotes-collection.php:16
+#: quotes-collection-ajax.php:6
+#: quotes-collection.php:215
 msgid "Next quote"
 msgstr "Vai alla prossima citazione"
 
-#: quotes-collection.php:88
+#: quotes-collection-ajax.php:7
 msgid "Loading..."
 msgstr "Un attimo..."
 
-#: quotes-collection.php:89
+#: quotes-collection-ajax.php:8
 msgid "Error getting quote"
 msgstr "Si é verificato un errore"
 
-#: quotes-collection.php:239
-#: quotes-collection.php:264
-msgid "Random Quote"
-msgstr "Citazioni a caso"
+#: quotes-collection.php:163
+msgid "Go to the first page"
+msgstr "Vai alla prima pagina"
 
-#: quotes-collection.php:291
-msgid "none"
-msgstr "nessuna"
+#: quotes-collection.php:165
+msgid "Go to the previous page"
+msgstr "Vai alla pagina precedente"
 
-#: quotes-collection.php:307
-msgid "Title"
-msgstr "Titolo"
+#: quotes-collection.php:169
+msgid "Go to the next page"
+msgstr "Vai alla pagina successiva"
 
-#: quotes-collection.php:308
-msgid "Show author?"
-msgstr "Desideri mostrare l'autore?"
+#: quotes-collection.php:171
+msgid "Go to the last page"
+msgstr "Vai all'ultima pagina"
 
-#: quotes-collection.php:309
-msgid "Show source?"
-msgstr "Desideri mostrare la fonte?"
+#: quotes-collection.php:175
+msgid "Goto page:"
+msgstr "Vai alla pagina:"
 
-#: quotes-collection.php:310
-msgid "Ajax refresh feature"
-msgstr "Funzione di ricarica Ajax"
-
-#: quotes-collection.php:311
-msgid "Advanced options"
-msgstr "Opzioni avanzate"
-
-#: quotes-collection.php:313
-msgid "Random refresh"
-msgstr "Ricarica casuale"
-
-#: quotes-collection.php:313
-msgid "Unchecking this will rotate quotes in the order added, latest first."
-msgstr "Deselezionando questa opzione le citazioni ruoteranno secondo l'ordine di aggiunta (le ultime per prime)."
-
-#: quotes-collection.php:314
-msgid "Auto refresh"
-msgstr "ricarica automatica"
-
-#: quotes-collection.php:314
-msgid "every"
-msgstr "ogni"
-
-#: quotes-collection.php:314
-msgid "sec"
-msgstr "sec"
-
-#: quotes-collection.php:315
-msgid "Tags filter"
-msgstr "Filtro tag"
-
-#: quotes-collection.php:315
-msgid "Comma separated"
-msgstr "separa con una virgola"
-
-#: quotes-collection.php:316
-msgid "Character limit"
-msgstr "Limite caratteri:"
-
-#: quotes-collection.php:335
+#: quotes-collection-admin.php:14
 msgid "Nothing added to the database."
 msgstr "Non é stato aggiunto nulla al database."
 
-#: quotes-collection.php:339
-#: quotes-collection.php:376
+#: quotes-collection-admin.php:18
+#: quotes-collection-admin.php:55
 msgid "Database table not found"
 msgstr "Non é stata trovata la tabella del database"
 
-#: quotes-collection.php:363
-#: quotes-collection.php:405
-#: quotes-collection.php:419
+#: quotes-collection-admin.php:42
+#: quotes-collection-admin.php:84
+#: quotes-collection-admin.php:98
 msgid "There was an error in the MySQL query"
 msgstr "Si é verificato un errore nella richiesta MySQL"
 
-#: quotes-collection.php:365
+#: quotes-collection-admin.php:44
 msgid "Quote added"
 msgstr "La citazione é stata aggiunta"
 
-#: quotes-collection.php:371
+#: quotes-collection-admin.php:50
 msgid "Quote not updated."
 msgstr "La citazione non é stata aggiornata."
 
-#: quotes-collection.php:407
+#: quotes-collection-admin.php:86
 msgid "Changes saved"
 msgstr "Le modifiche sono state salvate"
 
-#: quotes-collection.php:421
+#: quotes-collection-admin.php:100
 msgid "Quote deleted"
 msgstr "La citazione é stata cancellata"
 
-#: quotes-collection.php:423
+#: quotes-collection-admin.php:102
 msgid "The quote cannot be deleted"
 msgstr "La citazione non può essere cancellata"
 
-#: quotes-collection.php:439
-#: quotes-collection.php:536
+#: quotes-collection-admin.php:118
+#: quotes-collection-admin.php:220
 msgid "Add Quote"
 msgstr "Aggiungi la citazione"
 
-#: quotes-collection.php:455
-#: quotes-collection.php:540
+#: quotes-collection-admin.php:135
+#: quotes-collection-admin.php:224
 msgid "Save changes"
 msgstr "Salva le modifiche"
 
-#: quotes-collection.php:456
+#: quotes-collection-admin.php:136
 msgid "Back"
 msgstr "Ritorna indietro"
 
-#: quotes-collection.php:460
-#: quotes-collection.php:646
+#: quotes-collection-admin.php:140
+#: quotes-collection-admin.php:386
 msgid "The quote"
 msgstr "Citazione"
 
-#: quotes-collection.php:461
-#: quotes-collection.php:629
-#: quotes-collection.php:648
+#: quotes-collection-admin.php:141
+#: quotes-collection-admin.php:368
+#: quotes-collection-admin.php:388
 msgid "Author"
 msgstr "Autore"
 
-#: quotes-collection.php:462
-#: quotes-collection.php:630
-#: quotes-collection.php:648
+#: quotes-collection-admin.php:142
+#: quotes-collection-admin.php:369
+#: quotes-collection-admin.php:388
 msgid "Source"
 msgstr "Fonte"
 
-#: quotes-collection.php:463
-#: quotes-collection.php:650
+#: quotes-collection-admin.php:143
+#: quotes-collection-admin.php:390
 msgid "Tags"
 msgstr "Tags"
 
-#: quotes-collection.php:464
-#: quotes-collection.php:651
+#: quotes-collection-admin.php:144
+#: quotes-collection-admin.php:391
 msgid "Public?"
 msgstr "Pubblico?"
 
-#: quotes-collection.php:465
+#: quotes-collection-admin.php:145
 msgid "optional"
 msgstr "facoltativo"
 
-#: quotes-collection.php:466
+#: quotes-collection-admin.php:146
 msgid "comma separated"
 msgstr "separa con una virgola"
 
-#: quotes-collection.php:503
-#: quotes-collection.php:519
+#: quotes-collection-admin.php:183
+#: quotes-collection-admin.php:199
 msgid "Nothing done!"
 msgstr "Non ho fatto nulla!"
 
-#: quotes-collection.php:511
+#: quotes-collection-admin.php:191
 msgid "Selected quotes made public"
 msgstr "Le citazioni selezionate saranno rese pubbliche"
 
-#: quotes-collection.php:513
+#: quotes-collection-admin.php:193
 msgid "Selected quotes made private"
 msgstr "Le citazioni selezionate saranno rese private"
 
-#: quotes-collection.php:524
+#: quotes-collection-admin.php:204
 msgid "Quote(s) deleted"
 msgstr "Citazione(i) cancellata(e)"
 
-#: quotes-collection.php:545
+#: quotes-collection-admin.php:231
 msgid "Edit quote"
 msgstr "Modifica la citazione"
 
-#: quotes-collection.php:555
-#: quotes-collection.php:606
-#: quotes-collection.php:621
-#: quotes-collection.php:660
-msgid "Delete"
-msgstr "Cancella"
-
-#: quotes-collection.php:557
-#: quotes-collection.php:622
-#: quotes-collection.php:661
-msgid "Make public"
-msgstr "Rendi pubblico"
-
-#: quotes-collection.php:560
-#: quotes-collection.php:623
-#: quotes-collection.php:662
-msgid "Keep private"
-msgstr "Mantieni privato"
-
-#: quotes-collection.php:605
-msgid "Edit"
-msgstr "Modifica"
-
-#: quotes-collection.php:606
-msgid "Are you sure you want to delete this quote?"
-msgstr "Sei certo di volere cancellare questa citazione?"
-
-#: quotes-collection.php:613
-#, php-format
-msgid "Currently, you have %d quote."
-msgid_plural "Currently, you have %d quotes."
-msgstr[0] "Al momento, hai %d citazione disponibile."
-msgstr[1] "Al momento, hai %d citazioni disponibili."
-
-#: quotes-collection.php:615
-#: quotes-collection.php:677
+#: quotes-collection-admin.php:258
+#: quotes-collection-admin.php:267
+#: quotes-collection-admin.php:412
 msgid "Add new quote"
 msgstr "Aggiungi una nuova citazione"
 
-#: quotes-collection.php:625
+#: quotes-collection-admin.php:263
+#: quotes-collection-admin.php:406
+msgid "No quotes in the database"
+msgstr "Non é presente alcuna citazione nel database"
+
+#: quotes-collection-admin.php:337
+msgid "Edit"
+msgstr "Modifica"
+
+#: quotes-collection-admin.php:337
+msgid "Are you sure you want to delete this quote?"
+msgstr "Sei certo di volere cancellare questa citazione?"
+
+#: quotes-collection-admin.php:337
+#: quotes-collection-admin.php:358
+msgid "Delete"
+msgstr "Cancella"
+
+#: quotes-collection-admin.php:344
+msgid "No"
+msgstr "No"
+
+#: quotes-collection-admin.php:345
+msgid "Yes"
+msgstr "Sì"
+
+#: quotes-collection-admin.php:357
+msgid "Bulk Actions"
+msgstr "Azione di massa"
+
+#: quotes-collection-admin.php:359
+msgid "Make public"
+msgstr "Rendi pubblico"
+
+#: quotes-collection-admin.php:360
+msgid "Keep private"
+msgstr "Mantieni privato"
+
+#: quotes-collection-admin.php:362
+msgid "Apply"
+msgstr "Applica"
+
+#: quotes-collection-admin.php:364
 msgid "Sort by: "
 msgstr "Disponi per: "
 
-#: quotes-collection.php:627
-#: quotes-collection.php:628
+#: quotes-collection-admin.php:366
+#: quotes-collection-admin.php:367
 msgid "Quote"
 msgstr "Citazione"
 
-#: quotes-collection.php:631
+#: quotes-collection-admin.php:370
 msgid "Date added"
 msgstr "Data di inserimento"
 
-#: quotes-collection.php:632
+#: quotes-collection-admin.php:371
 msgid "Date updated"
 msgstr "Data di aggiornamento"
 
-#: quotes-collection.php:633
+#: quotes-collection-admin.php:372
 msgid "Visibility"
 msgstr "Visibilità"
 
-#: quotes-collection.php:636
+#: quotes-collection-admin.php:375
 msgid "Go"
 msgstr "Vai"
 
-#: quotes-collection.php:652
-msgid "Action"
-msgstr "Azione"
+#: quotes-collection-admin.php:377
+#: quotes-collection-admin.php:397
+#, php-format
+msgid "%d quote"
+msgid_plural "%d quotes"
+msgstr[0] "citazione"
+msgstr[1] "citazioni"
 
-#: quotes-collection.php:671
-msgid "No quotes in the database"
-msgstr "Non é presente alcuna citazione nel database"
+#: quotes-collection-widget.php:13
+#: quotes-collection-widget.php:38
+msgid "Random Quote"
+msgstr "Citazioni a caso"
+
+#: quotes-collection-widget.php:65
+msgid "none"
+msgstr "nessuna"
+
+#: quotes-collection-widget.php:84
+msgid "Title"
+msgstr "Titolo"
+
+#: quotes-collection-widget.php:85
+msgid "Show author?"
+msgstr "Desideri mostrare l'autore?"
+
+#: quotes-collection-widget.php:86
+msgid "Show source?"
+msgstr "Desideri mostrare la fonte?"
+
+#: quotes-collection-widget.php:87
+msgid "Ajax refresh feature"
+msgstr "Funzione di ricarica Ajax"
+
+#: quotes-collection-widget.php:88
+msgid "Advanced options"
+msgstr "Opzioni avanzate"
+
+#: quotes-collection-widget.php:90
+msgid "Random refresh"
+msgstr "Ricarica casuale"
+
+#: quotes-collection-widget.php:90
+msgid "Unchecking this will rotate quotes in the order added, latest first."
+msgstr "Deselezionando questa opzione le citazioni ruoteranno secondo l'ordine di aggiunta (le ultime per prime)."
+
+#: quotes-collection-widget.php:91
+msgid "Auto refresh"
+msgstr "ricarica automatica"
+
+#: quotes-collection-widget.php:91
+msgid "every"
+msgstr "ogni"
+
+#: quotes-collection-widget.php:91
+msgid "sec"
+msgstr "sec"
+
+#: quotes-collection-widget.php:92
+msgid "Tags filter"
+msgstr "Filtro tag"
+
+#: quotes-collection-widget.php:92
+msgid "Comma separated"
+msgstr "separa con una virgola"
+
+#: quotes-collection-widget.php:93
+msgid "Character limit"
+msgstr "Limite caratteri:"
+
+#~ msgid "Currently, you have %d quote."
+
+#~ msgid_plural "Currently, you have %d quotes."
+#~ msgstr[0] "Al momento, hai %d citazione disponibile."
+#~ msgstr[1] "Al momento, hai %d citazioni disponibili."
 
 #~ msgid "Click here"
 #~ msgstr "Clicca qui"

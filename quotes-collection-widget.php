@@ -68,7 +68,7 @@ function quotescollection_widget_init()
 
 		// Now we define the display of widget options menu
 		$show_author_checked = $show_source_checked	= $ajax_refresh_checked = $auto_refresh_checked = $random_refresh_checked = '';
-		$int_select = array ( '5' => '', '10' => '', '15' => '', '20' => '');
+		$int_select = array ( '5' => '', '10' => '', '15' => '', '20' => '', '30' => '', '60' => '');
         if($options['show_author'])
         	$show_author_checked = ' checked="checked"';
         if($options['show_source'])
@@ -88,7 +88,7 @@ function quotescollection_widget_init()
 		echo "<p style=\"text-align:left;\"><small><a id=\"quotescollection-adv_key\" style=\"cursor:pointer;\" onclick=\"jQuery('div#quotescollection-adv_opts').slideToggle();\">".__('Advanced options', 'quotes-collection')." &raquo;</a></small></p>";
 		echo "<div id=\"quotescollection-adv_opts\" style=\"display:none\">";
 		echo "<p style=\"text-align:left;\"><input type=\"checkbox\" id=\"quotescollection-random_refresh\" name=\"quotescollection-random_refresh\" value=\"1\"{$random_refresh_checked} /> <label for=\"quotescollection-random_refresh\">".__('Random refresh', 'quotes-collection')."</label><br/><span class=\"setting-description\"><small>".__('Unchecking this will rotate quotes in the order added, latest first.', 'quotes-collection')."</small></span></p>";
-		echo "<p style=\"text-align:left;\"><input type=\"checkbox\" id=\"quotescollection-auto_refresh\" name=\"quotescollection-auto_refresh\" value=\"1\"{$auto_refresh_checked} /> <label for=\"quotescollection-auto_refresh\">".__('Auto refresh', 'quotes-collection')."</label> <label for=\"quotescollection-refresh_interval\">".__('every', 'quotes-collection')."</label> <select id=\"quotescollection-refresh_interval\" name=\"quotescollection-refresh_interval\"><option{$int_select['5']}>5</option><option{$int_select['10']}>10</option><option{$int_select['15']}>15</option><option{$int_select['20']}>20</option></select> ".__('sec', 'quotes-collection')."</p>";
+		echo "<p style=\"text-align:left;\"><input type=\"checkbox\" id=\"quotescollection-auto_refresh\" name=\"quotescollection-auto_refresh\" value=\"1\"{$auto_refresh_checked} /> <label for=\"quotescollection-auto_refresh\">".__('Auto refresh', 'quotes-collection')."</label> <label for=\"quotescollection-refresh_interval\">".__('every', 'quotes-collection')."</label> <select id=\"quotescollection-refresh_interval\" name=\"quotescollection-refresh_interval\"><option{$int_select['5']}>5</option><option{$int_select['10']}>10</option><option{$int_select['15']}>15</option><option{$int_select['20']}>20</option><option{$int_select['30']}>30</option><option{$int_select['60']}>60</option></select> ".__('sec', 'quotes-collection')."</p>";
 		echo "<p style=\"text-align:left;\"><label for=\"quotescollection-tags\">".__('Tags filter', 'quotes-collection')." </label><input class=\"widefat\" type=\"text\" id=\"quotescollection-tags\" name=\"quotescollection-tags\" value=\"".htmlspecialchars($options['tags'], ENT_QUOTES)."\" /><br/><span class=\"setting-description\"><small>".__('Comma separated', 'quotes-collection')."</small></span></p>";
 		echo "<p style=\"text-align:left;\"><label for=\"quotescollection-char_limit\">".__('Character limit', 'quotes-collection')." </label><input class=\"widefat\" type=\"text\" id=\"quotescollection-char_limit\" name=\"quotescollection-char_limit\" value=\"".htmlspecialchars($options['char_limit'], ENT_QUOTES)."\" /></p>";
 		echo "</div>";

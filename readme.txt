@@ -206,7 +206,7 @@ Versions 1.1 and greater support localization. As of the current version, locali
 * `hu_HU` / Hungarian / [KOOS, Tamas](http://www.koosfoto.hu/)
 * `id_ID` / Bahasa Indonesia / [Kelayang](http://kelayang.com/)
 * `it_IT` / Italian / [Gianni Diurno  (aka gidibao)](http://gidibao.net/index.php/2008/05/26/quotes-collection-in-italiano/)
-* `ja` / Japanese / [Urepko Asaba](http://sourceforge.jp/projects/wppluginsj/downloads/36796/quotes-collection%201.2.3%20Lang-ja.zip)
+* `ja` / Japanese / [Urepko Asaba](http://www.urepko.net/)
 * `lt_LT` / Lithuanian / Lulilo
 * `lv_LV` / Latvian / [Maris Svirksts](http://www.moskjis.com/)
 * `nb_NO` / Norwegian (Bokmål) / [Christian K. Nordtømme](http://nextpage.no/)
@@ -226,6 +226,10 @@ Versions 1.1 and greater support localization. As of the current version, locali
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/wordpress/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the plugin author.
 
 ==Changelog==
+* **2011-08-31: Version 1.5.4**
+	* 30 and 60 seconds added to widget auto refresh time option.
+	* Updates for Italian and Japanese localizations.
+
 * **2011-08-08: Version 1.5.3**
 	* Hebrew localization added
 	* id attribute added for blockquote tags for shortcode quotes.
@@ -393,7 +397,3 @@ You can translate the plugin in your language if it's not done already. The loca
 * **2007-12-15: Version 0.9**
     * Initial release
 
-== Upgrade Notice ==
-
-= 1.5.1 = 
-Version 1.5 comes with improved shortcode, and various other fixes and improvements. Localization in Bahasa Indonesia in 1.5.1.
