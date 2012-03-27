@@ -3,7 +3,7 @@
 Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
-Version: 1.5.4
+Version: 1.5.5
 Author: Srini G
 Author URI: http://srinig.com/wordpress/
 License: GPL2
@@ -117,13 +117,25 @@ function quotescollection_pagenav($total, $current = 1, $format = 0, $paged = 'p
 		if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {$url .= "s";}
 		$url .= "://";
 		if ($_SERVER["SERVER_PORT"] != "80") {
-			$url .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["PHP_SELF"];
+			$url .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"];
 		} else {
-			$url .= $_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"];
+			$url .= $_SERVER["SERVER_NAME"];
 		}
+
+		if ( get_option('permalink_structure') != '' ) {
+			if($_SERVER['REQUEST_URI']) {
+				$request_uri = explode('?', $_SERVER['REQUEST_URI']);
+				$url .= $request_uri[0];
+			}
+			else $url .= "/";
+		}
+		else {
+			$url .= $_SERVER["PHP_SELF"];
+		}
+		
 		if($query_string = $_SERVER['QUERY_STRING']) {
 			$parms = explode('&', $query_string);
-			$y = '?';
+			$y = '';
 			foreach($parms as $parm) {
 				$x = explode('=', $parm);
 				if($x[0] == $paged) {

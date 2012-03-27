@@ -69,6 +69,7 @@ function quotescollection_shortcodes($atts = array())
 
 
 	if($orderby == 'id' || !$orderby) $orderby = 'quote_id';
+	else if ($orderby == 'date_added') $orderby = 'time_added';
 	else if($orderby == 'random' || $orderby == 'rand') {
 		$orderby = 'RAND()';
 		$order = '';
@@ -132,58 +133,58 @@ add_shortcode('quotecoll', 'quotescollection_shortcodes'); // just in case, some
 
 
 
-function quotescollection_displayquote($quote_id = 0)
+function quotescollection_displayquote($matches)
 {
-	if($quote_id == 0)
+	if(!isset($matches[1]) || (isset($matches[1]) && !$matches[1]) || $matches[0] == "[quote|random]")
 		$atts = array( 'orderby' => 'random', 'limit' => 1 );
 	else
-		$atts = array (	'id' => $quote_id );
+		$atts = array (	'id' => $matches[1] );
 	
 	return quotescollection_shortcodes($atts);
 }
 
 
-function quotescollection_displayquotes_author($author = "")
+function quotescollection_displayquotes_author($matches)
 {
-	return quotescollection_shortcodes(array('author'=>$author));
+	return quotescollection_shortcodes(array('author'=>$matches[1]));
 }
 
 
-function quotescollection_displayquotes_source($source = "")
+function quotescollection_displayquotes_source($matches)
 {
-	return quotescollection_shortcodes(array('source'=>$source));
+	return quotescollection_shortcodes(array('source'=>$matches[1]));
 }
 
-function quotescollection_displayquotes_tags($tags = "")
+function quotescollection_displayquotes_tags($matches)
 {
-	return quotescollection_shortcodes(array('tags'=>$tags));
+	return quotescollection_shortcodes(array('tags'=>$matches[1]));
 }
 
 function quotescollection_inpost( $text )
 {
   $start = strpos($text,"[quote|id=");
   if ($start !== FALSE) {
-    $text = preg_replace( "/\[quote\|id=(\d+)\]/ie", "quotescollection_displayquote('\\1')", $text );
+    $text = preg_replace_callback( "/\[quote\|id=(\d+)\]/i", "quotescollection_displayquote", $text );
   }
   $start = strpos($text,"[quote|random]");
   if ($start !== FALSE) {
-    $text = preg_replace( "/\[quote\|random\]/ie", "quotescollection_displayquote()", $text );
+    $text = preg_replace_callback( "/\[quote\|random\]/i", "quotescollection_displayquote", $text );
   }
   $start = strpos($text,"[quote|all]");
   if ($start !== FALSE) {
-    $text = preg_replace( "/\[quote\|all\]/ie", "quotescollection_shortcodes()", $text );
+    $text = preg_replace_callback( "/\[quote\|all\]/i", "quotescollection_shortcodes", $text );
   }
 	$start = strpos($text,"[quote|author=");
 	if($start !== FALSE) {
-		$text = preg_replace("/\[quote\|author=(.{1,})?\]/ie", "quotescollection_displayquotes_author(\"\\1\")", $text);
+		$text = preg_replace_callback("/\[quote\|author=(.{1,})?\]/i", "quotescollection_displayquotes_author", $text);
 	}
 	$start = strpos($text,"[quote|source=");
 	if($start !== FALSE) {
-		$text = preg_replace("/\[quote\|source=(.{1,})?\]/ie", "quotescollection_displayquotes_source(\"\\1\")", $text);
+		$text = preg_replace_callback("/\[quote\|source=(.{1,})?\]/i", "quotescollection_displayquotes_source", $text);
 	}
 	$start = strpos($text,"[quote|tags=");
 	if($start !== FALSE) {
-		$text = preg_replace("/\[quote\|tags=(.{1,})?\]/ie", "quotescollection_displayquotes_tags(\"\\1\")", $text);
+		$text = preg_replace_callback("/\[quote\|tags=(.{1,})?\]/i", "quotescollection_displayquotes_tags", $text);
 	}	return $text;
 }
 add_filter('the_content', 'quotescollection_inpost', 7);

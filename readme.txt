@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDWT2K8TXXHUN
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax, shortcode
 Requires at least: 2.8
-Tested up to: 3.2.1
+Tested up to: 3.3.1
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes in your WordPress blog.
@@ -107,7 +107,7 @@ Different attributes can be specified to customize the way the quotes are displa
 		* 'quote_id' (default)
 		* 'author'
 		* 'source'
-		* 'date_added'
+		* 'time_added'
 		* 'random'
 	
 * **order** *(string)* 
@@ -190,13 +190,15 @@ The list of parameters (arguments) that can be passed on to this function:
 Versions 1.1 and greater support localization. As of the current version, localization is available in the following languages (code / language / author):
 
 * `ar` / Arabic / [Ahmed Alharfi](http://www.alharfi.com/)
+* `be_BY` / Belarusian / [Alexander Ovsov](http://webhostinggeeks.com/)
 * `bg_BG` / Bulgarian / [Martin Petrov](http://mpetrov.net/)
 * `bs_BA` / Bosnian / Vukasin Stojkov
-* `by_BY` / Belarusian / [Илья](http://www.fatcow.com/)
 * `cs_CZ` / Czech / Josef Ondruch
 * `da_DK` / Danish / [Rune Clausen](http://www.runemester.dk/)
 * `de_DE` / German / [Tobias Koch](http://tobias.kochs-online.net/2008/05/multilingual-blogging-using-wordpress/)
+* `el` / Greek / [Spiros Doikas](http://www.translatum.gr/)
 * `es_ES` / Spanish / [Germán L. Martínez (Gershu)](http://www.gershu.com.ar/)
+* `et_EE` / Estonian / [Iflexion](http://iflexion.com/)
 * `fa_IR` / Persian / [Ehsan SH](http://mastaneh.ir/)
 * `fi_FI` / Finnish / [Jussi Ruokomäki](http://jussi.ruokomaki.fi/)
 * `fr_FR` / French / [psykotik](http://www.ikiru.ch/blog), Laurent Naudier
@@ -214,6 +216,7 @@ Versions 1.1 and greater support localization. As of the current version, locali
 * `pl_PL` / Polish / Marcin Gucia
 * `pt_BR` / Brazilian Portugese / Tzor More
 * `pt_PT` / Portugese / [Djamilo Jacinto](http://www.maxibim.net/)
+* `ro_RO` / Romanian / Alexander Ovsov
 * `ru_RU` / Russian / Andrew Malarchuk
 * `sk_SK` / Slovak / [Stefan Stieranka](http://www.itec.sk/)
 * `sr_RS` / Serbian / Vukasin Stojkov
@@ -226,6 +229,12 @@ Versions 1.1 and greater support localization. As of the current version, locali
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/wordpress/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the plugin author.
 
 ==Changelog==
+* **2012-03-27: Version 1.5.5**
+	* Security fixes
+	* Shortcode output pagination issue fixed
+	* Shortcode: 'time_added' value for 'orderby' parameter fixed.
+	* Localization in Estonian, Greek, Belarusian and Romanian languages added.
+	
 * **2011-08-31: Version 1.5.4**
 	* 30 and 60 seconds added to widget auto refresh time option.
 	* Updates for Italian and Japanese localizations.
