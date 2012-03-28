@@ -3,7 +3,7 @@
 Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
-Version: 1.5.5
+Version: 1.5.5.1
 Author: Srini G
 Author URI: http://srinig.com/wordpress/
 License: GPL2
@@ -187,7 +187,7 @@ function quotescollection_pagenav($total, $current = 1, $format = 0, $paged = 'p
 		$pagenav = __("Goto page:", 'quotes-collection');
 		for( $i = 1; $i <= $total; $i++ ) {
 			if($i == $current)
-				$pagenav .= "&nbsp<strong>{$i}</strong>";
+				$pagenav .= "&nbsp;<strong>{$i}</strong>";
 			else if($i == 1)
 				$pagenav .= "&nbsp;<a href=\"{$url}\">{$i}</a>";
 			else 

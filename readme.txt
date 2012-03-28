@@ -229,6 +229,9 @@ Versions 1.1 and greater support localization. As of the current version, locali
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/wordpress/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the plugin author.
 
 ==Changelog==
+* **2012-03-28: Version 1.5.5.1**
+	* Minor fix (the missing semicolon in <code>&amp;nbsp;</code>)
+	
 * **2012-03-27: Version 1.5.5**
 	* Security fixes
 	* Shortcode output pagination issue fixed
