@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDWT2K8TXXHUN
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax, shortcode
 Requires at least: 2.8
-Tested up to: 3.3.1
+Tested up to: 3.4.1
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes in your WordPress blog.
@@ -15,7 +15,7 @@ Quotes Collection plugin helps you collect, manage and display your favourite qu
 
 **Features and notes**
 
-* **Admin interface**: A nice admin interface to add, edit and manage quotes. Details such as author and source of the quote, and attributes like tags and visibility, can be specified. The 'Quotes' menu in the WP admin navigation leads to the quotes admin interface.
+* **Admin interface**: An admin interface to add, edit and manage quotes. Details such as author and source of the quote, and attributes like tags and visibility, can be specified. The 'Quotes' menu in the WP admin navigation leads to the quotes admin interface.
 * **Sidebar widget**: The Random Quote sidebar widget with Ajax refresh feature -- you will be able to get another random quote on the same space without refreshing the web page. Following is the list of options in the widget control panel:
 	* Widget title
 	* Option to show/hide quote author
@@ -229,6 +229,10 @@ Versions 1.1 and greater support localization. As of the current version, locali
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/wordpress/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the plugin author.
 
 ==Changelog==
+
+* **2012-07-02: Version 1.5.6**
+	* Security fix (pointed out by Charlie Eriksen via Secunia SVCRP)
+
 * **2012-03-28: Version 1.5.5.1**
 	* Minor fix (the missing semicolon in <code>&amp;nbsp;</code>)
 	
@@ -408,4 +412,10 @@ You can translate the plugin in your language if it's not done already. The loca
 
 * **2007-12-15: Version 0.9**
     * Initial release
+
+
+== Upgrade Notice ==
+
+= 1.5.6 =
+This version fixes a security vulnerability. Please upgrade.
 

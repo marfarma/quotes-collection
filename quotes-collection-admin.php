@@ -19,11 +19,11 @@ function quotescollection_addquote($quote, $author = "", $source = "", $tags = "
 	else //Add the quote data to the database
 	{
 		
-		$quote = stripslashes($quote);
-		$author = stripslashes($author);	
-		$source = stripslashes($source);	
-		$tags = stripslashes($tags);
-
+		$quote = wp_kses_data( stripslashes($quote) );
+		$author = wp_kses( stripslashes($author), array( 'a' => array( 'href' => array(),'title' => array() ) ) ) ;	
+		$source = wp_kses( stripslashes($source), array( 'a' => array( 'href' => array(),'title' => array() ) ) ) ;	
+		$tags = strip_tags( stripslashes($tags) );
+		
 		$quote = "'".$wpdb->escape($quote)."'";
 		$author = $author?"'".$wpdb->escape($author)."'":"NULL";
 		$source = $source?"'".$wpdb->escape($source)."'":"NULL";
@@ -56,10 +56,10 @@ function quotescollection_editquote($quote_id, $quote, $author = "", $source = "
 	else //Update database
 	{
 		
-		$quote = stripslashes($quote);
-		$author = stripslashes($author);	
-		$source = stripslashes($source);	
-		$tags = stripslashes($tags);
+		$quote = wp_kses_data( stripslashes($quote) );
+		$author = wp_kses( stripslashes($author), array( 'a' => array( 'href' => array(),'title' => array() ) ) ) ;	
+		$source = wp_kses( stripslashes($source), array( 'a' => array( 'href' => array(),'title' => array() ) ) ) ;	
+		$tags = strip_tags( stripslashes($tags) );
 
 	  	$quote = "'".$wpdb->escape($quote)."'";
 		$author = $author?"'".$wpdb->escape($author)."'":"NULL";
