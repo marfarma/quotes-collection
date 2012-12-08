@@ -64,7 +64,7 @@ Change the value of the variable `$quotescollection_next_quote` on line 34 of th
 
 Make sure your theme's footer.php file has the code `<?php wp_footer(); ?>` just before `</body>`. If you still experience the problem, [contact](http://srinig.com/wordpress/contact/) the plugin author.
 
-= I have added a number of quotes, but some of the quotes never get displayed in the widget. Why?
+= I have added a number of quotes, but some of the quotes never get displayed in the widget. Why? =
 
 If you want all of the quotes to display, make sure all all the quotes fall within the 'Character limit'. There is an option named 'Character limit' for the widget (bottom most, under the 'advanced options') with a default value of '500'. The value can be changed, or simply removed and the field left blank so that none of the quotes get filtered out based on length.
 
