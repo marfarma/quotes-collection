@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDWT2K8TXXHUN
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax, shortcode
 Requires at least: 2.8
-Tested up to: 3.4.1
+Tested up to: 3.5-RC5
 Stable tag: trunk
 
 Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes in your WordPress blog.
@@ -25,7 +25,7 @@ Quotes Collection plugin helps you collect, manage and display your favourite qu
 	* Option to refresh the quote automatically
 	* Show only quotes with certain tags
 	* Specify a character limit and filter out bigger quotes
-* **Shortcode**: Quotes can be displayed in a WordPress page by placing a `[quotcoll]`shortcode. Few examples are provided below. For more examples and the full list of arguments, please refer the [plugin homepage](http://srinig.com/wordpress/plugins/quotes-collection/) or 'other notes'. *(Note: as of version 1.5, the new `[quotcoll]` shortcode is introduced which uses the WordPress shortoced API. The older `[quote]` shortcode is deprecated, though it will still work as a measure of backwards compatibility.)* 
+* **Shortcode**: Quotes can be displayed in a WordPress page by placing a `[quotcoll]`shortcode. Few examples are provided below. For more examples and the full list of arguments, please refer the [plugin homepage](http://srinig.com/wordpress/plugins/quotes-collection/) or 'other notes'. *(Note: The new `[quotcoll]` shortcode is introduced in version 1.5, that makes use of the WordPress shortcode API. The older `[quote]` shortcode is deprecated, though it will still work as a measure of backwards compatibility.)* 
 	* Placing `[quotcoll]` in the page displays all quotes.
 	* `[quotcoll author="Somebody"]` displays quotes authored by Somebody.
 	* `[quotcoll tags="tag1,tag2,tag3"]` displays quotes tagged tag1 or tag2 or tag3, one or more or all of these
@@ -50,11 +50,11 @@ Open the quotes-collection.css file that comes along with the plugin, scroll dow
 
 = How to change the random quote text color? =
 
-Styling such as text color, font size, background color, etc., of the random quote can be customized by editing the quotes-collection.css file.
+Styling such as text color, font size, background color, etc., of the random quote can be customized by editing the quotes-collection.css file. Please also note that any updates to the plugin will overwrite your customized css file, so it's advisable to backup your customization before updating the plugin.
 
 = How to hide the 'Next quote »' link? = 
 
-You can do this by turning off the 'Ajax Refresh feature' in widget options.
+You can do this by turning off the 'Ajax Refresh' feature in widget options.
 
 = How to change the link text from 'Next quote »' to something else? =
 
@@ -62,13 +62,21 @@ Change the value of the variable `$quotescollection_next_quote` on line 34 of th
 
 = The 'Next quote »' link is not working. Why? =
 
-Make sure your theme's header.php file has the code `<?php wp_head(); ?>` just before `</head>`. If you still experience the problem, [contact](http://srinig.com/wordpress/contact/) the plugin author.
+Make sure your theme's footer.php file has the code `<?php wp_footer(); ?>` just before `</body>`. If you still experience the problem, [contact](http://srinig.com/wordpress/contact/) the plugin author.
+
+= I have added a number of quotes, but some of the quotes never get displayed in the widget. Why?
+
+If you want all of the quotes to display, make sure all all the quotes fall within the 'Character limit'. There is an option named 'Character limit' for the widget (bottom most, under the 'advanced options') with a default value of '500'. The value can be changed, or simply removed and the field left blank so that none of the quotes get filtered out based on length.
+
+= Why multiple instances of the widget is not available? =
+
+There can be conflicts and undesirable behaviour when more than one instance of the random quote function call is used in the same page, especially with the ajax refresh turned on for all the instances. It is for this reason the multiple instances of the widget is currently unavailable. For the same reason, it is not advised to use the `quotescollection_quote()` function call more than once in the same page. And for the same reason, the ajax refresh option is not made available for the shortcodes. These limitations shall be overcome in a future version of the plugin.
 
 = How to change the admin access level setting for the quotes collection admin page? =
 
 Change the value of the variable `$quotescollection_admin_userlevel` on line 44 of the quotes-collection.php file. Refer [WordPress documentation](http://codex.wordpress.org/Roles_and_Capabilities) for more information about user roles and capabilities.
 
-= I have a long list of quotes, and `[quotcoll]` puts all of the quotes in a single page. Is there a way to introduce pagination and break the long list of quotes into different pages? =
+= I have a long list of quotes, and the `[quotcoll]` shortcode puts all of the quotes in a single page. Is there a way to introduce pagination and break the long list of quotes into different pages? =
 
 Yes, pagination is supporterd in versions 1.5 and greater. `paging` and `limit_per_page` attributes can be used to achieve this. For example, `[quotcoll paging=true limit_per_page=30]` will introduce pagination with a maximum of 30 quotes per page.
 
@@ -112,7 +120,7 @@ Different attributes can be specified to customize the way the quotes are displa
 	
 * **order** *(string)* 
 	* The value can be either 'ASC' (default) or 'DESC', for ascending and descending order respectively.
-	* For example, `[quotcoll orderby="date_added" order="DESC"]` will display all the quotes in the order of date added, latest first and the earliest last.
+	* For example, `[quotcoll orderby="time_added" order="DESC"]` will display all the quotes in the order of date added, latest first and the earliest last.
 	
 * **paging** *(boolean)*
 	* The values can be:
@@ -211,6 +219,7 @@ Versions 1.1 and greater support localization. As of the current version, locali
 * `ja` / Japanese / [Urepko Asaba](http://www.urepko.net/)
 * `lt_LT` / Lithuanian / Lulilo
 * `lv_LV` / Latvian / [Maris Svirksts](http://www.moskjis.com/)
+* `mk_MK` / Macedonian / [Diana](http://wpcouponshop.com/)
 * `nb_NO` / Norwegian (Bokmål) / [Christian K. Nordtømme](http://nextpage.no/)
 * `nl_NL` / Dutch / [Kristof Vercruyssen](http://www.simplit.be/)
 * `pl_PL` / Polish / Marcin Gucia
@@ -229,6 +238,11 @@ Versions 1.1 and greater support localization. As of the current version, locali
 You can translate the plugin in your language if it's not done already. The localization template file (quotes-collection.pot) can be found in the 'languages' folder of the plugin. After translating send the localized files to the [plugin author](http://srinig.com/wordpress/contact/) so that it's included in the next update. If you are not sure how to go about translating, contact the plugin author.
 
 ==Changelog==
+
+* **2012-12-08: Version 1.5.7**
+	* Localization in Macedonian language added, Persian language updated.
+	* Code improvements
+	* Documentation changes (FAQ updated)
 
 * **2012-07-02: Version 1.5.6**
 	* Security fix (pointed out by Charlie Eriksen via Secunia SVCRP)
@@ -416,6 +430,6 @@ You can translate the plugin in your language if it's not done already. The loca
 
 == Upgrade Notice ==
 
-= 1.5.6 =
-This version fixes a security vulnerability. Please upgrade.
+= 1.5.7 =
+Minor udate. Localization in Macedonian language added, Persian updated. Improvements to code.
 

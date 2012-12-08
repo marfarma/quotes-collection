@@ -1,14 +1,14 @@
 <?php
 function quotescollection_scripts()
 {
-	global $quotescollection_auto_refresh_max, $quotescollection_next_quote;
+	global $quotescollection_auto_refresh_max, $quotescollection_next_quote, $quotescollection_version;
 
 	$nextquote =  $quotescollection_next_quote?$quotescollection_next_quote:__('Next quote', 'quotes-collection')."&nbsp;&raquo;";
 	$loading = __('Loading...', 'quotes-collection');
 	$error = __('Error getting quote', 'quotes-collection');
 	$auto_refresh_max = $quotescollection_auto_refresh_max;
 
-	wp_enqueue_script( 'quotescollection', plugin_dir_url(__FILE__).'quotes-collection.js', array('jquery') );
+	wp_enqueue_script( 'quotescollection', plugin_dir_url(__FILE__).'quotes-collection.js', array('jquery'), $quotescollection_version, true );
 	wp_localize_script( 'quotescollection', 'QCAjax', array(
 	    // URL to wp-admin/admin-ajax.php to process the request
 	    'ajaxurl' => admin_url( 'admin-ajax.php' ),

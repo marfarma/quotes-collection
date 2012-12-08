@@ -3,13 +3,13 @@
 Plugin Name: Quotes Collection
 Plugin URI: http://srinig.com/wordpress/plugins/quotes-collection/
 Description: Quotes Collection plugin with Ajax powered Random Quote sidebar widget helps you collect and display your favourite quotes on your WordPress blog.
-Version: 1.5.6
+Version: 1.5.7
 Author: Srini G
 Author URI: http://srinig.com/wordpress/
 License: GPL2
 */
 
-/*  Copyright 2007-2011 Srini G (email : srinig.com@gmail.com)
+/*  Copyright 2007-2012 Srini G (email : srinig.com@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ $quotescollection_auto_refresh_max = 30;
 /*  Refer http://codex.wordpress.org/Roles_and_Capabilities */
 $quotescollection_admin_userlevel = 'edit_posts'; 
 
-
+$quotescollection_version = '1.5.7';
 $quotescollection_db_version = '1.4'; 
 
 
@@ -211,6 +211,30 @@ function quotescollection_txtfmt($quotedata = array())
 	return $quotedata;	
 }
 
+function quotescollection_output_format( $quote_data, $options = array('show_author' => 1, 'show_source' => 1) )
+{
+	$display = "";
+
+	$quote_data = quotescollection_txtfmt($quote_data);
+
+	$display .= "<p><q>".$quote_data['quote']."</q>";
+	
+	$cite = "";
+
+	if($options['show_author'] && $quote_data['author'])
+		$cite = '<span class="quotescollection_author">'. $quote_data['author'] .'</span>';
+
+	if($options['show_source'] && $quote_data['source']) {
+		if($cite) $cite .= ", ";
+		$cite .= '<span class="quotescollection_source">'. $quote_data['source'] .'</span>';
+	}
+
+	if($cite) $cite = " <cite>&mdash;&nbsp;{$cite}</cite>";
+	$display .= $cite."</p>";
+
+	return apply_filters( 'quotescollection_output_format', $display );
+}
+
 
 function quotescollection_display_randomquote($show_author = 1, $show_source = 1, $ajax_refresh = 1, $random_quote = array()) 
 {
@@ -279,17 +303,7 @@ function quotescollection_quote($args = '')
 	
 	$random_quote  = quotescollection_txtfmt($random_quote);
 				
-	$display = "<p><q>". $random_quote['quote'] ."</q>";
-	$cite = "";
-	if($options['show_author'] && $random_quote['author'])
-		$cite = '<span class="quotescollection_author">'. $random_quote['author'] .'</span>';
-
-	if($options['show_source'] && $random_quote['source']) {
-		if($cite) $cite .= ", ";
-			$cite .= '<span class="quotescollection_source">'. $random_quote['source'] .'</span>';
-	}
-	if($cite) $cite = " <cite>&mdash;&nbsp;{$cite}</cite>";
-	$display .= $cite."</p>";
+	$display = quotescollection_output_format($random_quote, $options);
 	
 	// We don't want to display the 'next quote' link if there is no more than 1 quote
 	$quotes_count = quotescollection_count($condition); 
@@ -373,16 +387,15 @@ function quotescollection_install()
 }
 
 
-function quotescollection_css_head() 
+function quotescollection_css_head()
 {
-	?>
-	<link rel="stylesheet" type="text/css" href="<?php echo plugins_url(); ?>/quotes-collection/quotes-collection.css" />
-	<?php
+	global $quotescollection_version;
+	if ( !is_admin() ) {
+		wp_register_style( 'quotescollection-style', plugins_url('quotes-collection.css', __FILE__), false, $quotescollection_version );
+		wp_enqueue_style( 'quotescollection-style' );
+	}
 }
-
-
-add_action('wp_head', 'quotescollection_css_head' );
-
+add_action( 'wp_enqueue_scripts', 'quotescollection_css_head' );
 
 
 register_activation_hook( __FILE__, 'quotescollection_install' );

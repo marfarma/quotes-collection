@@ -1,23 +1,15 @@
 <?php
 
-function quotescollection_output_format($quotes)
+function quotescollection_shortcode_output_format($quotes)
 {
 	$display = "";
 
 	foreach($quotes as $quote_data) {
-		$quote_data = quotescollection_txtfmt($quote_data);
-		$display .= "<blockquote class=\"quotescollection\" id=\"quote-".$quote_data['quote_id']."\"><p><q>".$quote_data['quote']."</q>";
-		$cite = "";
-		if($quote_data['author'])
-			$cite = $quote_data['author'];
-		if($quote_data['source']) {
-			if($cite) $cite .= ", ";
-			$cite .= $quote_data['source'];
-		}
-		if($cite) $cite = " <cite>&mdash;&nbsp;{$cite}</cite>"; 
-		$display .= $cite."</p></blockquote>\n";
+		$display .= "<blockquote class=\"quotescollection\" id=\"quote-".$quote_data['quote_id']."\">";
+		$display .= quotescollection_output_format( $quote_data );
+		$display .= "</blockquote>\n";
 	}
-	return $display;
+	return apply_filters( 'quotescollection_shortcode_output_format', $display );
 }
 
 
@@ -43,7 +35,7 @@ function quotescollection_shortcodes($atts = array())
 		$condition .= " AND quote_id = ".$id;
 		
 		if ($quote = quotescollection_get_quotes($condition))
-			return quotescollection_output_format($quote);
+			return quotescollection_shortcode_output_format($quote);
 		else
 			return "";
 	}
@@ -105,7 +97,7 @@ function quotescollection_shortcodes($atts = array())
 //		return $condition;
 		
 		if($quotes = quotescollection_get_quotes($condition))
-			return $page_nav.quotescollection_output_format($quotes).$page_nav;
+			return $page_nav.quotescollection_shortcode_output_format($quotes).$page_nav;
 		else
 			return "";
 		
@@ -117,7 +109,7 @@ function quotescollection_shortcodes($atts = array())
 //	return $condition;
 
 	if($quotes = quotescollection_get_quotes($condition))
-		return quotescollection_output_format($quotes);
+		return quotescollection_shortcode_output_format($quotes);
 	else
 		return "";
 }
