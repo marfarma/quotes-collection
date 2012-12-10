@@ -18,8 +18,8 @@ function quotescollection_addquote($quote, $author = "", $source = "", $tags = "
 		return __('Database table not found', 'quotes-collection');
 	else //Add the quote data to the database
 	{
-		
-		$quote = wp_kses_data( stripslashes($quote) );
+		global $allowedposttags;
+		$quote = wp_kses( stripslashes($quote), $allowedposttags );
 		$author = wp_kses( stripslashes($author), array( 'a' => array( 'href' => array(),'title' => array() ) ) ) ;	
 		$source = wp_kses( stripslashes($source), array( 'a' => array( 'href' => array(),'title' => array() ) ) ) ;	
 		$tags = strip_tags( stripslashes($tags) );
@@ -55,8 +55,8 @@ function quotescollection_editquote($quote_id, $quote, $author = "", $source = "
 		return __('Database table not found', 'quotes-collection');
 	else //Update database
 	{
-		
-		$quote = wp_kses_data( stripslashes($quote) );
+		global $allowedposttags;
+		$quote = wp_kses( stripslashes($quote), $allowedposttags );
 		$author = wp_kses( stripslashes($author), array( 'a' => array( 'href' => array(),'title' => array() ) ) ) ;	
 		$source = wp_kses( stripslashes($source), array( 'a' => array( 'href' => array(),'title' => array() ) ) ) ;	
 		$tags = strip_tags( stripslashes($tags) );
@@ -374,7 +374,7 @@ function quotescollection_quotes_management()
 		$display .= "<select name=\"order\"><option{$option_selected['ASC']}>ASC</option><option{$option_selected['DESC']}>DESC</option></select>";
 		$display .= "<input type=\"submit\" name=\"orderbysubmit\" value=\"".__('Go', 'quotes-collection')."\" class=\"button-secondary\" />";
 		$display .= "</div>";
-		$display .= '<div class="tablenav-pages"><span class="displaying-num">'.sprintf(_n('%d quote', '%d quote', $quotes_count, 'quotes-collection'), $quotes_count).'</span><span class="pagination-links">'. $page_nav. "</span></div>";
+		$display .= '<div class="tablenav-pages"><span class="displaying-num">'.sprintf(_n('%d quote', '%d quotes', $quotes_count, 'quotes-collection'), $quotes_count).'</span><span class="pagination-links">'. $page_nav. "</span></div>";
 		$display .= "<div class=\"clear\"></div>";	
 		$display .= "</div>";
 		
@@ -394,7 +394,7 @@ function quotescollection_quotes_management()
 		$display .= "</table>";
 
 		$display .= "<div class=\"tablenav\">";
-		$display .= '<div class="tablenav-pages"><span class="displaying-num">'.sprintf(_n('%d quote', '%d quote', $quotes_count, 'quotes-collection'), $quotes_count).'</span><span class="pagination-links">'. $page_nav. "</span></div>";
+		$display .= '<div class="tablenav-pages"><span class="displaying-num">'.sprintf(_n('%d quote', '%d quotes', $quotes_count, 'quotes-collection'), $quotes_count).'</span><span class="pagination-links">'. $page_nav. "</span></div>";
 		$display .= "<div class=\"clear\"></div>";	
 		$display .= "</div>";
 
