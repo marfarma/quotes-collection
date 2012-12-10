@@ -63,7 +63,7 @@ Change the value of the variable `$quotescollection_next_quote` on line 34 of th
 
 = The 'Next quote »' link is not working. Why? =
 
-Make sure your theme's footer.php file has the code `<?php wp_footer(); ?>` just before `</body>`. If you still experience the problem, [contact](http://srinig.com/wordpress/contact/) the plugin author.
+Make sure your theme's header.php file has the code `<?php wp_head(); ?>` just before `</head>`. If you still experience the problem, [contact](http://srinig.com/wordpress/contact/) the plugin author.
 
 = I have added a number of quotes, but some of the quotes never get displayed in the widget. Why? =
 
