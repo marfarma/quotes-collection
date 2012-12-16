@@ -63,7 +63,7 @@ function quotescollection_shortcodes($atts = array())
 	if($orderby == 'id' || !$orderby) $orderby = 'quote_id';
 	else if ($orderby == 'date_added') $orderby = 'time_added';
 	else if($orderby == 'random' || $orderby == 'rand') {
-		$orderby = 'RAND()';
+		$orderby = 'RAND(UNIX_TIMESTAMP(NOW()))';
 		$order = '';
 		$paging = false;
 	};

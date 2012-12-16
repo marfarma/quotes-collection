@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDWT2K8TXXHUN
 Tags: quotes collection, quotes, quotations, random quote, sidebar, widget, ajax, shortcode
 Requires at least: 2.8
-Tested up to: 3.5-RC5
+Tested up to: 3.5
 Stable tag: trunk
 License: GNU General Public License
 
@@ -240,6 +240,10 @@ You can translate the plugin in your language if it's not done already. The loca
 
 ==Changelog==
 
+* **2012-12-16: Version 1.5.9**
+	* Fix for cases where random refresh always fetches only two quotes
+	* Bugfix for widget
+
 * **2012-12-10: Version 1.5.8**
 	* Modified html tags filtering for 'quote'. Now all html tags allowed for blog posts can be used in the 'quote' field.
 	* Fixed quotes count display in admin so that plural shows as 'quotes' and not as 'quote'.
@@ -436,9 +440,7 @@ You can translate the plugin in your language if it's not done already. The loca
 
 == Upgrade Notice ==
 
-= 1.5.8 =
-Bug fix. Upgrade recommended.
+= 1.5.9 =
+Upgrade if random refresh always fetches only two quotes, also if the there are problems with the widget controls.
 
-= 1.5.7 =
-Minor udate. Localization in Macedonian language added, Persian updated. Improvements to code.
 

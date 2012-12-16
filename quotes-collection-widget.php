@@ -97,7 +97,7 @@ function quotescollection_widget_init()
 
 	if ( function_exists( 'wp_register_sidebar_widget' ) ) {
 		wp_register_sidebar_widget( 'quotescollection', 'Random Quote', 'quotescollection_widget' );
-		wp_register_widget_control( 'quotescollection', 'Random Quote', 'quotescollection_widget_control', 250, 350 );
+		wp_register_widget_control( 'quotescollection', 'Random Quote', 'quotescollection_widget_control' );
 	} else {
 		register_sidebar_widget(array('Random Quote', 'widgets'), 'quotescollection_widget');
 		register_widget_control('Random Quote', 'quotescollection_widget_control', 250, 350);
